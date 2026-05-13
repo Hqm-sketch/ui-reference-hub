@@ -100,6 +100,21 @@ export function ComponentRenderer({ componentName, category, variants }: Compone
   if (name === "floatingactionbutton") return <FabShowcase />;
   if (name === "bottomnavigation") return <BottomNavShowcase />;
 
+  // --- App-level components ---
+  if (name === "bottomtabnav" || name === "底部导航栏") return <BottomTabNavShowcase />;
+  if (name === "datacard" || name === "数据卡片") return <DataCardShowcase />;
+  if (name === "contentblock" || name === "内容区块") return <ContentBlockShowcase />;
+  if (name === "settingslist" || name === "设置列表") return <SettingsListShowcase />;
+  if (name === "calendarview" || name === "日历视图") return <CalendarViewShowcase />;
+  if (name === "formgroup" || name === "表单组") return <FormGroupShowcase />;
+  if (name === "transactionitem" || name === "交易记录") return <TransactionItemShowcase />;
+  if (name === "chartplaceholder" || name === "图表占位") return <ChartPlaceholderShowcase />;
+  if (name === "searchbar" || name === "搜索栏") return <SearchBarShowcase />;
+  if (name === "pageheader" || name === "页面标题") return <PageHeaderShowcase />;
+  if (name === "statrow" || name === "统计行") return <StatRowShowcase />;
+  if (name === "blankslot" || name === "空白占位") return <BlankSlotShowcase />;
+  if (name === "listgroup" || name === "列表组") return <ListGroupShowcase />;
+
   // --- Default ---
   return <GenericShowcase name={componentName} variants={variants} />;
 }
@@ -948,6 +963,248 @@ function BottomNavShowcase() {
           <item.icon className={`h-6 w-6 ${item.active ? "text-zinc-900 dark:text-zinc-50" : "text-zinc-400"}`} />
           <span className={`text-[10px] ${item.active ? "font-medium" : "text-zinc-400"}`}>{item.label}</span>
           {"badge" in item && <span className="absolute -top-1 -right-3 h-4 w-4 rounded-full bg-red-500 text-white text-[9px] flex items-center justify-center">{item.badge}</span>}
+        </div>
+      ))}
+    </div>
+  );
+}
+
+// ============ APP-LEVEL COMPONENTS ============
+
+function BottomTabNavShowcase() {
+  const tabs = [
+    { icon: Home, label: "首页", active: true },
+    { icon: BarChart3, label: "账单", active: false },
+    { icon: Plus, label: "记账", active: false },
+    { icon: Bell, label: "提醒", active: false },
+    { icon: User, label: "我的", active: false },
+  ];
+  return (
+    <div className="flex justify-around items-center w-full h-16 bg-white border-t dark:bg-zinc-900 dark:border-zinc-700 rounded-t-xl">
+      {tabs.map((t, i) => (
+        <div key={i} className="flex flex-col items-center gap-0.5">
+          <t.icon className={`h-5 w-5 ${t.active ? "text-zinc-900 dark:text-zinc-50" : "text-zinc-400"}`} />
+          <span className={`text-[10px] ${t.active ? "font-semibold text-zinc-900 dark:text-zinc-50" : "text-zinc-400"}`}>{t.label}</span>
+        </div>
+      ))}
+    </div>
+  );
+}
+
+function DataCardShowcase() {
+  return (
+    <div className="grid gap-3 w-full" style={{ gridTemplateColumns: "repeat(auto-fit, minmax(140px, 1fr))" }}>
+      {[
+        { label: "今日支出", value: "¥128.50", color: "text-red-500", icon: TrendingUp },
+        { label: "本月收入", value: "¥12,450", color: "text-green-500", icon: TrendingUp },
+        { label: "账户余额", value: "¥8,320", color: "text-blue-500", icon: CreditCard },
+      ].map((d, i) => (
+        <div key={i} className="rounded-xl border bg-white p-4 dark:border-zinc-700 dark:bg-zinc-900 shadow-sm">
+          <div className="flex items-center justify-between mb-2">
+            <span className="text-xs text-zinc-500">{d.label}</span>
+            <d.icon className={`h-4 w-4 ${d.color}`} />
+          </div>
+          <p className={`text-lg font-bold ${d.color}`}>{d.value}</p>
+        </div>
+      ))}
+    </div>
+  );
+}
+
+function ContentBlockShowcase() {
+  return (
+    <div className="w-full rounded-xl border-2 border-dashed border-zinc-300 dark:border-zinc-600 bg-zinc-50/50 dark:bg-zinc-800/30 p-6 text-center">
+      <div className="text-3xl mb-2">📦</div>
+      <p className="text-sm font-medium text-zinc-500">内容区域</p>
+      <p className="text-xs text-zinc-400 mt-1">可放置自定义内容</p>
+    </div>
+  );
+}
+
+function SettingsListShowcase() {
+  const items = [
+    { icon: User, label: "个人资料", desc: "修改头像和昵称", arrow: true },
+    { icon: Bell, label: "通知设置", desc: "管理通知偏好", arrow: true },
+    { icon: Lock, label: "隐私安全", desc: "密码和隐私设置", arrow: true },
+    { icon: Palette, label: "主题风格", desc: "浅色", arrow: true },
+  ];
+  return (
+    <div className="w-full rounded-xl border dark:border-zinc-700 overflow-hidden divide-y dark:divide-zinc-700">
+      {items.map((item, i) => (
+        <div key={i} className="flex items-center gap-3 px-4 py-3 bg-white hover:bg-zinc-50 dark:bg-zinc-900 dark:hover:bg-zinc-800 cursor-pointer transition-colors">
+          <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-zinc-100 dark:bg-zinc-800">
+            <item.icon className="h-4 w-4 text-zinc-500" />
+          </div>
+          <div className="flex-1">
+            <p className="text-sm font-medium">{item.label}</p>
+            <p className="text-xs text-zinc-500">{item.desc}</p>
+          </div>
+          {item.arrow && <ChevronRight className="h-4 w-4 text-zinc-400" />}
+        </div>
+      ))}
+    </div>
+  );
+}
+
+function CalendarViewShowcase() {
+  const days = Array.from({ length: 31 }, (_, i) => i + 1);
+  const marked = [5, 13, 20, 25];
+  return (
+    <div className="w-full rounded-xl border dark:border-zinc-700 bg-white dark:bg-zinc-900 p-4">
+      <div className="flex items-center justify-between mb-4">
+        <button className="rounded p-1 hover:bg-zinc-100 dark:hover:bg-zinc-800"><ChevronRight className="h-4 w-4 rotate-180" /></button>
+        <span className="text-sm font-semibold">2026年 5月</span>
+        <button className="rounded p-1 hover:bg-zinc-100 dark:hover:bg-zinc-800"><ChevronRight className="h-4 w-4" /></button>
+      </div>
+      <div className="grid grid-cols-7 gap-1 text-center">
+        {["一","二","三","四","五","六","日"].map(d => <span key={d} className="text-[10px] text-zinc-400 py-1">{d}</span>)}
+        {days.map(d => (
+          <button key={d} className={`h-9 w-full text-xs rounded-lg transition-colors
+            ${d === 13 ? "bg-blue-500 text-white" : marked.includes(d) ? "bg-blue-50 text-blue-600 dark:bg-blue-900/30" : "hover:bg-zinc-100 dark:hover:bg-zinc-800"}`}>
+            {d}
+          </button>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+function FormGroupShowcase() {
+  return (
+    <div className="w-full rounded-xl border dark:border-zinc-700 bg-white dark:bg-zinc-900 p-4 space-y-4">
+      <div className="space-y-1.5">
+        <label className="text-sm font-medium">金额</label>
+        <Input placeholder="0.00" />
+      </div>
+      <div className="space-y-1.5">
+        <label className="text-sm font-medium">分类</label>
+        <Select>
+          <SelectTrigger><SelectValue placeholder="选择分类" /></SelectTrigger>
+          <SelectContent>
+            <SelectItem value="food">餐饮</SelectItem>
+            <SelectItem value="transport">交通</SelectItem>
+            <SelectItem value="shop">购物</SelectItem>
+          </SelectContent>
+        </Select>
+      </div>
+      <div className="space-y-1.5">
+        <label className="text-sm font-medium">备注</label>
+        <Input placeholder="添加备注..." />
+      </div>
+      <Button className="w-full">保存记录</Button>
+    </div>
+  );
+}
+
+function TransactionItemShowcase() {
+  const items = [
+    { icon: "🍔", label: "午餐", time: "12:30", amount: "-¥38.00", type: "expense" },
+    { icon: "🚌", label: "地铁", time: "08:15", amount: "-¥6.00", type: "expense" },
+    { icon: "💰", label: "工资", time: "昨天", amount: "+¥15,000", type: "income" },
+    { icon: "🛒", label: "超市", time: "昨天", amount: "-¥156.30", type: "expense" },
+  ];
+  return (
+    <div className="w-full divide-y dark:divide-zinc-700">
+      {items.map((item, i) => (
+        <div key={i} className="flex items-center gap-3 py-3">
+          <div className="flex h-10 w-10 items-center justify-center rounded-full bg-zinc-100 dark:bg-zinc-800 text-lg">{item.icon}</div>
+          <div className="flex-1">
+            <p className="text-sm font-medium">{item.label}</p>
+            <p className="text-[11px] text-zinc-500">{item.time}</p>
+          </div>
+          <p className={`text-sm font-semibold ${item.type === "income" ? "text-green-500" : "text-zinc-900 dark:text-zinc-50"}`}>{item.amount}</p>
+        </div>
+      ))}
+    </div>
+  );
+}
+
+function ChartPlaceholderShowcase() {
+  return (
+    <div className="w-full rounded-xl border-2 border-dashed border-zinc-300 dark:border-zinc-600 bg-zinc-50/50 dark:bg-zinc-800/30 p-6">
+      <p className="text-sm font-medium text-zinc-500 mb-4">📊 月度统计图表</p>
+      <div className="flex items-end justify-between gap-2 h-24">
+        {[40, 65, 45, 80, 55, 90, 75, 60, 85, 70, 95, 80].map((h, i) => (
+          <div key={i} className="flex-1 flex flex-col items-center gap-1">
+            <div className="w-full bg-zinc-300 dark:bg-zinc-600 rounded-t transition-all" style={{ height: `${h}%` }} />
+            <span className="text-[9px] text-zinc-400">{i + 1}月</span>
+          </div>
+        ))}
+      </div>
+      <div className="flex items-center justify-center gap-4 mt-3">
+        <span className="flex items-center gap-1 text-[10px] text-zinc-500"><span className="h-2 w-2 rounded-full bg-blue-500" /> 收入</span>
+        <span className="flex items-center gap-1 text-[10px] text-zinc-500"><span className="h-2 w-2 rounded-full bg-red-400" /> 支出</span>
+      </div>
+    </div>
+  );
+}
+
+function SearchBarShowcase() {
+  return (
+    <div className="relative w-full">
+      <Search className="absolute left-3 top-2.5 h-4 w-4 text-zinc-400" />
+      <Input className="pl-9 h-10 rounded-full bg-zinc-100 border-0 dark:bg-zinc-800" placeholder="搜索交易记录..." />
+    </div>
+  );
+}
+
+function PageHeaderShowcase() {
+  return (
+    <div className="flex items-center justify-between w-full py-2">
+      <div className="flex items-center gap-3">
+        <button className="rounded-full p-1 hover:bg-zinc-100 dark:hover:bg-zinc-800"><ChevronRight className="h-5 w-5 rotate-180" /></button>
+        <h1 className="text-lg font-bold">记账本</h1>
+      </div>
+      <div className="flex items-center gap-2">
+        <button className="rounded-full p-2 hover:bg-zinc-100 dark:hover:bg-zinc-800"><Search className="h-4 w-4" /></button>
+        <button className="rounded-full p-2 hover:bg-zinc-100 dark:hover:bg-zinc-800"><Settings className="h-4 w-4" /></button>
+      </div>
+    </div>
+  );
+}
+
+function StatRowShowcase() {
+  return (
+    <div className="flex gap-3 w-full">
+      {[
+        { label: "支出", value: "¥1,280", color: "text-red-500" },
+        { label: "收入", value: "¥3,450", color: "text-green-500" },
+        { label: "结余", value: "¥2,170", color: "text-blue-500" },
+      ].map((s, i) => (
+        <div key={i} className="flex-1 rounded-xl border bg-white p-3 text-center dark:border-zinc-700 dark:bg-zinc-900">
+          <p className="text-xs text-zinc-500">{s.label}</p>
+          <p className={`text-base font-bold mt-1 ${s.color}`}>{s.value}</p>
+        </div>
+      ))}
+    </div>
+  );
+}
+
+function BlankSlotShowcase() {
+  return (
+    <div className="w-full rounded-xl border-2 border-dashed border-zinc-300 dark:border-zinc-600 bg-zinc-50/30 dark:bg-zinc-800/20 p-8 text-center min-h-[80px] flex flex-col items-center justify-center">
+      <Plus className="h-8 w-8 text-zinc-300 dark:text-zinc-600 mb-2" />
+      <p className="text-sm text-zinc-400">拖入组件或自定义内容</p>
+    </div>
+  );
+}
+
+function ListGroupShowcase() {
+  return (
+    <div className="w-full rounded-xl border dark:border-zinc-700 overflow-hidden divide-y dark:divide-zinc-700">
+      {[
+        { icon: "🍕", title: "餐饮", count: "12笔", amount: "¥1,280", color: "text-orange-500" },
+        { icon: "🚌", title: "交通", count: "8笔", amount: "¥320", color: "text-blue-500" },
+        { icon: "🛒", title: "购物", count: "5笔", amount: "¥890", color: "text-purple-500" },
+        { icon: "🎮", title: "娱乐", count: "3笔", amount: "¥450", color: "text-green-500" },
+      ].map((item, i) => (
+        <div key={i} className="flex items-center gap-3 px-4 py-3 bg-white hover:bg-zinc-50 dark:bg-zinc-900 dark:hover:bg-zinc-800 cursor-pointer">
+          <span className="text-xl">{item.icon}</span>
+          <div className="flex-1">
+            <p className="text-sm font-medium">{item.title}</p>
+            <p className="text-[11px] text-zinc-500">{item.count}</p>
+          </div>
+          <p className={`text-sm font-semibold ${item.color}`}>{item.amount}</p>
         </div>
       ))}
     </div>
