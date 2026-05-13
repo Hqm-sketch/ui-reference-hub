@@ -60,7 +60,7 @@ export default function Home() {
             Design Token
           </Link>
           <Link
-            href="/api/metadata"
+            href="/api/metadata.json"
             className="inline-flex items-center gap-2 rounded-lg border border-zinc-200 bg-white px-4 py-2 text-sm font-medium hover:bg-zinc-50 dark:border-zinc-700 dark:bg-zinc-900 dark:hover:bg-zinc-800"
           >
             <FileJson className="h-4 w-4" />
