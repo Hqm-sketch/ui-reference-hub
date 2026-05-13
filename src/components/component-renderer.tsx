@@ -21,6 +21,7 @@ import {
   LayoutDashboard, BarChart3, TrendingUp, MapPin, Lock, Calendar,
   Folder, File, Inbox, Sparkles, RefreshCw,
 } from "lucide-react";
+import { cn } from "@/lib/utils";
 
 interface ComponentRendererProps {
   componentName: string;
@@ -114,6 +115,31 @@ export function ComponentRenderer({ componentName, category, variants }: Compone
   if (name === "statrow" || name === "统计行") return <StatRowShowcase />;
   if (name === "blankslot" || name === "空白占位") return <BlankSlotShowcase />;
   if (name === "listgroup" || name === "列表组") return <ListGroupShowcase />;
+
+  // --- Scene: Chat/Social ---
+  if (name === "消息气泡" || name === "chatbubble") return <ChatBubbleShowcase />;
+  if (name === "聊天输入栏" || name === "chatinput") return <ChatInputShowcase />;
+  if (name === "用户信息卡" || name === "userinfocard") return <UserInfoShowcase />;
+  if (name === "联系人列表" || name === "contactlist") return <ContactListShowcase />;
+
+  // --- Scene: E-commerce ---
+  if (name === "商品卡片" || name === "productcard") return <ProductCardShowcase />;
+  if (name === "订单摘要" || name === "ordersummary") return <OrderSummaryShowcase />;
+  if (name === "价格标签" || name === "pricetag") return <PriceTagShowcase />;
+  if (name === "评价卡片" || name === "reviewcard") return <ReviewCardShowcase />;
+  if (name === "购物车项" || name === "cartitem") return <CartItemShowcase />;
+
+  // --- Scene: Media/Health ---
+  if (name === "音乐播放条" || name === "musicplayer") return <MusicPlayerShowcase />;
+  if (name === "歌单卡片" || name === "playlistcard") return <PlaylistCardShowcase />;
+  if (name === "步数卡片" || name === "stepscard") return <StepsCardShowcase />;
+  if (name === "签到卡片" || name === "checkincard") return <CheckInShowcase />;
+
+  // --- Scene: General ---
+  if (name === "功能入口" || name === "featuregrid") return <FeatureGridShowcase />;
+  if (name === "标签筛选栏" || name === "tagfilter") return <TagFilterShowcase />;
+  if (name === "公告横幅" || name === "announcement") return <AnnouncementShowcase />;
+  if (name === "进度环" || name === "progressring") return <ProgressRingShowcase />;
 
   // --- Default ---
   return <GenericShowcase name={componentName} variants={variants} />;
@@ -1207,6 +1233,281 @@ function ListGroupShowcase() {
           <p className={`text-sm font-semibold ${item.color}`}>{item.amount}</p>
         </div>
       ))}
+    </div>
+  );
+}
+
+// ============ SCENE: Chat / Social ============
+
+function ChatBubbleShowcase() {
+  return (
+    <div className="w-full space-y-3">
+      <div className="flex justify-end"><div className="max-w-[75%] rounded-2xl rounded-br-md bg-blue-500 text-white px-4 py-2 text-sm">在吗？今天天气真好 🌞</div></div>
+      <div className="flex justify-start"><div className="max-w-[75%] rounded-2xl rounded-bl-md bg-zinc-100 dark:bg-zinc-800 px-4 py-2 text-sm">是啊，要不要出去走走？</div></div>
+      <div className="flex justify-end"><div className="max-w-[75%] rounded-2xl rounded-br-md bg-blue-500 text-white px-4 py-2 text-sm">好啊，下午3点老地方见 👋</div></div>
+    </div>
+  );
+}
+
+function ChatInputShowcase() {
+  return (
+    <div className="flex items-center gap-2 w-full bg-white dark:bg-zinc-900 rounded-xl border dark:border-zinc-700 p-2">
+      <button className="shrink-0 rounded-full p-2 hover:bg-zinc-100 dark:hover:bg-zinc-800 text-xl">😊</button>
+      <input className="flex-1 border-0 bg-transparent text-sm focus:outline-none dark:text-zinc-50" placeholder="输入消息..." />
+      <button className="shrink-0 rounded-full bg-blue-500 text-white px-4 py-1.5 text-sm font-medium">发送</button>
+    </div>
+  );
+}
+
+function UserInfoShowcase() {
+  return (
+    <div className="flex items-center gap-3 w-full p-3 rounded-xl bg-white dark:bg-zinc-900 border dark:border-zinc-700">
+      <div className="flex h-12 w-12 items-center justify-center rounded-full bg-gradient-to-br from-blue-400 to-purple-500 text-white text-lg font-bold">我</div>
+      <div className="flex-1">
+        <p className="text-sm font-semibold">用户昵称</p>
+        <p className="text-xs text-zinc-500">ID: 12345678 · 关注 128 · 粉丝 3.2K</p>
+      </div>
+      <Button size="sm" variant="outline" className="h-7 text-xs">关注</Button>
+    </div>
+  );
+}
+
+function ContactListShowcase() {
+  return (
+    <div className="w-full divide-y dark:divide-zinc-700">
+      {[
+        { name: "张三", msg: "好的，我马上到", time: "12:30", unread: 3, online: true },
+        { name: "李四", msg: "文件已发送", time: "昨天", unread: 0, online: false },
+        { name: "项目群", msg: "@所有人 开会了", time: "周一", unread: 99, online: true },
+      ].map((c, i) => (
+        <div key={i} className="flex items-center gap-3 py-3 px-1">
+          <div className="relative">
+            <div className="flex h-10 w-10 items-center justify-center rounded-full bg-zinc-200 dark:bg-zinc-700 text-sm font-medium">{c.name[0]}</div>
+            {c.online && <span className="absolute bottom-0 right-0 h-3 w-3 rounded-full border-2 border-white dark:border-zinc-900 bg-green-500" />}
+          </div>
+          <div className="flex-1 min-w-0"><p className="text-sm font-medium truncate">{c.name}</p><p className="text-xs text-zinc-500 truncate">{c.msg}</p></div>
+          <div className="text-right"><p className="text-[10px] text-zinc-400">{c.time}</p>{c.unread > 0 && <Badge variant="destructive" className="text-[9px] mt-0.5">{c.unread}</Badge>}</div>
+        </div>
+      ))}
+    </div>
+  );
+}
+
+// ============ SCENE: E-commerce ============
+
+function ProductCardShowcase() {
+  return (
+    <div className="w-full sm:w-44 rounded-xl border dark:border-zinc-700 bg-white dark:bg-zinc-900 overflow-hidden">
+      <div className="h-28 bg-gradient-to-br from-zinc-200 to-zinc-300 dark:from-zinc-700 dark:to-zinc-600 flex items-center justify-center text-4xl">📦</div>
+      <div className="p-3">
+        <p className="text-sm font-medium truncate">商品名称示例</p>
+        <div className="flex items-center justify-between mt-2">
+          <div><span className="text-red-500 font-bold text-sm">¥99.00</span><span className="text-[10px] text-zinc-400 line-through ml-1">¥199</span></div>
+          <Badge variant="destructive" className="text-[9px]">热卖</Badge>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function OrderSummaryShowcase() {
+  return (
+    <div className="w-full rounded-xl border dark:border-zinc-700 bg-white dark:bg-zinc-900 p-4 space-y-3">
+      <p className="text-sm font-semibold">订单 #20260513001</p>
+      <div className="space-y-2 text-sm">
+        <div className="flex justify-between"><span className="text-zinc-500">商品总额</span><span>¥199.00</span></div>
+        <div className="flex justify-between"><span className="text-zinc-500">运费</span><span className="text-green-500">免运费</span></div>
+        <div className="flex justify-between"><span className="text-zinc-500">优惠</span><span className="text-red-500">-¥30.00</span></div>
+        <Separator />
+        <div className="flex justify-between font-bold"><span>实付</span><span className="text-red-500">¥169.00</span></div>
+      </div>
+    </div>
+  );
+}
+
+function PriceTagShowcase() {
+  return (
+    <div className="flex items-baseline gap-1">
+      <span className="text-[10px] text-red-500">¥</span>
+      <span className="text-2xl font-bold text-red-500">99</span>
+      <span className="text-xs text-red-500">.00</span>
+      <span className="text-xs text-zinc-400 line-through ml-2">¥199.00</span>
+    </div>
+  );
+}
+
+function ReviewCardShowcase() {
+  return (
+    <div className="w-full rounded-xl border dark:border-zinc-700 bg-white dark:bg-zinc-900 p-4">
+      <div className="flex items-center gap-2 mb-2">
+        <div className="flex h-7 w-7 items-center justify-center rounded-full bg-zinc-200 text-xs font-medium dark:bg-zinc-700">用</div>
+        <span className="text-sm font-medium">用户名</span>
+        <span className="text-yellow-500 text-xs">⭐⭐⭐⭐⭐</span>
+      </div>
+      <p className="text-sm text-zinc-600 dark:text-zinc-400">很好用，物流很快，包装也很完整，五星好评！</p>
+      <div className="flex gap-2 mt-2 text-[10px] text-zinc-400"><span>2026-05-10</span><span>颜色: 黑色</span></div>
+    </div>
+  );
+}
+
+function CartItemShowcase() {
+  return (
+    <div className="flex items-center gap-3 w-full p-3 rounded-xl border dark:border-zinc-700 bg-white dark:bg-zinc-900">
+      <input type="checkbox" className="h-4 w-4 rounded" defaultChecked />
+      <div className="h-16 w-16 rounded-lg bg-zinc-200 dark:bg-zinc-700 flex items-center justify-center text-2xl flex-shrink-0">📦</div>
+      <div className="flex-1 min-w-0">
+        <p className="text-sm font-medium truncate">商品名称</p>
+        <p className="text-xs text-zinc-500">规格: 标准版</p>
+        <div className="flex items-center justify-between mt-1">
+          <span className="text-sm font-bold text-red-500">¥99.00</span>
+          <div className="flex items-center gap-2">
+            <button className="h-6 w-6 rounded border text-xs dark:border-zinc-700">−</button>
+            <span className="text-sm w-6 text-center">1</span>
+            <button className="h-6 w-6 rounded border text-xs dark:border-zinc-700">+</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+// ============ SCENE: Media / Health ============
+
+function MusicPlayerShowcase() {
+  return (
+    <div className="w-full rounded-xl bg-zinc-900 text-white p-4">
+      <div className="flex items-center gap-4">
+        <div className="h-14 w-14 rounded-lg bg-zinc-700 flex items-center justify-center text-2xl flex-shrink-0">🎵</div>
+        <div className="flex-1 min-w-0">
+          <p className="text-sm font-medium truncate">歌曲名称</p>
+          <p className="text-xs text-zinc-400 truncate">歌手 · 专辑名</p>
+        </div>
+        <Heart className="h-5 w-5 text-zinc-400 hover:text-red-500 flex-shrink-0" />
+      </div>
+      <div className="mt-3">
+        <div className="h-1.5 w-full rounded-full bg-zinc-700"><div className="h-full w-[40%] rounded-full bg-white" /></div>
+        <div className="flex justify-between text-[10px] text-zinc-400 mt-1"><span>1:28</span><span>3:42</span></div>
+      </div>
+      <div className="flex justify-center items-center gap-6 mt-2 text-white">
+        <button className="text-lg">⏮</button>
+        <button className="h-10 w-10 rounded-full bg-white text-zinc-900 flex items-center justify-center text-lg">▶</button>
+        <button className="text-lg">⏭</button>
+      </div>
+    </div>
+  );
+}
+
+function PlaylistCardShowcase() {
+  return (
+    <div className="flex items-center gap-3 w-full p-2 rounded-xl hover:bg-zinc-50 dark:hover:bg-zinc-800">
+      <div className="h-12 w-12 rounded-lg bg-gradient-to-br from-purple-400 to-pink-500 flex items-center justify-center text-white text-lg flex-shrink-0">🎶</div>
+      <div className="flex-1 min-w-0"><p className="text-sm font-medium truncate">热门歌单推荐</p><p className="text-xs text-zinc-500 truncate">120首 · 328万次播放</p></div>
+      <ChevronRight className="h-4 w-4 text-zinc-400 flex-shrink-0" />
+    </div>
+  );
+}
+
+function StepsCardShowcase() {
+  return (
+    <div className="w-full rounded-xl bg-gradient-to-r from-green-400 to-blue-500 text-white p-5">
+      <p className="text-sm opacity-90">今日步数</p>
+      <div className="flex items-end justify-between mt-2">
+        <p className="text-4xl font-bold">8,420</p>
+        <p className="text-sm opacity-80">目标 10,000</p>
+      </div>
+      <div className="h-2 w-full rounded-full bg-white/30 mt-3"><div className="h-full w-[84%] rounded-full bg-white" /></div>
+      <div className="flex justify-between text-xs mt-2 opacity-80"><span>🔥 320 千卡</span><span>🕐 1.8 公里</span><span>⏱ 42 分钟</span></div>
+    </div>
+  );
+}
+
+function CheckInShowcase() {
+  const days = Array.from({ length: 7 }, (_, i) => ({ day: i + 1, checked: i < 5 }));
+  return (
+    <div className="w-full rounded-xl border dark:border-zinc-700 bg-white dark:bg-zinc-900 p-4">
+      <div className="flex items-center justify-between mb-3">
+        <div><p className="text-sm font-semibold">每日签到</p><p className="text-xs text-zinc-500">已连续签到 5 天</p></div>
+        <div className="h-10 w-10 rounded-full bg-amber-100 dark:bg-amber-900/30 flex items-center justify-center text-lg">🎁</div>
+      </div>
+      <div className="flex justify-between gap-1">
+        {days.map((d, i) => (
+          <div key={i} className={`flex-1 flex flex-col items-center gap-1 py-2 rounded-lg text-xs ${d.checked ? "bg-amber-50 dark:bg-amber-900/20 text-amber-600" : "text-zinc-300"}`}>
+            <span>{d.checked ? "✅" : "○"}</span>
+            <span>D{d.day}</span>
+          </div>
+        ))}
+      </div>
+      <Button size="sm" className="w-full mt-3 text-xs h-8">签到领积分</Button>
+    </div>
+  );
+}
+
+// ============ SCENE: General ============
+
+function FeatureGridShowcase() {
+  const items = [
+    { icon: "💰", label: "记账" }, { icon: "📊", label: "统计" },
+    { icon: "🎯", label: "预算" }, { icon: "💳", label: "账户" },
+    { icon: "📝", label: "账单" }, { icon: "⚙️", label: "设置" },
+    { icon: "📈", label: "报表" }, { icon: "🔔", label: "提醒" },
+  ];
+  return (
+    <div className="grid grid-cols-4 gap-3 w-full">
+      {items.map((item, i) => (
+        <button key={i} className="flex flex-col items-center gap-2 p-2 rounded-xl hover:bg-zinc-50 dark:hover:bg-zinc-800 transition-colors">
+          <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-zinc-100 dark:bg-zinc-800 text-2xl">{item.icon}</div>
+          <span className="text-xs">{item.label}</span>
+        </button>
+      ))}
+    </div>
+  );
+}
+
+function TagFilterShowcase() {
+  const tags = ["全部", "餐饮", "交通", "购物", "娱乐", "旅行", "医疗", "教育"];
+  const [active, setActive] = React.useState(0);
+  return (
+    <div className="flex gap-2 overflow-x-auto w-full pb-1">
+      {tags.map((t, i) => (
+        <button key={i} onClick={() => setActive(i)}
+          className={cn("shrink-0 rounded-full px-3 py-1.5 text-xs transition-colors",
+            i === active ? "bg-zinc-900 text-white dark:bg-white dark:text-zinc-900" : "bg-zinc-100 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-400 hover:bg-zinc-200 dark:hover:bg-zinc-700")}>
+          {t}
+        </button>
+      ))}
+    </div>
+  );
+}
+
+function AnnouncementShowcase() {
+  return (
+    <div className="w-full rounded-xl bg-gradient-to-r from-blue-50 to-purple-50 dark:from-blue-950/30 dark:to-purple-950/30 border border-blue-200 dark:border-blue-900 p-3">
+      <div className="flex items-center gap-3">
+        <span className="text-xl">📢</span>
+        <div>
+          <p className="text-sm font-semibold text-blue-800 dark:text-blue-200">系统公告</p>
+          <p className="text-xs text-blue-600 dark:text-blue-300 mt-0.5">新版本 v2.5.0 已上线，点击查看更新内容 →</p>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function ProgressRingShowcase() {
+  return (
+    <div className="flex items-center gap-6">
+      <div className="relative h-20 w-20">
+        <svg className="h-full w-full -rotate-90" viewBox="0 0 72 72">
+          <circle cx="36" cy="36" r="30" fill="none" stroke="#e5e5e5" strokeWidth="8" />
+          <circle cx="36" cy="36" r="30" fill="none" stroke="#2563eb" strokeWidth="8" strokeDasharray="188.5" strokeDashoffset={188.5 * 0.25} strokeLinecap="round" />
+        </svg>
+        <span className="absolute inset-0 flex items-center justify-center text-lg font-bold">75%</span>
+      </div>
+      <div>
+        <p className="text-sm font-semibold">月度预算</p>
+        <p className="text-xs text-zinc-500">已用 ¥7,500 / ¥10,000</p>
+        <p className="text-xs text-green-500 mt-1">剩余 ¥2,500</p>
+      </div>
     </div>
   );
 }
