@@ -3,10 +3,14 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ChevronRight, Monitor, Smartphone, Tablet, Tag, Palette, Accessibility, Link2 } from "lucide-react";
 import { getComponentBySlug, getComponentsByCategory, CATEGORIES } from "@/lib/registry";
+import { componentPaths } from "@/lib/component-paths";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Separator } from "@/components/ui/separator";
-import { ComponentDetailClient } from "./client";
+import { ComponentDetailClient, CopyButton } from "./client";
+
+export async function generateStaticParams() {
+  return componentPaths;
+}
 
 interface Props {
   params: Promise<{ category: string; component: string }>;
@@ -16,10 +20,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { category, component } = await params;
   const comp = await getComponentBySlug(category, component);
   if (!comp) return { title: "未找到" };
-  return {
-    title: `${comp.name} | UI Reference Hub`,
-    description: comp.description,
-  };
+  return { title: `${comp.name} | UI Reference Hub`, description: comp.description };
 }
 
 export default async function ComponentDetailPage({ params }: Props) {
@@ -87,7 +88,7 @@ export default async function ComponentDetailPage({ params }: Props) {
           <Card>
             <CardHeader className="flex flex-row items-center justify-between">
               <CardTitle className="text-base">代码示例</CardTitle>
-              <ComponentDetailClient.CopyButton code={comp.codeExample} />
+              <CopyButton code={comp.codeExample} />
             </CardHeader>
             <CardContent>
               <pre className="!bg-zinc-950 !text-zinc-100 dark:!bg-zinc-900"><code>{comp.codeExample}</code></pre>

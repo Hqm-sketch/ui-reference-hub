@@ -3,6 +3,12 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ChevronRight } from "lucide-react";
 import { CATEGORIES, getComponentsByCategory } from "@/lib/registry";
+import { componentPaths } from "@/lib/component-paths";
+
+export async function generateStaticParams() {
+  const categories = new Set(componentPaths.map((p) => p.category));
+  return Array.from(categories).map((category) => ({ category }));
+}
 import { Badge } from "@/components/ui/badge";
 import { CategoryFilter } from "./category-filter";
 

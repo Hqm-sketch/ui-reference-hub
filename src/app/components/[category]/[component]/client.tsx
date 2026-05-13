@@ -175,7 +175,7 @@ function compName(code: string): string {
   return first.replace(/[<>/]/g, "").split(" ")[0] || "Component";
 }
 
-function CopyButton({ code }: { code: string }) {
+export function CopyButton({ code }: { code: string }) {
   const [copied, setCopied] = React.useState(false);
 
   const handleCopy = async () => {
@@ -191,5 +191,3 @@ function CopyButton({ code }: { code: string }) {
     </Button>
   );
 }
-
-ComponentDetailClient.CopyButton = CopyButton;

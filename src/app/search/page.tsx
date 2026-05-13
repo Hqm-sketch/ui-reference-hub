@@ -12,6 +12,14 @@ import { Card, CardContent } from "@/components/ui/card";
 type SearchResult = Pick<ComponentMeta, "name" | "category" | "description" | "tags" | "platform" | "complexity">;
 
 export default function SearchPage() {
+  return (
+    <React.Suspense fallback={<div className="py-16 text-center text-zinc-400">加载中...</div>}>
+      <SearchContent />
+    </React.Suspense>
+  );
+}
+
+function SearchContent() {
   const searchParams = useSearchParams();
   const initialQuery = searchParams.get("q") || "";
   const initialCat = searchParams.get("cat") || "";

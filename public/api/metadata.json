@@ -1,0 +1,4207 @@
+{
+  "name": "UI Reference Hub",
+  "version": "1.0.0",
+  "description": "AI 驱动的 UI 组件参考库，200+ 组件覆盖桌面端和移动端",
+  "totalComponents": 162,
+  "categories": [
+    {
+      "id": "basic",
+      "name": "基础组件",
+      "count": 29
+    },
+    {
+      "id": "form",
+      "name": "表单组件",
+      "count": 32
+    },
+    {
+      "id": "layout",
+      "name": "布局组件",
+      "count": 20
+    },
+    {
+      "id": "data-display",
+      "name": "数据展示",
+      "count": 23
+    },
+    {
+      "id": "navigation",
+      "name": "导航组件",
+      "count": 11
+    },
+    {
+      "id": "feedback",
+      "name": "反馈组件",
+      "count": 15
+    },
+    {
+      "id": "animation",
+      "name": "动画/特效",
+      "count": 17
+    },
+    {
+      "id": "mobile",
+      "name": "移动端专用",
+      "count": 15
+    }
+  ],
+  "components": [
+    {
+      "name": "Button",
+      "category": "basic",
+      "categoryName": "基础组件",
+      "description": "按钮用于触发操作，支持多种变体、尺寸和状态。",
+      "platform": [
+        "desktop",
+        "mobile",
+        "tablet"
+      ],
+      "tags": [
+        "按钮",
+        "交互",
+        "表单",
+        "CTA"
+      ],
+      "variants": [
+        "default",
+        "secondary",
+        "outline",
+        "ghost",
+        "destructive",
+        "link"
+      ],
+      "complexity": "simple",
+      "accessibility": "使用原生 button 元素，支持 Enter/Space 键盘触发，disabled 状态正确传达",
+      "designTokens": {},
+      "codeExample": "<Button variant=\"default\">默认按钮</Button>\n<Button variant=\"secondary\">次要按钮</Button>\n<Button variant=\"o",
+      "url": "/components/basic/button"
+    },
+    {
+      "name": "IconButton",
+      "category": "basic",
+      "categoryName": "基础组件",
+      "description": "图标按钮，仅显示图标不显示文字，适用于工具栏和紧凑布局。",
+      "platform": [
+        "desktop",
+        "mobile",
+        "tablet"
+      ],
+      "tags": [
+        "按钮",
+        "图标",
+        "工具栏"
+      ],
+      "variants": [
+        "default",
+        "ghost",
+        "outline"
+      ],
+      "complexity": "simple",
+      "accessibility": "必须提供 aria-label 描述按钮功能",
+      "designTokens": {},
+      "codeExample": "<Button size=\"icon\" aria-label=\"搜索\">\n  <Search className=\"h-4 w-4\" />\n</Button>\n<Button size=\"icon\" ",
+      "url": "/components/basic/iconbutton"
+    },
+    {
+      "name": "ButtonGroup",
+      "category": "basic",
+      "categoryName": "基础组件",
+      "description": "按钮组用于组合相关的操作按钮，形成视觉关联。",
+      "platform": [
+        "desktop",
+        "mobile",
+        "tablet"
+      ],
+      "tags": [
+        "按钮",
+        "分组",
+        "工具栏"
+      ],
+      "variants": [
+        "default",
+        "outline"
+      ],
+      "complexity": "simple",
+      "accessibility": "使用 role='group' 标记，aria-label 描述组功能",
+      "designTokens": {},
+      "codeExample": "<div className=\"inline-flex rounded-lg shadow-sm\" role=\"group\">\n  <button className=\"rounded-l-lg bo",
+      "url": "/components/basic/buttongroup"
+    },
+    {
+      "name": "LoadingButton",
+      "category": "basic",
+      "categoryName": "基础组件",
+      "description": "加载按钮在按钮内部显示加载状态，防止重复提交。",
+      "platform": [
+        "desktop",
+        "mobile",
+        "tablet"
+      ],
+      "tags": [
+        "按钮",
+        "加载",
+        "状态",
+        "异步"
+      ],
+      "variants": [
+        "default",
+        "secondary",
+        "destructive"
+      ],
+      "complexity": "simple",
+      "accessibility": "加载时设置 aria-busy='true' 和 disabled 属性",
+      "designTokens": {},
+      "codeExample": "<Button disabled>\n  <Loader2 className=\"mr-2 h-4 w-4 animate-spin\" />\n  加载中...\n</Button>",
+      "url": "/components/basic/loadingbutton"
+    },
+    {
+      "name": "Input",
+      "category": "basic",
+      "categoryName": "基础组件",
+      "description": "输入框是最基础的表单元素，用于接收用户文本输入。",
+      "platform": [
+        "desktop",
+        "mobile",
+        "tablet"
+      ],
+      "tags": [
+        "输入",
+        "表单",
+        "文本"
+      ],
+      "variants": [
+        "default",
+        "disabled",
+        "error",
+        "withIcon"
+      ],
+      "complexity": "simple",
+      "accessibility": "使用 label 关联，通过 aria-describedby 关联错误提示",
+      "designTokens": {},
+      "codeExample": "<Input placeholder=\"请输入内容\" />\n<Input type=\"email\" placeholder=\"请输入邮箱\" />\n<Input disabled placeholder",
+      "url": "/components/basic/input"
+    },
+    {
+      "name": "Textarea",
+      "category": "basic",
+      "categoryName": "基础组件",
+      "description": "多行文本输入框，适用于长文本如评论、描述、备注等。",
+      "platform": [
+        "desktop",
+        "mobile",
+        "tablet"
+      ],
+      "tags": [
+        "输入",
+        "文本",
+        "多行",
+        "表单"
+      ],
+      "variants": [
+        "default",
+        "disabled",
+        "error"
+      ],
+      "complexity": "simple",
+      "accessibility": "关联 label，支持 resize 控制",
+      "designTokens": {},
+      "codeExample": "<textarea\n  className=\"flex min-h-20 w-full rounded-lg border px-3 py-2 text-sm\"\n  placeholder=\"请输入详",
+      "url": "/components/basic/textarea"
+    },
+    {
+      "name": "SearchInput",
+      "category": "basic",
+      "categoryName": "基础组件",
+      "description": "搜索输入框，带有搜索图标和清除功能。",
+      "platform": [
+        "desktop",
+        "mobile",
+        "tablet"
+      ],
+      "tags": [
+        "输入",
+        "搜索",
+        "筛选"
+      ],
+      "variants": [
+        "default",
+        "withShortcut"
+      ],
+      "complexity": "simple",
+      "accessibility": "支持 Escape 清除，显示快捷键提示",
+      "designTokens": {},
+      "codeExample": "<div className=\"relative\">\n  <Search className=\"absolute left-2.5 top-2.5 h-4 w-4 text-zinc-400\" />\n",
+      "url": "/components/basic/searchinput"
+    },
+    {
+      "name": "PasswordInput",
+      "category": "basic",
+      "categoryName": "基础组件",
+      "description": "密码输入框，支持显示/隐藏密码切换。",
+      "platform": [
+        "desktop",
+        "mobile"
+      ],
+      "tags": [
+        "输入",
+        "密码",
+        "安全",
+        "表单"
+      ],
+      "variants": [
+        "default",
+        "withStrength"
+      ],
+      "complexity": "simple",
+      "accessibility": "密码可见性切换按钮设置 aria-label",
+      "designTokens": {},
+      "codeExample": "<div className=\"relative\">\n  <Input type=\"password\" placeholder=\"请输入密码\" />\n  <button className=\"abso",
+      "url": "/components/basic/passwordinput"
+    },
+    {
+      "name": "Badge",
+      "category": "basic",
+      "categoryName": "基础组件",
+      "description": "徽章用于标记状态、计数或标签。",
+      "platform": [
+        "desktop",
+        "mobile",
+        "tablet"
+      ],
+      "tags": [
+        "标签",
+        "状态",
+        "标记"
+      ],
+      "variants": [
+        "default",
+        "secondary",
+        "success",
+        "warning",
+        "destructive",
+        "outline"
+      ],
+      "complexity": "simple",
+      "accessibility": "纯展示元素，关键信息需配合 sr-only",
+      "designTokens": {},
+      "codeExample": "<Badge>默认</Badge>\n<Badge variant=\"secondary\">次要</Badge>\n<Badge variant=\"success\">成功</Badge>\n<Badge v",
+      "url": "/components/basic/badge"
+    },
+    {
+      "name": "Label",
+      "category": "basic",
+      "categoryName": "基础组件",
+      "description": "标签文本，用于标记分类、属性或元数据。",
+      "platform": [
+        "desktop",
+        "mobile",
+        "tablet"
+      ],
+      "tags": [
+        "标签",
+        "分类",
+        "元数据"
+      ],
+      "variants": [
+        "default",
+        "removable",
+        "withIcon"
+      ],
+      "complexity": "simple",
+      "accessibility": "纯展示，可移除标签使用 button 元素",
+      "designTokens": {},
+      "codeExample": "<div className=\"flex gap-2\">\n  <span className=\"rounded bg-zinc-100 px-2 py-0.5 text-xs\">React</span",
+      "url": "/components/basic/label"
+    },
+    {
+      "name": "Chip",
+      "category": "basic",
+      "categoryName": "基础组件",
+      "description": "芯片组件，用于显示选中项目，支持删除操作。",
+      "platform": [
+        "desktop",
+        "mobile"
+      ],
+      "tags": [
+        "标签",
+        "选择",
+        "筛选"
+      ],
+      "variants": [
+        "default",
+        "active",
+        "disabled"
+      ],
+      "complexity": "simple",
+      "accessibility": "删除按钮使用 aria-label 标识",
+      "designTokens": {},
+      "codeExample": "<div className=\"flex flex-wrap gap-2\">\n  <span className=\"inline-flex items-center gap-1 rounded-ful",
+      "url": "/components/basic/chip"
+    },
+    {
+      "name": "Avatar",
+      "category": "basic",
+      "categoryName": "基础组件",
+      "description": "头像组件，支持图片、文字缩写和在线状态指示。",
+      "platform": [
+        "desktop",
+        "mobile",
+        "tablet"
+      ],
+      "tags": [
+        "头像",
+        "用户",
+        "图片"
+      ],
+      "variants": [
+        "image",
+        "fallback",
+        "withStatus"
+      ],
+      "complexity": "simple",
+      "accessibility": "纯装饰图像使用 img alt=''，有信息的使用有意义 alt",
+      "designTokens": {},
+      "codeExample": "<div className=\"flex items-center gap-3\">\n  <div className=\"h-10 w-10 rounded-full bg-zinc-300\">\n   ",
+      "url": "/components/basic/avatar"
+    },
+    {
+      "name": "AvatarGroup",
+      "category": "basic",
+      "categoryName": "基础组件",
+      "description": "头像组，堆叠显示多个用户头像，多余显示+N。",
+      "platform": [
+        "desktop",
+        "mobile",
+        "tablet"
+      ],
+      "tags": [
+        "头像",
+        "群组",
+        "用户"
+      ],
+      "variants": [
+        "overlap",
+        "compact"
+      ],
+      "complexity": "simple",
+      "accessibility": "使用 aria-label 描述组和剩余人数",
+      "designTokens": {},
+      "codeExample": "<div className=\"flex -space-x-2\">\n  <div className=\"h-8 w-8 rounded-full bg-blue-200 ring-2 ring-whi",
+      "url": "/components/basic/avatargroup"
+    },
+    {
+      "name": "Icon",
+      "category": "basic",
+      "categoryName": "基础组件",
+      "description": "图标组件系统，支持多种尺寸和颜色。基于 Lucide Icons。",
+      "platform": [
+        "desktop",
+        "mobile",
+        "tablet"
+      ],
+      "tags": [
+        "图标",
+        "视觉",
+        "符号"
+      ],
+      "variants": [
+        "sm",
+        "md",
+        "lg",
+        "xl"
+      ],
+      "complexity": "simple",
+      "accessibility": "装饰性图标设置 aria-hidden='true'，功能性图标提供 aria-label",
+      "designTokens": {},
+      "codeExample": "<Search className=\"h-4 w-4\" />\n<Heart className=\"h-6 w-6 text-red-500\" />\n<Star className=\"h-8 w-8 t",
+      "url": "/components/basic/icon"
+    },
+    {
+      "name": "Link",
+      "category": "basic",
+      "categoryName": "基础组件",
+      "description": "链接组件，支持内部路由跳转和外部链接。",
+      "platform": [
+        "desktop",
+        "mobile",
+        "tablet"
+      ],
+      "tags": [
+        "链接",
+        "导航",
+        "跳转"
+      ],
+      "variants": [
+        "default",
+        "underline",
+        "subtle",
+        "withIcon"
+      ],
+      "complexity": "simple",
+      "accessibility": "外部链接使用 rel='noopener noreferrer'，新窗口使用 target='_blank'",
+      "designTokens": {},
+      "codeExample": "<a href=\"/page\" className=\"text-blue-600 hover:underline\">内部链接</a>\n<a href=\"https://example.com\" tar",
+      "url": "/components/basic/link"
+    },
+    {
+      "name": "Typography",
+      "category": "basic",
+      "categoryName": "基础组件",
+      "description": "排版组件，定义标题、段落、引用等文本层级。",
+      "platform": [
+        "desktop",
+        "mobile",
+        "tablet"
+      ],
+      "tags": [
+        "排版",
+        "文字",
+        "层级"
+      ],
+      "variants": [
+        "h1",
+        "h2",
+        "h3",
+        "h4",
+        "p",
+        "lead",
+        "muted",
+        "small",
+        "code",
+        "blockquote"
+      ],
+      "complexity": "simple",
+      "accessibility": "使用语义化 HTML 标签（h1-h6，p，blockquote）",
+      "designTokens": {},
+      "codeExample": "<h1 className=\"text-4xl font-bold\">一级标题</h1>\n<h2 className=\"text-2xl font-semibold\">二级标题</h2>\n<p cla",
+      "url": "/components/basic/typography"
+    },
+    {
+      "name": "Spinner",
+      "category": "basic",
+      "categoryName": "基础组件",
+      "description": "加载旋转器，表示加载或处理中的状态。",
+      "platform": [
+        "desktop",
+        "mobile",
+        "tablet"
+      ],
+      "tags": [
+        "加载",
+        "状态",
+        "动画"
+      ],
+      "variants": [
+        "sm",
+        "md",
+        "lg",
+        "withText"
+      ],
+      "complexity": "simple",
+      "accessibility": "使用 role='status' 和 aria-label='加载中'",
+      "designTokens": {},
+      "codeExample": "<div className=\"flex items-center gap-2\">\n  <Loader2 className=\"h-4 w-4 animate-spin\" />\n  <span cla",
+      "url": "/components/basic/spinner"
+    },
+    {
+      "name": "Skeleton",
+      "category": "basic",
+      "categoryName": "基础组件",
+      "description": "骨架屏，在内容加载时展示占位，减少用户感知等待。",
+      "platform": [
+        "desktop",
+        "mobile",
+        "tablet"
+      ],
+      "tags": [
+        "加载",
+        "占位",
+        "骨架屏"
+      ],
+      "variants": [
+        "text",
+        "circular",
+        "rectangular",
+        "card"
+      ],
+      "complexity": "simple",
+      "accessibility": "使用 aria-busy='true' 和 aria-label 标记加载区域",
+      "designTokens": {},
+      "codeExample": "<div className=\"space-y-3\">\n  <div className=\"h-4 w-3/4 animate-pulse rounded bg-zinc-200\" />\n  <div",
+      "url": "/components/basic/skeleton"
+    },
+    {
+      "name": "Divider",
+      "category": "basic",
+      "categoryName": "基础组件",
+      "description": "分割线，用于分隔内容区域。",
+      "platform": [
+        "desktop",
+        "mobile",
+        "tablet"
+      ],
+      "tags": [
+        "布局",
+        "分隔",
+        "视觉"
+      ],
+      "variants": [
+        "horizontal",
+        "vertical",
+        "withLabel"
+      ],
+      "complexity": "simple",
+      "accessibility": "使用 hr 元素，role='separator'",
+      "designTokens": {},
+      "codeExample": "<Separator />\n<div className=\"flex items-center gap-4\">\n  <Separator className=\"flex-1\" />\n  <span c",
+      "url": "/components/basic/divider"
+    },
+    {
+      "name": "Tooltip",
+      "category": "basic",
+      "categoryName": "基础组件",
+      "description": "工具提示，鼠标悬停时显示补充信息。",
+      "platform": [
+        "desktop"
+      ],
+      "tags": [
+        "提示",
+        "悬停",
+        "辅助"
+      ],
+      "variants": [
+        "top",
+        "bottom",
+        "left",
+        "right"
+      ],
+      "complexity": "simple",
+      "accessibility": "使用 aria-describedby 关联触发元素和提示内容",
+      "designTokens": {},
+      "codeExample": "<Tooltip>\n  <TooltipTrigger asChild>\n    <Button variant=\"ghost\" size=\"icon\"><Info className=\"h-4 w-",
+      "url": "/components/basic/tooltip"
+    },
+    {
+      "name": "StatusDot",
+      "category": "basic",
+      "categoryName": "基础组件",
+      "description": "状态圆点，用颜色表示不同状态（在线、离线、忙碌等）。",
+      "platform": [
+        "desktop",
+        "mobile",
+        "tablet"
+      ],
+      "tags": [
+        "状态",
+        "指示器",
+        "在线"
+      ],
+      "variants": [
+        "online",
+        "offline",
+        "busy",
+        "away"
+      ],
+      "complexity": "simple",
+      "accessibility": "配合 sr-only 文本描述状态",
+      "designTokens": {},
+      "codeExample": "<div className=\"flex items-center gap-3\">\n  <span className=\"flex items-center gap-1.5\">\n    <span c",
+      "url": "/components/basic/statusdot"
+    },
+    {
+      "name": "Kbd",
+      "category": "basic",
+      "categoryName": "基础组件",
+      "description": "键盘快捷键显示，用于展示键盘组合。",
+      "platform": [
+        "desktop"
+      ],
+      "tags": [
+        "键盘",
+        "快捷键",
+        "提示"
+      ],
+      "variants": [
+        "single",
+        "combo"
+      ],
+      "complexity": "simple",
+      "accessibility": "使用 kbd 语义标签",
+      "designTokens": {},
+      "codeExample": "<div className=\"flex items-center gap-1\">\n  <kbd className=\"rounded border px-1.5 py-0.5 text-xs fon",
+      "url": "/components/basic/kbd"
+    },
+    {
+      "name": "Code",
+      "category": "basic",
+      "categoryName": "基础组件",
+      "description": "代码块组件，支持语法高亮和行号。",
+      "platform": [
+        "desktop",
+        "mobile",
+        "tablet"
+      ],
+      "tags": [
+        "代码",
+        "展示",
+        "语法"
+      ],
+      "variants": [
+        "inline",
+        "block",
+        "withLineNumbers"
+      ],
+      "complexity": "simple",
+      "accessibility": "使用 code 和 pre 语义标签",
+      "designTokens": {},
+      "codeExample": "<pre><code>const greeting = \"Hello, World!\";\nconsole.log(greeting);</code></pre>",
+      "url": "/components/basic/code"
+    },
+    {
+      "name": "Toggle",
+      "category": "basic",
+      "categoryName": "基础组件",
+      "description": "开关切换，用于二元状态切换。",
+      "platform": [
+        "desktop",
+        "mobile",
+        "tablet"
+      ],
+      "tags": [
+        "开关",
+        "切换",
+        "状态"
+      ],
+      "variants": [
+        "default",
+        "disabled",
+        "withLabel"
+      ],
+      "complexity": "simple",
+      "accessibility": "使用 switch role，aria-checked 表示状态",
+      "designTokens": {},
+      "codeExample": "<div className=\"flex items-center space-x-2\">\n  <Switch id=\"airplane-mode\" />\n  <Label htmlFor=\"airp",
+      "url": "/components/basic/toggle"
+    },
+    {
+      "name": "Checkbox",
+      "category": "basic",
+      "categoryName": "基础组件",
+      "description": "复选框，用于多选场景。",
+      "platform": [
+        "desktop",
+        "mobile",
+        "tablet"
+      ],
+      "tags": [
+        "选择",
+        "表单",
+        "多选"
+      ],
+      "variants": [
+        "default",
+        "checked",
+        "indeterminate",
+        "disabled"
+      ],
+      "complexity": "simple",
+      "accessibility": "使用原生 input[type='checkbox'] 或 checkbox role",
+      "designTokens": {},
+      "codeExample": "<div className=\"flex items-center space-x-2\">\n  <input type=\"checkbox\" className=\"h-4 w-4 rounded bo",
+      "url": "/components/basic/checkbox"
+    },
+    {
+      "name": "RadioGroup",
+      "category": "basic",
+      "categoryName": "基础组件",
+      "description": "单选按钮组，用于互斥选择场景。",
+      "platform": [
+        "desktop",
+        "mobile",
+        "tablet"
+      ],
+      "tags": [
+        "选择",
+        "表单",
+        "单选"
+      ],
+      "variants": [
+        "default",
+        "card",
+        "disabled"
+      ],
+      "complexity": "simple",
+      "accessibility": "使用 radiogroup role 包裹，radio role 标记选项",
+      "designTokens": {},
+      "codeExample": "<fieldset>\n  <legend className=\"text-sm font-medium\">选择方案</legend>\n  <div className=\"mt-2 space-y-2\"",
+      "url": "/components/basic/radiogroup"
+    },
+    {
+      "name": "Select",
+      "category": "basic",
+      "categoryName": "基础组件",
+      "description": "下拉选择器，从选项列表中选择一个值。",
+      "platform": [
+        "desktop",
+        "mobile",
+        "tablet"
+      ],
+      "tags": [
+        "选择",
+        "表单",
+        "下拉"
+      ],
+      "variants": [
+        "default",
+        "disabled",
+        "withSearch"
+      ],
+      "complexity": "medium",
+      "accessibility": "使用 combobox role 或原生 select + label 关联",
+      "designTokens": {},
+      "codeExample": "<Select>\n  <SelectTrigger className=\"w-48\">\n    <SelectValue placeholder=\"选择框架\" />\n  </SelectTrigger",
+      "url": "/components/basic/select"
+    },
+    {
+      "name": "Combobox",
+      "category": "basic",
+      "categoryName": "基础组件",
+      "description": "组合框，支持搜索过滤的下拉选择器。",
+      "platform": [
+        "desktop"
+      ],
+      "tags": [
+        "选择",
+        "搜索",
+        "输入",
+        "表单"
+      ],
+      "variants": [
+        "default",
+        "multiple",
+        "creatable"
+      ],
+      "complexity": "medium",
+      "accessibility": "使用 combobox role，aria-expanded 控制展开状态",
+      "designTokens": {},
+      "codeExample": "<div className=\"relative\">\n  <Input placeholder=\"搜索框架...\" onChange={handleSearch} />\n  <ul className",
+      "url": "/components/basic/combobox"
+    },
+    {
+      "name": "ScrollArea",
+      "category": "basic",
+      "categoryName": "基础组件",
+      "description": "自定义滚动区域，提供美观的滚动条。",
+      "platform": [
+        "desktop",
+        "mobile",
+        "tablet"
+      ],
+      "tags": [
+        "滚动",
+        "容器",
+        "布局"
+      ],
+      "variants": [
+        "vertical",
+        "horizontal",
+        "both"
+      ],
+      "complexity": "simple",
+      "accessibility": "保持键盘滚动支持，tabindex 正确设置",
+      "designTokens": {},
+      "codeExample": "<ScrollArea className=\"h-72 rounded-lg border\">\n  <div className=\"p-4\">\n    {items.map(item => <div ",
+      "url": "/components/basic/scrollarea"
+    },
+    {
+      "name": "Form",
+      "category": "form",
+      "categoryName": "表单组件",
+      "description": "表单容器，管理表单状态、校验和提交。",
+      "platform": [
+        "desktop",
+        "mobile",
+        "tablet"
+      ],
+      "tags": [
+        "表单",
+        "容器",
+        "状态管理"
+      ],
+      "variants": [
+        "default",
+        "inline",
+        "twoColumn"
+      ],
+      "complexity": "medium",
+      "accessibility": "使用 form 元素，legend 描述表单用途",
+      "designTokens": {},
+      "codeExample": "<form className=\"space-y-6\" onSubmit={handleSubmit}>\n  <FormField label=\"用户名\" name=\"username\">\n    <",
+      "url": "/components/form/form"
+    },
+    {
+      "name": "FormField",
+      "category": "form",
+      "categoryName": "表单组件",
+      "description": "表单域，封装 label + input + error 的组合。",
+      "platform": [
+        "desktop",
+        "mobile",
+        "tablet"
+      ],
+      "tags": [
+        "表单",
+        "字段",
+        "校验"
+      ],
+      "variants": [
+        "default",
+        "required",
+        "error",
+        "horizontal"
+      ],
+      "complexity": "simple",
+      "accessibility": "label 与 input 正确关联，error 通过 aria-describedby 关联",
+      "designTokens": {},
+      "codeExample": "<div className=\"space-y-1.5\">\n  <label className=\"text-sm font-medium\">邮箱 <span className=\"text-red-",
+      "url": "/components/form/formfield"
+    },
+    {
+      "name": "FormValidation",
+      "category": "form",
+      "categoryName": "表单组件",
+      "description": "表单校验系统，支持实时校验和提交校验。",
+      "platform": [
+        "desktop",
+        "mobile",
+        "tablet"
+      ],
+      "tags": [
+        "表单",
+        "校验",
+        "错误"
+      ],
+      "variants": [
+        "onBlur",
+        "onChange",
+        "onSubmit"
+      ],
+      "complexity": "medium",
+      "accessibility": "错误使用 aria-describedby 和 aria-invalid，汇总错误列表",
+      "designTokens": {},
+      "codeExample": "<div className=\"space-y-1.5\">\n  <Input aria-invalid placeholder=\"邮箱\" />\n  <ul className=\"text-sm tex",
+      "url": "/components/form/formvalidation"
+    },
+    {
+      "name": "TextInput",
+      "category": "form",
+      "categoryName": "表单组件",
+      "description": "标准文本输入框，包含 label、placeholder 和帮助文本。",
+      "platform": [
+        "desktop",
+        "mobile",
+        "tablet"
+      ],
+      "tags": [
+        "输入",
+        "文本",
+        "表单"
+      ],
+      "variants": [
+        "default",
+        "withHelperText",
+        "withIcon"
+      ],
+      "complexity": "simple",
+      "accessibility": "关联 label 和 aria-describedby",
+      "designTokens": {},
+      "codeExample": "<TextInput\n  label=\"用户名\"\n  placeholder=\"请输入用户名\"\n  helperText=\"用户名为 3-20 个字符\"\n/>",
+      "url": "/components/form/textinput"
+    },
+    {
+      "name": "NumberInput",
+      "category": "form",
+      "categoryName": "表单组件",
+      "description": "数字输入框，支持步进按钮和范围限制。",
+      "platform": [
+        "desktop",
+        "mobile",
+        "tablet"
+      ],
+      "tags": [
+        "输入",
+        "数字",
+        "表单",
+        "步进"
+      ],
+      "variants": [
+        "default",
+        "withStepper",
+        "compact"
+      ],
+      "complexity": "simple",
+      "accessibility": "使用 type='number'，min/max 属性限制范围",
+      "designTokens": {},
+      "codeExample": "<div className=\"flex items-center\">\n  <button className=\"h-10 w-10 rounded-l-lg border\" aria-label=\"",
+      "url": "/components/form/numberinput"
+    },
+    {
+      "name": "CurrencyInput",
+      "category": "form",
+      "categoryName": "表单组件",
+      "description": "金额输入框，自动格式化货币显示。",
+      "platform": [
+        "desktop",
+        "mobile"
+      ],
+      "tags": [
+        "输入",
+        "金额",
+        "货币",
+        "格式化"
+      ],
+      "variants": [
+        "default",
+        "withPrefix",
+        "withDropdown"
+      ],
+      "complexity": "medium",
+      "accessibility": "金额格式化不影响实际输入值",
+      "designTokens": {},
+      "codeExample": "<div className=\"relative\">\n  <span className=\"absolute left-3 top-2.5 text-zinc-400\">¥</span>\n  <Inp",
+      "url": "/components/form/currencyinput"
+    },
+    {
+      "name": "DatePicker",
+      "category": "form",
+      "categoryName": "表单组件",
+      "description": "日期选择器，支持日期格式化和范围选择。",
+      "platform": [
+        "desktop",
+        "mobile",
+        "tablet"
+      ],
+      "tags": [
+        "日期",
+        "选择",
+        "日历"
+      ],
+      "variants": [
+        "single",
+        "range",
+        "withTime"
+      ],
+      "complexity": "complex",
+      "accessibility": "使用 grid role 构建日历表格，方向键导航日期",
+      "designTokens": {},
+      "codeExample": "<div className=\"inline-flex flex-col rounded-lg border p-4\">\n  <div className=\"flex justify-between ",
+      "url": "/components/form/datepicker"
+    },
+    {
+      "name": "TimePicker",
+      "category": "form",
+      "categoryName": "表单组件",
+      "description": "时间选择器，支持 12/24 小时制。",
+      "platform": [
+        "desktop",
+        "mobile"
+      ],
+      "tags": [
+        "时间",
+        "选择",
+        "表单"
+      ],
+      "variants": [
+        "12h",
+        "24h",
+        "withSeconds"
+      ],
+      "complexity": "medium",
+      "accessibility": "使用 spinbutton role 或独立输入字段",
+      "designTokens": {},
+      "codeExample": "<div className=\"flex items-center gap-1\">\n  <Input className=\"w-16 text-center\" placeholder=\"时\" />\n ",
+      "url": "/components/form/timepicker"
+    },
+    {
+      "name": "DateTimePicker",
+      "category": "form",
+      "categoryName": "表单组件",
+      "description": "日期时间选择器，同时选择日期和时间。",
+      "platform": [
+        "desktop"
+      ],
+      "tags": [
+        "日期",
+        "时间",
+        "选择"
+      ],
+      "variants": [
+        "default",
+        "inline",
+        "modal"
+      ],
+      "complexity": "complex",
+      "accessibility": "日期和时间区域分别标记，Tab 键切换",
+      "designTokens": {},
+      "codeExample": "<div className=\"flex gap-2\">\n  <DatePicker />\n  <TimePicker />\n</div>",
+      "url": "/components/form/datetimepicker"
+    },
+    {
+      "name": "FileUpload",
+      "category": "form",
+      "categoryName": "表单组件",
+      "description": "文件上传，支持拖拽、多文件和预览。",
+      "platform": [
+        "desktop",
+        "mobile"
+      ],
+      "tags": [
+        "上传",
+        "文件",
+        "拖拽"
+      ],
+      "variants": [
+        "dragDrop",
+        "button",
+        "withPreview",
+        "multiple"
+      ],
+      "complexity": "medium",
+      "accessibility": "拖拽区域需设置 role='button'，文件列表使用 listbox role",
+      "designTokens": {},
+      "codeExample": "<div className=\"rounded-lg border-2 border-dashed p-8 text-center hover:border-zinc-400 transition-c",
+      "url": "/components/form/fileupload"
+    },
+    {
+      "name": "ImageUpload",
+      "category": "form",
+      "categoryName": "表单组件",
+      "description": "图片上传组件，支持裁剪和预览。",
+      "platform": [
+        "desktop",
+        "mobile"
+      ],
+      "tags": [
+        "上传",
+        "图片",
+        "预览"
+      ],
+      "variants": [
+        "avatar",
+        "cover",
+        "gallery",
+        "withCrop"
+      ],
+      "complexity": "medium",
+      "accessibility": "上传按钮描述清晰，预览图提供有意义的 alt",
+      "designTokens": {},
+      "codeExample": "<div className=\"flex flex-col items-center gap-3\">\n  <div className=\"flex h-32 w-32 items-center jus",
+      "url": "/components/form/imageupload"
+    },
+    {
+      "name": "Dropzone",
+      "category": "form",
+      "categoryName": "表单组件",
+      "description": "拖拽上传区域，支持文件类型过滤。",
+      "platform": [
+        "desktop"
+      ],
+      "tags": [
+        "拖拽",
+        "上传",
+        "文件"
+      ],
+      "variants": [
+        "default",
+        "compact",
+        "withPreview"
+      ],
+      "complexity": "medium",
+      "accessibility": "设置 role='region' aria-label 描述区域功能",
+      "designTokens": {},
+      "codeExample": "<Dropzone onDrop={handleDrop}>\n  <div className=\"flex flex-col items-center\">\n    <Upload className=",
+      "url": "/components/form/dropzone"
+    },
+    {
+      "name": "RichTextEditor",
+      "category": "form",
+      "categoryName": "表单组件",
+      "description": "富文本编辑器，支持格式化文本。",
+      "platform": [
+        "desktop"
+      ],
+      "tags": [
+        "编辑",
+        "富文本",
+        "格式化"
+      ],
+      "variants": [
+        "minimal",
+        "full",
+        "inline"
+      ],
+      "complexity": "complex",
+      "accessibility": "工具栏使用 toolbar role，编辑区域使用 textbox role",
+      "designTokens": {},
+      "codeExample": "<div className=\"rounded-lg border\">\n  <div className=\"flex gap-1 border-b p-2\">\n    <button classNam",
+      "url": "/components/form/richtexteditor"
+    },
+    {
+      "name": "MarkdownEditor",
+      "category": "form",
+      "categoryName": "表单组件",
+      "description": "Markdown 编辑器，支持实时预览。",
+      "platform": [
+        "desktop"
+      ],
+      "tags": [
+        "编辑",
+        "Markdown",
+        "预览"
+      ],
+      "variants": [
+        "edit",
+        "preview",
+        "split"
+      ],
+      "complexity": "medium",
+      "accessibility": "编辑区和预览区使用独立的标签",
+      "designTokens": {},
+      "codeExample": "<div className=\"grid grid-cols-2 gap-0 border rounded-lg overflow-hidden\">\n  <textarea className=\"p-",
+      "url": "/components/form/markdowneditor"
+    },
+    {
+      "name": "CodeEditor",
+      "category": "form",
+      "categoryName": "表单组件",
+      "description": "代码编辑器，支持语法高亮和自动补全。",
+      "platform": [
+        "desktop"
+      ],
+      "tags": [
+        "编辑",
+        "代码",
+        "语法"
+      ],
+      "variants": [
+        "default",
+        "readonly",
+        "withLineNumbers"
+      ],
+      "complexity": "complex",
+      "accessibility": "使用 textbox role，支持标准编辑快捷键",
+      "designTokens": {},
+      "codeExample": "<div className=\"rounded-lg border overflow-hidden\">\n  <div className=\"flex items-center gap-2 border",
+      "url": "/components/form/codeeditor"
+    },
+    {
+      "name": "Slider",
+      "category": "form",
+      "categoryName": "表单组件",
+      "description": "滑块，用于选择范围内的数值。",
+      "platform": [
+        "desktop",
+        "mobile",
+        "tablet"
+      ],
+      "tags": [
+        "选择",
+        "数值",
+        "滑动"
+      ],
+      "variants": [
+        "default",
+        "range",
+        "withMarks"
+      ],
+      "complexity": "medium",
+      "accessibility": "使用 slider role，aria-valuenow/aria-valuemin/aria-valuemax",
+      "designTokens": {},
+      "codeExample": "<div className=\"space-y-2\">\n  <div className=\"flex justify-between text-sm\">\n    <span>音量</span>\n   ",
+      "url": "/components/form/slider"
+    },
+    {
+      "name": "RangeSlider",
+      "category": "form",
+      "categoryName": "表单组件",
+      "description": "范围滑块，选择数值区间。",
+      "platform": [
+        "desktop"
+      ],
+      "tags": [
+        "选择",
+        "范围",
+        "区间"
+      ],
+      "variants": [
+        "default",
+        "withInputs"
+      ],
+      "complexity": "medium",
+      "accessibility": "两个滑块都使用 slider role，正确设置 value 范围",
+      "designTokens": {},
+      "codeExample": "<div className=\"relative h-2 bg-zinc-200 rounded-full\">\n  <div className=\"absolute h-full bg-zinc-90",
+      "url": "/components/form/rangeslider"
+    },
+    {
+      "name": "SwitchGroup",
+      "category": "form",
+      "categoryName": "表单组件",
+      "description": "开关组，多个开关项的组合。",
+      "platform": [
+        "desktop",
+        "mobile",
+        "tablet"
+      ],
+      "tags": [
+        "开关",
+        "设置",
+        "选项"
+      ],
+      "variants": [
+        "default",
+        "card",
+        "withDescription"
+      ],
+      "complexity": "simple",
+      "accessibility": "每个开关独立 label，组使用 fieldset+legend",
+      "designTokens": {},
+      "codeExample": "<fieldset className=\"space-y-3\">\n  <legend className=\"text-sm font-medium\">通知设置</legend>\n  <div clas",
+      "url": "/components/form/switchgroup"
+    },
+    {
+      "name": "CheckboxGroup",
+      "category": "form",
+      "categoryName": "表单组件",
+      "description": "复选框组，多选项目组。",
+      "platform": [
+        "desktop",
+        "mobile",
+        "tablet"
+      ],
+      "tags": [
+        "选择",
+        "多选",
+        "表单"
+      ],
+      "variants": [
+        "default",
+        "card",
+        "grid"
+      ],
+      "complexity": "simple",
+      "accessibility": "使用 fieldset+legend 包裹，每个 checkbox 独立 label",
+      "designTokens": {},
+      "codeExample": "<fieldset>\n  <legend className=\"text-sm font-medium mb-2\">兴趣爱好</legend>\n  <div className=\"space-y-2\"",
+      "url": "/components/form/checkboxgroup"
+    },
+    {
+      "name": "RadioCard",
+      "category": "form",
+      "categoryName": "表单组件",
+      "description": "卡片式单选，用卡片展现选项。",
+      "platform": [
+        "desktop",
+        "mobile",
+        "tablet"
+      ],
+      "tags": [
+        "选择",
+        "卡片",
+        "单选"
+      ],
+      "variants": [
+        "default",
+        "withIcon",
+        "withImage"
+      ],
+      "complexity": "simple",
+      "accessibility": "使用 radiogroup role 包裹",
+      "designTokens": {},
+      "codeExample": "<fieldset className=\"grid grid-cols-3 gap-3\">\n  {plans.map(plan => (\n    <label key={plan.id} classN",
+      "url": "/components/form/radiocard"
+    },
+    {
+      "name": "MultiSelect",
+      "category": "form",
+      "categoryName": "表单组件",
+      "description": "多选下拉，从列表中选择多个选项。",
+      "platform": [
+        "desktop"
+      ],
+      "tags": [
+        "选择",
+        "多选",
+        "标签"
+      ],
+      "variants": [
+        "default",
+        "withChips",
+        "grouped"
+      ],
+      "complexity": "medium",
+      "accessibility": "使用 multiselect role 或 listbox+checkbox 模式",
+      "designTokens": {},
+      "codeExample": "<div className=\"relative\">\n  <div className=\"flex flex-wrap gap-1 rounded-lg border p-2 min-h-[2.5re",
+      "url": "/components/form/multiselect"
+    },
+    {
+      "name": "TagInput",
+      "category": "form",
+      "categoryName": "表单组件",
+      "description": "标签输入，输入并按回车添加标签。",
+      "platform": [
+        "desktop",
+        "mobile"
+      ],
+      "tags": [
+        "输入",
+        "标签",
+        "多值"
+      ],
+      "variants": [
+        "default",
+        "withSuggestions"
+      ],
+      "complexity": "medium",
+      "accessibility": "每个标签可独立删除，输入建议使用 listbox",
+      "designTokens": {},
+      "codeExample": "<div className=\"flex flex-wrap gap-2 rounded-lg border p-2\">\n  {tags.map(tag => (\n    <span key={tag",
+      "url": "/components/form/taginput"
+    },
+    {
+      "name": "Autocomplete",
+      "category": "form",
+      "categoryName": "表单组件",
+      "description": "自动补全输入，输入时显示匹配建议。",
+      "platform": [
+        "desktop",
+        "mobile"
+      ],
+      "tags": [
+        "输入",
+        "自动补全",
+        "建议"
+      ],
+      "variants": [
+        "default",
+        "withHighlight",
+        "async"
+      ],
+      "complexity": "medium",
+      "accessibility": "使用 combobox role，aria-autocomplete='list'",
+      "designTokens": {},
+      "codeExample": "<div className=\"relative\">\n  <Input placeholder=\"搜索城市...\" />\n  <ul className=\"absolute z-10 mt-1 w-f",
+      "url": "/components/form/autocomplete"
+    },
+    {
+      "name": "ColorPicker",
+      "category": "form",
+      "categoryName": "表单组件",
+      "description": "颜色选择器，支持色板、HEX 和透明度。",
+      "platform": [
+        "desktop"
+      ],
+      "tags": [
+        "颜色",
+        "选择",
+        "设计"
+      ],
+      "variants": [
+        "swatches",
+        "picker",
+        "input",
+        "withAlpha"
+      ],
+      "complexity": "complex",
+      "accessibility": "提供 hex 输入框作为键盘输入替代方案",
+      "designTokens": {},
+      "codeExample": "<div className=\"flex items-center gap-3\">\n  <div className=\"relative h-8 w-8 rounded-lg border overf",
+      "url": "/components/form/colorpicker"
+    },
+    {
+      "name": "OTPInput",
+      "category": "form",
+      "categoryName": "表单组件",
+      "description": "一次性密码输入，分格输入验证码。",
+      "platform": [
+        "desktop",
+        "mobile"
+      ],
+      "tags": [
+        "输入",
+        "验证码",
+        "安全"
+      ],
+      "variants": [
+        "numeric",
+        "alphanumeric",
+        "withSeparator"
+      ],
+      "complexity": "medium",
+      "accessibility": "使用多个 input 或单个 input，支持粘贴填充",
+      "designTokens": {},
+      "codeExample": "<div className=\"flex gap-2\">\n  {Array.from({length: 6}).map((_, i) => (\n    <input key={i} className",
+      "url": "/components/form/otpinput"
+    },
+    {
+      "name": "PhoneInput",
+      "category": "form",
+      "categoryName": "表单组件",
+      "description": "手机号输入，支持国家区号选择。",
+      "platform": [
+        "desktop",
+        "mobile"
+      ],
+      "tags": [
+        "输入",
+        "手机",
+        "国际化"
+      ],
+      "variants": [
+        "default",
+        "withFlag"
+      ],
+      "complexity": "medium",
+      "accessibility": "区号选择器独立 label，号码输入关联 label",
+      "designTokens": {},
+      "codeExample": "<div className=\"flex\">\n  <Select>\n    <SelectTrigger className=\"w-24 rounded-r-none\"><SelectValue pl",
+      "url": "/components/form/phoneinput"
+    },
+    {
+      "name": "SignaturePad",
+      "category": "form",
+      "categoryName": "表单组件",
+      "description": "手写签名板，支持触摸和鼠标签名。",
+      "platform": [
+        "desktop",
+        "mobile",
+        "tablet"
+      ],
+      "tags": [
+        "签名",
+        "手写",
+        "表单"
+      ],
+      "variants": [
+        "default",
+        "withClear"
+      ],
+      "complexity": "complex",
+      "accessibility": "提供键盘输入姓名作为签名替代方案",
+      "designTokens": {},
+      "codeExample": "<div className=\"rounded-lg border-2 border-dashed p-2\">\n  <canvas className=\"h-40 w-full rounded\" />",
+      "url": "/components/form/signaturepad"
+    },
+    {
+      "name": "StarRating",
+      "category": "form",
+      "categoryName": "表单组件",
+      "description": "星级评分，支持分数和自定义图标。",
+      "platform": [
+        "desktop",
+        "mobile"
+      ],
+      "tags": [
+        "评分",
+        "评价",
+        "交互"
+      ],
+      "variants": [
+        "default",
+        "readonly",
+        "withText",
+        "emoji"
+      ],
+      "complexity": "medium",
+      "accessibility": "使用 slider role 或 radio group",
+      "designTokens": {},
+      "codeExample": "<div className=\"flex items-center gap-1\" role=\"radiogroup\" aria-label=\"评分\">\n  {[1,2,3,4,5].map(i => ",
+      "url": "/components/form/starrating"
+    },
+    {
+      "name": "EmojiPicker",
+      "category": "form",
+      "categoryName": "表单组件",
+      "description": "表情选择器，分类展示表情符号。",
+      "platform": [
+        "desktop",
+        "mobile"
+      ],
+      "tags": [
+        "表情",
+        "选择",
+        "社交"
+      ],
+      "variants": [
+        "default",
+        "compact",
+        "reactions"
+      ],
+      "complexity": "medium",
+      "accessibility": "使用 grid role，每个表情用 button 并设 aria-label",
+      "designTokens": {},
+      "codeExample": "<div className=\"rounded-lg border p-3 w-72\">\n  <div className=\"flex border-b pb-2 gap-1 mb-2\">\n    {",
+      "url": "/components/form/emojipicker"
+    },
+    {
+      "name": "MediaRecorder",
+      "category": "form",
+      "categoryName": "表单组件",
+      "description": "媒体录制器，录音或录视频。",
+      "platform": [
+        "desktop",
+        "mobile"
+      ],
+      "tags": [
+        "录制",
+        "音频",
+        "视频",
+        "媒体"
+      ],
+      "variants": [
+        "audio",
+        "video"
+      ],
+      "complexity": "complex",
+      "accessibility": "录音按钮设置 aria-label 和状态提示",
+      "designTokens": {},
+      "codeExample": "<div className=\"flex items-center gap-4\">\n  <button className=\"flex h-12 w-12 items-center justify-c",
+      "url": "/components/form/mediarecorder"
+    },
+    {
+      "name": "CreditCardInput",
+      "category": "form",
+      "categoryName": "表单组件",
+      "description": "信用卡输入，自动识别卡号和格式化。",
+      "platform": [
+        "desktop",
+        "mobile"
+      ],
+      "tags": [
+        "支付",
+        "信用卡",
+        "格式化"
+      ],
+      "variants": [
+        "default",
+        "withIcon",
+        "compact"
+      ],
+      "complexity": "medium",
+      "accessibility": "使用 autocomplete='cc-number' 等属性",
+      "designTokens": {},
+      "codeExample": "<div className=\"space-y-3 rounded-lg border p-4\">\n  <Input placeholder=\"卡号 1234 5678 9012 3456\" clas",
+      "url": "/components/form/creditcardinput"
+    },
+    {
+      "name": "VoiceInput",
+      "category": "form",
+      "categoryName": "表单组件",
+      "description": "语音输入，使用语音转文字。",
+      "platform": [
+        "desktop",
+        "mobile"
+      ],
+      "tags": [
+        "语音",
+        "输入",
+        "识别"
+      ],
+      "variants": [
+        "default",
+        "pulse"
+      ],
+      "complexity": "complex",
+      "accessibility": "使用 aria-label 描述录音状态",
+      "designTokens": {},
+      "codeExample": "<div className=\"relative\">\n  <Input placeholder=\"点击麦克风开始语音输入\" />\n  <button className=\"absolute right",
+      "url": "/components/form/voiceinput"
+    },
+    {
+      "name": "Container",
+      "category": "layout",
+      "categoryName": "布局组件",
+      "description": "页面容器，限定最大宽度并水平居中。",
+      "platform": [
+        "desktop",
+        "tablet"
+      ],
+      "tags": [
+        "布局",
+        "容器",
+        "居中"
+      ],
+      "variants": [
+        "sm",
+        "md",
+        "lg",
+        "xl",
+        "fluid"
+      ],
+      "complexity": "simple",
+      "accessibility": "使用 main 或 section 语义标签",
+      "designTokens": {},
+      "codeExample": "<div className=\"mx-auto max-w-7xl px-4 sm:px-6 lg:px-8\">\n  {children}\n</div>",
+      "url": "/components/layout/container"
+    },
+    {
+      "name": "Grid",
+      "category": "layout",
+      "categoryName": "布局组件",
+      "description": "栅格系统，12列响应式布局。",
+      "platform": [
+        "desktop",
+        "mobile",
+        "tablet"
+      ],
+      "tags": [
+        "布局",
+        "栅格",
+        "响应式"
+      ],
+      "variants": [
+        "2col",
+        "3col",
+        "4col",
+        "masonry"
+      ],
+      "complexity": "simple",
+      "accessibility": "使用 CSS Grid，DOM 顺序与视觉顺序一致",
+      "designTokens": {},
+      "codeExample": "<div className=\"grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4\">\n  {items.map(i",
+      "url": "/components/layout/grid"
+    },
+    {
+      "name": "Flex",
+      "category": "layout",
+      "categoryName": "布局组件",
+      "description": "弹性布局容器，控制子元素排列方向和对齐。",
+      "platform": [
+        "desktop",
+        "mobile",
+        "tablet"
+      ],
+      "tags": [
+        "布局",
+        "弹性",
+        "对齐"
+      ],
+      "variants": [
+        "row",
+        "column",
+        "wrap",
+        "center"
+      ],
+      "complexity": "simple",
+      "accessibility": "默认 behavior，无需额外增强",
+      "designTokens": {},
+      "codeExample": "<div className=\"flex items-center justify-between gap-4\">\n  <div>左侧</div>\n  <div className=\"flex ite",
+      "url": "/components/layout/flex"
+    },
+    {
+      "name": "Stack",
+      "category": "layout",
+      "categoryName": "布局组件",
+      "description": "堆叠布局，统一控制子元素间距。",
+      "platform": [
+        "desktop",
+        "mobile",
+        "tablet"
+      ],
+      "tags": [
+        "布局",
+        "间距",
+        "堆叠"
+      ],
+      "variants": [
+        "horizontal",
+        "vertical"
+      ],
+      "complexity": "simple",
+      "accessibility": "无需额外增强",
+      "designTokens": {},
+      "codeExample": "<div className=\"space-y-4\">\n  <Card>第一项</Card>\n  <Card>第二项</Card>\n  <Card>第三项</Card>\n</div>",
+      "url": "/components/layout/stack"
+    },
+    {
+      "name": "Section",
+      "category": "layout",
+      "categoryName": "布局组件",
+      "description": "页面区域分隔，包含标题和内容区。",
+      "platform": [
+        "desktop",
+        "mobile",
+        "tablet"
+      ],
+      "tags": [
+        "布局",
+        "区域",
+        "标题"
+      ],
+      "variants": [
+        "default",
+        "withAction",
+        "collapsible"
+      ],
+      "complexity": "simple",
+      "accessibility": "使用 section 元素和 heading",
+      "designTokens": {},
+      "codeExample": "<section className=\"py-8\">\n  <div className=\"flex items-center justify-between mb-4\">\n    <h2 classN",
+      "url": "/components/layout/section"
+    },
+    {
+      "name": "PageLayout",
+      "category": "layout",
+      "categoryName": "布局组件",
+      "description": "页面整体布局，包含侧边栏、顶栏和内容区。",
+      "platform": [
+        "desktop"
+      ],
+      "tags": [
+        "布局",
+        "页面",
+        "侧边栏"
+      ],
+      "variants": [
+        "sidebar",
+        "header",
+        "both",
+        "fullScreen"
+      ],
+      "complexity": "complex",
+      "accessibility": "使用 header/nav/main/footer 语义标签，skip-link",
+      "designTokens": {},
+      "codeExample": "<div className=\"min-h-screen flex\">\n  <aside className=\"w-64 border-r bg-zinc-50\">{sidebar}</aside>\n",
+      "url": "/components/layout/pagelayout"
+    },
+    {
+      "name": "SplitPane",
+      "category": "layout",
+      "categoryName": "布局组件",
+      "description": "可拖拽分割面板，两栏可调整大小。",
+      "platform": [
+        "desktop"
+      ],
+      "tags": [
+        "布局",
+        "分割",
+        "拖拽",
+        "面板"
+      ],
+      "variants": [
+        "horizontal",
+        "vertical"
+      ],
+      "complexity": "medium",
+      "accessibility": "分隔条使用 separator role，支持键盘调整",
+      "designTokens": {},
+      "codeExample": "<div className=\"flex h-full\">\n  <div className=\"w-1/3 min-w-[200px] border-r\">{left}</div>\n  <div cl",
+      "url": "/components/layout/splitpane"
+    },
+    {
+      "name": "ResizablePanel",
+      "category": "layout",
+      "categoryName": "布局组件",
+      "description": "可调整大小的面板，支持拖拽边缘。",
+      "platform": [
+        "desktop"
+      ],
+      "tags": [
+        "布局",
+        "调整",
+        "拖拽"
+      ],
+      "variants": [
+        "right",
+        "bottom",
+        "left"
+      ],
+      "complexity": "medium",
+      "accessibility": "调整手柄设置 aria-label 和键盘操作",
+      "designTokens": {},
+      "codeExample": "<div className=\"relative\" style={{width: panelWidth}}>\n  {content}\n  <div className=\"absolute right-",
+      "url": "/components/layout/resizablepanel"
+    },
+    {
+      "name": "Tabs",
+      "category": "layout",
+      "categoryName": "布局组件",
+      "description": "标签页，在同一区域切换不同内容视图。",
+      "platform": [
+        "desktop",
+        "mobile",
+        "tablet"
+      ],
+      "tags": [
+        "导航",
+        "切换",
+        "标签"
+      ],
+      "variants": [
+        "line",
+        "pills",
+        "card"
+      ],
+      "complexity": "simple",
+      "accessibility": "使用 tablist/tab/tabpanel 角色，键盘左右切换",
+      "designTokens": {},
+      "codeExample": "<Tabs defaultValue=\"account\">\n  <TabsList>\n    <TabsTrigger value=\"account\">账户</TabsTrigger>\n    <Ta",
+      "url": "/components/layout/tabs"
+    },
+    {
+      "name": "Accordion",
+      "category": "layout",
+      "categoryName": "布局组件",
+      "description": "手风琴，可展开/折叠的内容区域。",
+      "platform": [
+        "desktop",
+        "mobile",
+        "tablet"
+      ],
+      "tags": [
+        "折叠",
+        "展开",
+        "内容"
+      ],
+      "variants": [
+        "single",
+        "multiple",
+        "bordered"
+      ],
+      "complexity": "simple",
+      "accessibility": "使用 disclosure 模式，aria-expanded 控制状态",
+      "designTokens": {},
+      "codeExample": "<div className=\"divide-y border rounded-lg\">\n  {items.map(item => (\n    <details key={item.id} class",
+      "url": "/components/layout/accordion"
+    },
+    {
+      "name": "Wizard",
+      "category": "layout",
+      "categoryName": "布局组件",
+      "description": "步骤向导，引导用户完成多步操作。",
+      "platform": [
+        "desktop",
+        "mobile"
+      ],
+      "tags": [
+        "步骤",
+        "向导",
+        "流程"
+      ],
+      "variants": [
+        "horizontal",
+        "vertical",
+        "withIcon"
+      ],
+      "complexity": "medium",
+      "accessibility": "当前步骤使用 aria-current='step'，完成步骤使用 aria-label",
+      "designTokens": {},
+      "codeExample": "<div className=\"flex items-center gap-2\">\n  {steps.map((step, i) => (\n    <>\n      <div className=\"f",
+      "url": "/components/layout/wizard"
+    },
+    {
+      "name": "EmptyState",
+      "category": "layout",
+      "categoryName": "布局组件",
+      "description": "空状态占位，无数据时展示提示和操作引导。",
+      "platform": [
+        "desktop",
+        "mobile",
+        "tablet"
+      ],
+      "tags": [
+        "空状态",
+        "占位",
+        "引导"
+      ],
+      "variants": [
+        "default",
+        "withAction",
+        "compact"
+      ],
+      "complexity": "simple",
+      "accessibility": "使用 status role，操作按钮可聚焦",
+      "designTokens": {},
+      "codeExample": "<div className=\"flex flex-col items-center justify-center py-16 text-center\">\n  <Inbox className=\"h-",
+      "url": "/components/layout/emptystate"
+    },
+    {
+      "name": "ErrorState",
+      "category": "layout",
+      "categoryName": "布局组件",
+      "description": "错误状态，显示错误信息和重试操作。",
+      "platform": [
+        "desktop",
+        "mobile",
+        "tablet"
+      ],
+      "tags": [
+        "错误",
+        "状态",
+        "重试"
+      ],
+      "variants": [
+        "default",
+        "inline",
+        "fullPage"
+      ],
+      "complexity": "simple",
+      "accessibility": "使用 alert role，错误信息可读",
+      "designTokens": {},
+      "codeExample": "<div className=\"flex flex-col items-center justify-center py-16 text-center\" role=\"alert\">\n  <AlertT",
+      "url": "/components/layout/errorstate"
+    },
+    {
+      "name": "Sidebar",
+      "category": "layout",
+      "categoryName": "布局组件",
+      "description": "侧边栏，固定左侧或右侧的导航面板。",
+      "platform": [
+        "desktop"
+      ],
+      "tags": [
+        "导航",
+        "侧边栏",
+        "布局"
+      ],
+      "variants": [
+        "default",
+        "collapsible",
+        "floating"
+      ],
+      "complexity": "medium",
+      "accessibility": "使用 nav 标签，aria-label 描述导航用途",
+      "designTokens": {},
+      "codeExample": "<aside className=\"fixed left-0 top-0 h-screen w-64 border-r bg-zinc-50 p-4\">\n  <nav className=\"space",
+      "url": "/components/layout/sidebar"
+    },
+    {
+      "name": "Header",
+      "category": "layout",
+      "categoryName": "布局组件",
+      "description": "顶部导航栏，包含Logo、导航和操作区。",
+      "platform": [
+        "desktop",
+        "mobile",
+        "tablet"
+      ],
+      "tags": [
+        "导航",
+        "顶栏",
+        "布局"
+      ],
+      "variants": [
+        "default",
+        "transparent",
+        "withSearch"
+      ],
+      "complexity": "medium",
+      "accessibility": "使用 header/banner 语义标签",
+      "designTokens": {},
+      "codeExample": "<header className=\"sticky top-0 z-50 h-14 border-b bg-white/80 backdrop-blur-sm\">\n  <div className=\"",
+      "url": "/components/layout/header"
+    },
+    {
+      "name": "Footer",
+      "category": "layout",
+      "categoryName": "布局组件",
+      "description": "页脚，放置版权、链接和社交信息。",
+      "platform": [
+        "desktop",
+        "mobile",
+        "tablet"
+      ],
+      "tags": [
+        "页脚",
+        "布局",
+        "链接"
+      ],
+      "variants": [
+        "simple",
+        "withLinks",
+        "withNewsletter"
+      ],
+      "complexity": "simple",
+      "accessibility": "使用 footer/contentinfo 语义标签",
+      "designTokens": {},
+      "codeExample": "<footer className=\"border-t py-12\">\n  <div className=\"mx-auto max-w-7xl px-6\">\n    <div className=\"g",
+      "url": "/components/layout/footer"
+    },
+    {
+      "name": "Card",
+      "category": "layout",
+      "categoryName": "布局组件",
+      "description": "卡片容器，用于分组和展示关联内容。",
+      "platform": [
+        "desktop",
+        "mobile",
+        "tablet"
+      ],
+      "tags": [
+        "卡片",
+        "容器",
+        "分组"
+      ],
+      "variants": [
+        "default",
+        "hover",
+        "interactive",
+        "compact"
+      ],
+      "complexity": "simple",
+      "accessibility": "可交互卡片使用 button 或 a 元素",
+      "designTokens": {},
+      "codeExample": "<Card>\n  <CardHeader>\n    <CardTitle>卡片标题</CardTitle>\n    <CardDescription>卡片补充描述</CardDescription>\n",
+      "url": "/components/layout/card"
+    },
+    {
+      "name": "Panel",
+      "category": "layout",
+      "categoryName": "布局组件",
+      "description": "面板，可展开/折叠的内容区域。",
+      "platform": [
+        "desktop"
+      ],
+      "tags": [
+        "面板",
+        "折叠",
+        "区域"
+      ],
+      "variants": [
+        "default",
+        "collapsible",
+        "draggable"
+      ],
+      "complexity": "medium",
+      "accessibility": "折叠按钮设置 aria-expanded/aria-controls",
+      "designTokens": {},
+      "codeExample": "<div className=\"rounded-lg border\">\n  <div className=\"flex items-center justify-between border-b px-",
+      "url": "/components/layout/panel"
+    },
+    {
+      "name": "Drawer",
+      "category": "layout",
+      "categoryName": "布局组件",
+      "description": "抽屉，从屏幕边缘滑出的面板。",
+      "platform": [
+        "desktop",
+        "mobile"
+      ],
+      "tags": [
+        "面板",
+        "滑出",
+        "侧边"
+      ],
+      "variants": [
+        "left",
+        "right",
+        "bottom",
+        "top"
+      ],
+      "complexity": "medium",
+      "accessibility": "打开时焦点移入 Drawer，关闭后移回触发元素",
+      "designTokens": {},
+      "codeExample": "<Dialog>\n  <DialogTrigger asChild>\n    <Button variant=\"outline\">打开抽屉</Button>\n  </DialogTrigger>\n  ",
+      "url": "/components/layout/drawer"
+    },
+    {
+      "name": "Spacer",
+      "category": "layout",
+      "categoryName": "布局组件",
+      "description": "间距组件，在元素间添加统一空白。",
+      "platform": [
+        "desktop",
+        "mobile",
+        "tablet"
+      ],
+      "tags": [
+        "间距",
+        "空白",
+        "布局"
+      ],
+      "variants": [
+        "xs",
+        "sm",
+        "md",
+        "lg",
+        "xl"
+      ],
+      "complexity": "simple",
+      "accessibility": "纯视觉组件，无特殊要求",
+      "designTokens": {},
+      "codeExample": "<div className=\"flex items-center\">\n  <Button>按钮1</Button>\n  <Spacer size=\"md\" />\n  <Button>按钮2</But",
+      "url": "/components/layout/spacer"
+    },
+    {
+      "name": "Table",
+      "category": "data-display",
+      "categoryName": "数据展示",
+      "description": "数据表格，支持排序、筛选、分页和行选择。",
+      "platform": [
+        "desktop",
+        "tablet"
+      ],
+      "tags": [
+        "表格",
+        "数据",
+        "排序"
+      ],
+      "variants": [
+        "default",
+        "striped",
+        "bordered",
+        "compact"
+      ],
+      "complexity": "medium",
+      "accessibility": "使用 table 语义标签，th scope 正确设置",
+      "designTokens": {},
+      "codeExample": "<table className=\"w-full text-sm\">\n  <thead><tr className=\"border-b bg-zinc-50\">\n    <th className=\"",
+      "url": "/components/data-display/table"
+    },
+    {
+      "name": "DataGrid",
+      "category": "data-display",
+      "categoryName": "数据展示",
+      "description": "数据网格，功能丰富的数据表格含排序/筛选/拖拽列。",
+      "platform": [
+        "desktop"
+      ],
+      "tags": [
+        "表格",
+        "数据",
+        "高级"
+      ],
+      "variants": [
+        "default",
+        "virtualized",
+        "treeData"
+      ],
+      "complexity": "complex",
+      "accessibility": "复杂表格使用 grid role，键盘导航遵循 ARIA Grid Pattern",
+      "designTokens": {},
+      "codeExample": "<div role=\"grid\" aria-label=\"数据表格\" className=\"border rounded-lg overflow-hidden\">\n  <div role=\"rowgr",
+      "url": "/components/data-display/datagrid"
+    },
+    {
+      "name": "Pagination",
+      "category": "data-display",
+      "categoryName": "数据展示",
+      "description": "分页器，表格或列表数据的分页导航。",
+      "platform": [
+        "desktop",
+        "mobile"
+      ],
+      "tags": [
+        "分页",
+        "导航",
+        "数据"
+      ],
+      "variants": [
+        "default",
+        "simple",
+        "withSizeChanger"
+      ],
+      "complexity": "medium",
+      "accessibility": "使用 nav aria-label='分页'，当前页 aria-current='page'",
+      "designTokens": {},
+      "codeExample": "<nav aria-label=\"分页\" className=\"flex items-center justify-between\">\n  <p className=\"text-sm text-zin",
+      "url": "/components/data-display/pagination"
+    },
+    {
+      "name": "InfiniteScroll",
+      "category": "data-display",
+      "categoryName": "数据展示",
+      "description": "无限滚动，滚动到底自动加载更多。",
+      "platform": [
+        "desktop",
+        "mobile"
+      ],
+      "tags": [
+        "滚动",
+        "加载",
+        "列表"
+      ],
+      "variants": [
+        "default",
+        "virtualized"
+      ],
+      "complexity": "medium",
+      "accessibility": "加载状态通过 aria-live 通知，提供'加载更多'按钮备用",
+      "designTokens": {},
+      "codeExample": "<div className=\"h-96 overflow-auto\" onScroll={handleScroll}>\n  {items.map(item => <div key={item.id}",
+      "url": "/components/data-display/infinitescroll"
+    },
+    {
+      "name": "List",
+      "category": "data-display",
+      "categoryName": "数据展示",
+      "description": "列表，垂直排列数据项。",
+      "platform": [
+        "desktop",
+        "mobile",
+        "tablet"
+      ],
+      "tags": [
+        "列表",
+        "数据",
+        "排列"
+      ],
+      "variants": [
+        "default",
+        "withIcon",
+        "withAction",
+        "compact"
+      ],
+      "complexity": "simple",
+      "accessibility": "使用 ul/li 语义标签",
+      "designTokens": {},
+      "codeExample": "<ul className=\"divide-y\">\n  {items.map(item => (\n    <li key={item.id} className=\"flex items-center ",
+      "url": "/components/data-display/list"
+    },
+    {
+      "name": "CardList",
+      "category": "data-display",
+      "categoryName": "数据展示",
+      "description": "卡片列表，用卡片展示数据项集合。",
+      "platform": [
+        "desktop",
+        "mobile",
+        "tablet"
+      ],
+      "tags": [
+        "卡片",
+        "列表",
+        "数据"
+      ],
+      "variants": [
+        "grid",
+        "list",
+        "masonry"
+      ],
+      "complexity": "simple",
+      "accessibility": "使用列表语义或 article 包裹每张卡片",
+      "designTokens": {},
+      "codeExample": "<div className=\"grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4\">\n  {items.map(item => (\n    <C",
+      "url": "/components/data-display/cardlist"
+    },
+    {
+      "name": "TreeView",
+      "category": "data-display",
+      "categoryName": "数据展示",
+      "description": "树形控件，展示层级结构和可展开/折叠的节点。",
+      "platform": [
+        "desktop"
+      ],
+      "tags": [
+        "树",
+        "层级",
+        "展开"
+      ],
+      "variants": [
+        "default",
+        "withCheckbox",
+        "withIcon"
+      ],
+      "complexity": "complex",
+      "accessibility": "使用 tree/treeitem role，方向键导航节点",
+      "designTokens": {},
+      "codeExample": "<ul role=\"tree\" className=\"space-y-0\">\n  <li role=\"treeitem\" aria-expanded=\"true\">\n    <button class",
+      "url": "/components/data-display/treeview"
+    },
+    {
+      "name": "Timeline",
+      "category": "data-display",
+      "categoryName": "数据展示",
+      "description": "时间轴，按时间顺序展示事件。",
+      "platform": [
+        "desktop",
+        "mobile",
+        "tablet"
+      ],
+      "tags": [
+        "时间",
+        "时间轴",
+        "事件"
+      ],
+      "variants": [
+        "vertical",
+        "horizontal",
+        "alternating"
+      ],
+      "complexity": "simple",
+      "accessibility": "使用 list 语义，每个事件用 time 元素标注时间",
+      "designTokens": {},
+      "codeExample": "<ol className=\"relative border-l-2 border-zinc-200 ml-3 space-y-6\">\n  {events.map(event => (\n    <li",
+      "url": "/components/data-display/timeline"
+    },
+    {
+      "name": "StatCard",
+      "category": "data-display",
+      "categoryName": "数据展示",
+      "description": "统计卡片，展示关键指标和趋势。",
+      "platform": [
+        "desktop",
+        "mobile",
+        "tablet"
+      ],
+      "tags": [
+        "统计",
+        "指标",
+        "仪表盘"
+      ],
+      "variants": [
+        "default",
+        "withTrend",
+        "withChart"
+      ],
+      "complexity": "simple",
+      "accessibility": "数字使用合适的格式，趋势变化用 aria-label 说明",
+      "designTokens": {},
+      "codeExample": "<div className=\"grid grid-cols-4 gap-4\">\n  <Card>\n    <CardContent className=\"p-5\">\n      <p classNa",
+      "url": "/components/data-display/statcard"
+    },
+    {
+      "name": "TagList",
+      "category": "data-display",
+      "categoryName": "数据展示",
+      "description": "标签列表，展示一组标签或分类。",
+      "platform": [
+        "desktop",
+        "mobile",
+        "tablet"
+      ],
+      "tags": [
+        "标签",
+        "分类",
+        "筛选"
+      ],
+      "variants": [
+        "default",
+        "clickable",
+        "removable"
+      ],
+      "complexity": "simple",
+      "accessibility": "可点击标签使用 button 元素",
+      "designTokens": {},
+      "codeExample": "<div className=\"flex flex-wrap gap-2\">\n  {tags.map(tag => (\n    <span key={tag} className=\"inline-fl",
+      "url": "/components/data-display/taglist"
+    },
+    {
+      "name": "Progress",
+      "category": "data-display",
+      "categoryName": "数据展示",
+      "description": "进度条，展示任务完成度。",
+      "platform": [
+        "desktop",
+        "mobile",
+        "tablet"
+      ],
+      "tags": [
+        "进度",
+        "状态",
+        "加载"
+      ],
+      "variants": [
+        "linear",
+        "circular",
+        "withLabel",
+        "steps"
+      ],
+      "complexity": "simple",
+      "accessibility": "使用 progressbar role，aria-valuenow/aria-valuemin/aria-valuemax",
+      "designTokens": {},
+      "codeExample": "<div className=\"space-y-2\">\n  <div className=\"flex justify-between text-sm\">\n    <span>完成进度</span><s",
+      "url": "/components/data-display/progress"
+    },
+    {
+      "name": "CircularProgress",
+      "category": "data-display",
+      "categoryName": "数据展示",
+      "description": "环形进度，用圆环展示进度或百分比。",
+      "platform": [
+        "desktop",
+        "mobile",
+        "tablet"
+      ],
+      "tags": [
+        "进度",
+        "圆形",
+        "百分比"
+      ],
+      "variants": [
+        "default",
+        "withLabel",
+        "dashboard"
+      ],
+      "complexity": "medium",
+      "accessibility": "使用 progressbar role 或 img+alt",
+      "designTokens": {},
+      "codeExample": "<div className=\"relative h-16 w-16\">\n  <svg className=\"h-full w-full -rotate-90\" viewBox=\"0 0 36 36\"",
+      "url": "/components/data-display/circularprogress"
+    },
+    {
+      "name": "Sparkline",
+      "category": "data-display",
+      "categoryName": "数据展示",
+      "description": "迷你图表，在狭小空间展示数据趋势。",
+      "platform": [
+        "desktop",
+        "mobile"
+      ],
+      "tags": [
+        "图表",
+        "趋势",
+        "迷你"
+      ],
+      "variants": [
+        "line",
+        "bar",
+        "area"
+      ],
+      "complexity": "medium",
+      "accessibility": "提供文本替代描述数据趋势",
+      "designTokens": {},
+      "codeExample": "<svg className=\"h-8 w-24\" viewBox=\"0 0 100 30\">\n  <polyline fill=\"none\" stroke=\"#18181b\" strokeWidth",
+      "url": "/components/data-display/sparkline"
+    },
+    {
+      "name": "Chart",
+      "category": "data-display",
+      "categoryName": "数据展示",
+      "description": "图表，柱状图、折线图、饼图等数据可视化。",
+      "platform": [
+        "desktop",
+        "tablet"
+      ],
+      "tags": [
+        "图表",
+        "可视化",
+        "数据"
+      ],
+      "variants": [
+        "bar",
+        "line",
+        "pie",
+        "area",
+        "donut"
+      ],
+      "complexity": "complex",
+      "accessibility": "提供数据表格作为替代，图表使用适当的 aria 属性",
+      "designTokens": {},
+      "codeExample": "<div className=\"rounded-xl border p-6\">\n  <div className=\"flex items-center justify-between mb-6\">\n ",
+      "url": "/components/data-display/chart"
+    },
+    {
+      "name": "Carousel",
+      "category": "data-display",
+      "categoryName": "数据展示",
+      "description": "轮播，循环展示图片或内容卡片。",
+      "platform": [
+        "desktop",
+        "mobile",
+        "tablet"
+      ],
+      "tags": [
+        "轮播",
+        "滑动",
+        "展示"
+      ],
+      "variants": [
+        "default",
+        "thumbnail",
+        "fade"
+      ],
+      "complexity": "medium",
+      "accessibility": "使用 carousel role 或 tabpanel，支持键盘导航，自动播放可暂停",
+      "designTokens": {},
+      "codeExample": "<div className=\"relative overflow-hidden rounded-xl\" role=\"region\" aria-label=\"图片轮播\">\n  <div classNa",
+      "url": "/components/data-display/carousel"
+    },
+    {
+      "name": "Gallery",
+      "category": "data-display",
+      "categoryName": "数据展示",
+      "description": "图片画廊，网格布局展示图片集。",
+      "platform": [
+        "desktop",
+        "mobile",
+        "tablet"
+      ],
+      "tags": [
+        "图片",
+        "画廊",
+        "展示"
+      ],
+      "variants": [
+        "grid",
+        "masonry",
+        "justified"
+      ],
+      "complexity": "medium",
+      "accessibility": "每张图提供有意义的 alt，使用 figure 标签",
+      "designTokens": {},
+      "codeExample": "<div className=\"grid grid-cols-2 md:grid-cols-4 gap-2\">\n  {images.map(img => (\n    <figure key={img.",
+      "url": "/components/data-display/gallery"
+    },
+    {
+      "name": "Lightbox",
+      "category": "data-display",
+      "categoryName": "数据展示",
+      "description": "灯箱，放大查看图片或媒体。",
+      "platform": [
+        "desktop",
+        "tablet"
+      ],
+      "tags": [
+        "图片",
+        "放大",
+        "查看"
+      ],
+      "variants": [
+        "default",
+        "withThumbnails",
+        "withZoom"
+      ],
+      "complexity": "medium",
+      "accessibility": "使用 dialog role，Esc 关闭，焦点管理",
+      "designTokens": {},
+      "codeExample": "<Dialog open={open} onOpenChange={setOpen}>\n  <DialogContent className=\"max-w-4xl bg-black/95 border",
+      "url": "/components/data-display/lightbox"
+    },
+    {
+      "name": "Map",
+      "category": "data-display",
+      "categoryName": "数据展示",
+      "description": "地图组件，展示地理位置和标记。",
+      "platform": [
+        "desktop",
+        "mobile",
+        "tablet"
+      ],
+      "tags": [
+        "地图",
+        "位置",
+        "标记"
+      ],
+      "variants": [
+        "default",
+        "withMarkers",
+        "readonly"
+      ],
+      "complexity": "complex",
+      "accessibility": "提供地址文本作为地图的替代",
+      "designTokens": {},
+      "codeExample": "<div className=\"relative overflow-hidden rounded-xl border h-72 bg-zinc-100 flex items-center justif",
+      "url": "/components/data-display/map"
+    },
+    {
+      "name": "Calendar",
+      "category": "data-display",
+      "categoryName": "数据展示",
+      "description": "日历，展示月份视图和事件标记。",
+      "platform": [
+        "desktop",
+        "mobile",
+        "tablet"
+      ],
+      "tags": [
+        "日历",
+        "日期",
+        "事件"
+      ],
+      "variants": [
+        "month",
+        "week",
+        "year",
+        "withEvents"
+      ],
+      "complexity": "complex",
+      "accessibility": "使用 grid role 构建日期表格",
+      "designTokens": {},
+      "codeExample": "<div className=\"rounded-xl border p-4\">\n  <div className=\"flex items-center justify-between mb-4\">\n ",
+      "url": "/components/data-display/calendar"
+    },
+    {
+      "name": "KanbanBoard",
+      "category": "data-display",
+      "categoryName": "数据展示",
+      "description": "看板，拖拽卡片管理任务流。",
+      "platform": [
+        "desktop",
+        "tablet"
+      ],
+      "tags": [
+        "看板",
+        "拖拽",
+        "任务"
+      ],
+      "variants": [
+        "default",
+        "compact",
+        "withSubtasks"
+      ],
+      "complexity": "complex",
+      "accessibility": "使用 grid role 包裹列，每个卡片可拖拽排序",
+      "designTokens": {},
+      "codeExample": "<div className=\"flex gap-4 overflow-x-auto pb-4\">\n  {columns.map(col => (\n    <div key={col.id} clas",
+      "url": "/components/data-display/kanbanboard"
+    },
+    {
+      "name": "GanttChart",
+      "category": "data-display",
+      "categoryName": "数据展示",
+      "description": "甘特图，项目管理时间轴视图。",
+      "platform": [
+        "desktop"
+      ],
+      "tags": [
+        "甘特图",
+        "项目管理",
+        "时间"
+      ],
+      "variants": [
+        "default",
+        "withDependencies"
+      ],
+      "complexity": "complex",
+      "accessibility": "使用 grid role，时间信息提供文本替代",
+      "designTokens": {},
+      "codeExample": "<div className=\"overflow-auto\">\n  <div className=\"flex\">\n    <div className=\"w-48 flex-shrink-0 bord",
+      "url": "/components/data-display/ganttchart"
+    },
+    {
+      "name": "JSONViewer",
+      "category": "data-display",
+      "categoryName": "数据展示",
+      "description": "JSON 查看器，可折叠的结构化数据展示。",
+      "platform": [
+        "desktop"
+      ],
+      "tags": [
+        "JSON",
+        "数据",
+        "结构"
+      ],
+      "variants": [
+        "default",
+        "editable",
+        "withSearch"
+      ],
+      "complexity": "medium",
+      "accessibility": "使用 tree role 展示结构",
+      "designTokens": {},
+      "codeExample": "<pre className=\"text-sm font-mono bg-zinc-50 rounded-lg p-4 overflow-auto max-h-96\">\n  \"name\": \"Butt",
+      "url": "/components/data-display/jsonviewer"
+    },
+    {
+      "name": "DiffViewer",
+      "category": "data-display",
+      "categoryName": "数据展示",
+      "description": "差异对比器，高亮展示两个版本间的差异。",
+      "platform": [
+        "desktop"
+      ],
+      "tags": [
+        "对比",
+        "差异",
+        "代码"
+      ],
+      "variants": [
+        "split",
+        "unified"
+      ],
+      "complexity": "complex",
+      "accessibility": "新增/删除行提供视觉+文本标识",
+      "designTokens": {},
+      "codeExample": "<div className=\"grid grid-cols-2 border rounded-lg overflow-hidden text-sm font-mono\">\n  <div classN",
+      "url": "/components/data-display/diffviewer"
+    },
+    {
+      "name": "Breadcrumb",
+      "category": "navigation",
+      "categoryName": "导航组件",
+      "description": "面包屑，展示页面层级路径。",
+      "platform": [
+        "desktop",
+        "tablet"
+      ],
+      "tags": [
+        "导航",
+        "路径",
+        "层级"
+      ],
+      "variants": [
+        "default",
+        "withDropdown",
+        "compact"
+      ],
+      "complexity": "simple",
+      "accessibility": "使用 nav aria-label='面包屑'，ol/li 语义",
+      "designTokens": {},
+      "codeExample": "<nav aria-label=\"面包屑\">\n  <ol className=\"flex items-center gap-1.5 text-sm text-zinc-500\">\n    <li><a",
+      "url": "/components/navigation/breadcrumb"
+    },
+    {
+      "name": "Navbar",
+      "category": "navigation",
+      "categoryName": "导航组件",
+      "description": "导航栏，顶部的全局导航。",
+      "platform": [
+        "desktop",
+        "mobile"
+      ],
+      "tags": [
+        "导航",
+        "顶栏",
+        "全局"
+      ],
+      "variants": [
+        "default",
+        "sticky",
+        "transparent",
+        "withMegaMenu"
+      ],
+      "complexity": "medium",
+      "accessibility": "使用 nav 标签，当前页 aria-current='page'",
+      "designTokens": {},
+      "codeExample": "<nav className=\"flex h-14 items-center justify-between border-b px-6 bg-white\" aria-label=\"主导航\">\n  <",
+      "url": "/components/navigation/navbar"
+    },
+    {
+      "name": "DropdownMenu",
+      "category": "navigation",
+      "categoryName": "导航组件",
+      "description": "下拉菜单，点击显示操作菜单。",
+      "platform": [
+        "desktop"
+      ],
+      "tags": [
+        "菜单",
+        "下拉",
+        "操作"
+      ],
+      "variants": [
+        "default",
+        "withIcon",
+        "withShortcut",
+        "submenu"
+      ],
+      "complexity": "medium",
+      "accessibility": "使用 menu/menuitem role，方向键导航",
+      "designTokens": {},
+      "codeExample": "<DropdownMenu>\n  <DropdownMenuTrigger asChild>\n    <Button variant=\"outline\">操作 <ChevronDown classNa",
+      "url": "/components/navigation/dropdownmenu"
+    },
+    {
+      "name": "ContextMenu",
+      "category": "navigation",
+      "categoryName": "导航组件",
+      "description": "右键菜单，鼠标右键触发的上下文操作。",
+      "platform": [
+        "desktop"
+      ],
+      "tags": [
+        "菜单",
+        "右键",
+        "上下文"
+      ],
+      "variants": [
+        "default",
+        "withIcons",
+        "nested"
+      ],
+      "complexity": "medium",
+      "accessibility": "使用 menu role，支持键盘 Shift+F10 触发",
+      "designTokens": {},
+      "codeExample": "<div onContextMenu={handleContextMenu} className=\"rounded-lg border p-12 text-center text-sm text-zi",
+      "url": "/components/navigation/contextmenu"
+    },
+    {
+      "name": "MegaMenu",
+      "category": "navigation",
+      "categoryName": "导航组件",
+      "description": "大型菜单，展示多列内容的面板式下拉。",
+      "platform": [
+        "desktop"
+      ],
+      "tags": [
+        "菜单",
+        "导航",
+        "大型"
+      ],
+      "variants": [
+        "default",
+        "withFeatured"
+      ],
+      "complexity": "complex",
+      "accessibility": "使用 menubar 模式，子菜单使用 menu role",
+      "designTokens": {},
+      "codeExample": "<div className=\"absolute z-50 mt-2 rounded-xl border bg-white shadow-xl p-6 grid grid-cols-3 gap-8 w",
+      "url": "/components/navigation/megamenu"
+    },
+    {
+      "name": "TabBar",
+      "category": "navigation",
+      "categoryName": "导航组件",
+      "description": "标签栏，底部切换不同页面视图（移动端常用）。",
+      "platform": [
+        "mobile"
+      ],
+      "tags": [
+        "导航",
+        "底部",
+        "标签"
+      ],
+      "variants": [
+        "default",
+        "withBadge",
+        "floating"
+      ],
+      "complexity": "simple",
+      "accessibility": "使用 tablist role，当前页 aria-selected='true'",
+      "designTokens": {},
+      "codeExample": "<nav className=\"fixed bottom-0 left-0 right-0 h-16 border-t bg-white flex items-center justify-aroun",
+      "url": "/components/navigation/tabbar"
+    },
+    {
+      "name": "SegmentedControl",
+      "category": "navigation",
+      "categoryName": "导航组件",
+      "description": "分段控件，在多个选项间切换。",
+      "platform": [
+        "desktop",
+        "mobile"
+      ],
+      "tags": [
+        "切换",
+        "分段",
+        "选择"
+      ],
+      "variants": [
+        "default",
+        "withIcon",
+        "fullWidth"
+      ],
+      "complexity": "simple",
+      "accessibility": "使用 radiogroup 或 tablist role",
+      "designTokens": {},
+      "codeExample": "<div className=\"inline-flex rounded-lg bg-zinc-100 p-1\" role=\"radiogroup\">\n  {options.map(opt => (\n ",
+      "url": "/components/navigation/segmentedcontrol"
+    },
+    {
+      "name": "VerticalNav",
+      "category": "navigation",
+      "categoryName": "导航组件",
+      "description": "垂直导航，侧边的层级导航菜单。",
+      "platform": [
+        "desktop"
+      ],
+      "tags": [
+        "导航",
+        "垂直",
+        "侧边"
+      ],
+      "variants": [
+        "default",
+        "collapsible",
+        "withSubmenu"
+      ],
+      "complexity": "medium",
+      "accessibility": "使用 nav 标签和 list 语义，当前项 aria-current",
+      "designTokens": {},
+      "codeExample": "<nav className=\"space-y-1\">\n  <div className=\"px-3 py-2 text-xs font-semibold text-zinc-400 uppercas",
+      "url": "/components/navigation/verticalnav"
+    },
+    {
+      "name": "CommandPalette",
+      "category": "navigation",
+      "categoryName": "导航组件",
+      "description": "命令面板，快捷键唤起的全局搜索和命令执行器。",
+      "platform": [
+        "desktop"
+      ],
+      "tags": [
+        "搜索",
+        "命令",
+        "快捷键"
+      ],
+      "variants": [
+        "default",
+        "withActions",
+        "withRecent"
+      ],
+      "complexity": "complex",
+      "accessibility": "使用 dialog+combobox role，⌘K 唤起，Esc 关闭",
+      "designTokens": {},
+      "codeExample": "<Dialog open={open} onOpenChange={setOpen}>\n  <DialogContent className=\"p-0 max-w-xl\">\n    <div clas",
+      "url": "/components/navigation/commandpalette"
+    },
+    {
+      "name": "Stepper",
+      "category": "navigation",
+      "categoryName": "导航组件",
+      "description": "步骤条，展示多步流程的进度。",
+      "platform": [
+        "desktop",
+        "mobile",
+        "tablet"
+      ],
+      "tags": [
+        "步骤",
+        "流程",
+        "进度"
+      ],
+      "variants": [
+        "horizontal",
+        "vertical",
+        "clickable"
+      ],
+      "complexity": "medium",
+      "accessibility": "使用 ol/li 语义，当前步骤 aria-current='step'",
+      "designTokens": {},
+      "codeExample": "<ol className=\"flex items-center\">\n  {steps.map((step, i) => (\n    <li key={i} className=\"flex items",
+      "url": "/components/navigation/stepper"
+    },
+    {
+      "name": "BackToTop",
+      "category": "navigation",
+      "categoryName": "导航组件",
+      "description": "回到顶部，长页面滚回顶部的快捷按钮。",
+      "platform": [
+        "desktop",
+        "mobile"
+      ],
+      "tags": [
+        "导航",
+        "滚动",
+        "顶部"
+      ],
+      "variants": [
+        "default",
+        "withProgress"
+      ],
+      "complexity": "simple",
+      "accessibility": "使用 button，aria-label='回到顶部'",
+      "designTokens": {},
+      "codeExample": "<button\n  className=\"fixed bottom-8 right-8 h-10 w-10 rounded-full bg-zinc-900 text-white shadow-lg ",
+      "url": "/components/navigation/backtotop"
+    },
+    {
+      "name": "Alert",
+      "category": "feedback",
+      "categoryName": "反馈组件",
+      "description": "警告提示，展示重要信息、警告或错误。",
+      "platform": [
+        "desktop",
+        "mobile",
+        "tablet"
+      ],
+      "tags": [
+        "提示",
+        "警告",
+        "反馈"
+      ],
+      "variants": [
+        "info",
+        "success",
+        "warning",
+        "error",
+        "withAction"
+      ],
+      "complexity": "simple",
+      "accessibility": "使用 alert/status role，role='alert' 会立即通知屏幕阅读器",
+      "designTokens": {},
+      "codeExample": "<div className=\"rounded-lg border-l-4 border-blue-500 bg-blue-50 p-4\" role=\"alert\">\n  <div className",
+      "url": "/components/feedback/alert"
+    },
+    {
+      "name": "Toast",
+      "category": "feedback",
+      "categoryName": "反馈组件",
+      "description": "消息提示，短暂出现于屏幕角落的轻量通知。",
+      "platform": [
+        "desktop",
+        "mobile"
+      ],
+      "tags": [
+        "通知",
+        "提示",
+        "消息"
+      ],
+      "variants": [
+        "success",
+        "error",
+        "info",
+        "loading",
+        "withAction"
+      ],
+      "complexity": "medium",
+      "accessibility": "使用 status/alert role，配合 aria-live 区域",
+      "designTokens": {},
+      "codeExample": "<div className=\"fixed bottom-4 right-4 z-50 rounded-lg border bg-white p-4 shadow-lg animate-in slid",
+      "url": "/components/feedback/toast"
+    },
+    {
+      "name": "Notification",
+      "category": "feedback",
+      "categoryName": "反馈组件",
+      "description": "通知提醒，带标题和内容的系统通知。",
+      "platform": [
+        "desktop",
+        "mobile"
+      ],
+      "tags": [
+        "通知",
+        "提醒",
+        "系统"
+      ],
+      "variants": [
+        "default",
+        "withAvatar",
+        "withActions"
+      ],
+      "complexity": "medium",
+      "accessibility": "使用 aria-live='polite' 区域包裹",
+      "designTokens": {},
+      "codeExample": "<div className=\"w-80 rounded-xl border bg-white p-4 shadow-lg\">\n  <div className=\"flex items-start g",
+      "url": "/components/feedback/notification"
+    },
+    {
+      "name": "NotificationCenter",
+      "category": "feedback",
+      "categoryName": "反馈组件",
+      "description": "通知中心，汇聚所有通知的弹出面板。",
+      "platform": [
+        "desktop"
+      ],
+      "tags": [
+        "通知",
+        "中心",
+        "消息"
+      ],
+      "variants": [
+        "default",
+        "withTabs",
+        "withActions"
+      ],
+      "complexity": "medium",
+      "accessibility": "使用 dialog/region role，每个通知可聚焦",
+      "designTokens": {},
+      "codeExample": "<div className=\"w-96 rounded-xl border bg-white shadow-xl\">\n  <div className=\"flex items-center just",
+      "url": "/components/feedback/notificationcenter"
+    },
+    {
+      "name": "Dialog",
+      "category": "feedback",
+      "categoryName": "反馈组件",
+      "description": "对话框，需要用户关注的模态窗口。",
+      "platform": [
+        "desktop",
+        "mobile",
+        "tablet"
+      ],
+      "tags": [
+        "弹窗",
+        "模态",
+        "确认"
+      ],
+      "variants": [
+        "default",
+        "alert",
+        "confirm",
+        "fullScreen"
+      ],
+      "complexity": "medium",
+      "accessibility": "使用 dialog role，aria-modal='true'，打开时焦点移入",
+      "designTokens": {},
+      "codeExample": "<Dialog>\n  <DialogTrigger asChild><Button>打开对话框</Button></DialogTrigger>\n  <DialogContent>\n    <Dial",
+      "url": "/components/feedback/dialog"
+    },
+    {
+      "name": "Modal",
+      "category": "feedback",
+      "categoryName": "反馈组件",
+      "description": "模态框，占据全屏或大面积的弹出层。",
+      "platform": [
+        "desktop",
+        "mobile",
+        "tablet"
+      ],
+      "tags": [
+        "弹窗",
+        "模态",
+        "覆盖"
+      ],
+      "variants": [
+        "default",
+        "fullScreen",
+        "slideOver"
+      ],
+      "complexity": "medium",
+      "accessibility": "打开时锁定焦点在模态框内，Esc 关闭",
+      "designTokens": {},
+      "codeExample": "<div className=\"fixed inset-0 z-50 flex items-center justify-center\">\n  <div className=\"fixed inset-",
+      "url": "/components/feedback/modal"
+    },
+    {
+      "name": "ConfirmDialog",
+      "category": "feedback",
+      "categoryName": "反馈组件",
+      "description": "确认对话框，专用删除/操作确认弹窗。",
+      "platform": [
+        "desktop",
+        "mobile"
+      ],
+      "tags": [
+        "确认",
+        "删除",
+        "警告"
+      ],
+      "variants": [
+        "delete",
+        "archive",
+        "leavePage"
+      ],
+      "complexity": "simple",
+      "accessibility": "使用 alertdialog role，焦点默认在取消按钮",
+      "designTokens": {},
+      "codeExample": "<div className=\"rounded-xl border bg-white p-6 shadow-xl\" role=\"alertdialog\" aria-modal=\"true\">\n  <d",
+      "url": "/components/feedback/confirmdialog"
+    },
+    {
+      "name": "Popconfirm",
+      "category": "feedback",
+      "categoryName": "反馈组件",
+      "description": "气泡确认框，点击后弹出的轻量确认。",
+      "platform": [
+        "desktop"
+      ],
+      "tags": [
+        "确认",
+        "气泡",
+        "轻量"
+      ],
+      "variants": [
+        "default",
+        "withIcon"
+      ],
+      "complexity": "medium",
+      "accessibility": "使用 alertdialog role，焦点管理",
+      "designTokens": {},
+      "codeExample": "<Popover>\n  <PopoverTrigger asChild>\n    <Button variant=\"ghost\" size=\"sm\">删除</Button>\n  </PopoverTr",
+      "url": "/components/feedback/popconfirm"
+    },
+    {
+      "name": "Popover",
+      "category": "feedback",
+      "categoryName": "反馈组件",
+      "description": "气泡卡片，点击弹出额外信息面板。",
+      "platform": [
+        "desktop"
+      ],
+      "tags": [
+        "气泡",
+        "弹出",
+        "信息"
+      ],
+      "variants": [
+        "default",
+        "withForm",
+        "withList"
+      ],
+      "complexity": "medium",
+      "accessibility": "使用 dialog role，焦点移入面板",
+      "designTokens": {},
+      "codeExample": "<Popover>\n  <PopoverTrigger asChild>\n    <Button variant=\"outline\">设置</Button>\n  </PopoverTrigger>\n ",
+      "url": "/components/feedback/popover"
+    },
+    {
+      "name": "Sheet",
+      "category": "feedback",
+      "categoryName": "反馈组件",
+      "description": "抽屉面板，从屏幕边缘滑出的内容板。",
+      "platform": [
+        "desktop",
+        "mobile"
+      ],
+      "tags": [
+        "面板",
+        "滑出",
+        "抽屉"
+      ],
+      "variants": [
+        "left",
+        "right",
+        "bottom"
+      ],
+      "complexity": "medium",
+      "accessibility": "使用 dialog role，打开时焦点移入",
+      "designTokens": {},
+      "codeExample": "<div className=\"fixed right-0 top-0 h-full w-96 bg-white shadow-xl z-50 animate-in slide-in-from-rig",
+      "url": "/components/feedback/sheet"
+    },
+    {
+      "name": "Banner",
+      "category": "feedback",
+      "categoryName": "反馈组件",
+      "description": "横幅通知，页面顶部的全局提示条。",
+      "platform": [
+        "desktop",
+        "mobile",
+        "tablet"
+      ],
+      "tags": [
+        "横幅",
+        "通知",
+        "全局"
+      ],
+      "variants": [
+        "default",
+        "dismissible",
+        "sticky"
+      ],
+      "complexity": "simple",
+      "accessibility": "使用 alert/status role，关闭按钮有 label",
+      "designTokens": {},
+      "codeExample": "<div className=\"bg-zinc-900 text-white text-center py-3 px-6 text-sm flex items-center justify-cente",
+      "url": "/components/feedback/banner"
+    },
+    {
+      "name": "CookieBanner",
+      "category": "feedback",
+      "categoryName": "反馈组件",
+      "description": "Cookie 同意横幅，数据隐私合规。",
+      "platform": [
+        "desktop",
+        "mobile"
+      ],
+      "tags": [
+        "隐私",
+        "GDPR",
+        "横幅"
+      ],
+      "variants": [
+        "default",
+        "centered",
+        "detailed"
+      ],
+      "complexity": "simple",
+      "accessibility": "按钮可聚焦，链接可导航",
+      "designTokens": {},
+      "codeExample": "<div className=\"fixed bottom-4 left-4 right-4 sm:left-auto sm:right-4 sm:w-96 rounded-xl border bg-w",
+      "url": "/components/feedback/cookiebanner"
+    },
+    {
+      "name": "LoadingOverlay",
+      "category": "feedback",
+      "categoryName": "反馈组件",
+      "description": "加载覆盖层，阻止交互的全屏 Loading。",
+      "platform": [
+        "desktop",
+        "mobile",
+        "tablet"
+      ],
+      "tags": [
+        "加载",
+        "覆盖",
+        "等待"
+      ],
+      "variants": [
+        "default",
+        "withText",
+        "transparent"
+      ],
+      "complexity": "simple",
+      "accessibility": "使用 aria-busy='true' 和 aria-label",
+      "designTokens": {},
+      "codeExample": "<div className=\"relative\">\n  {content}\n  {isLoading && (\n    <div className=\"absolute inset-0 flex i",
+      "url": "/components/feedback/loadingoverlay"
+    },
+    {
+      "name": "ScoreBoard",
+      "category": "feedback",
+      "categoryName": "反馈组件",
+      "description": "评分板，展示用户评分和总计。",
+      "platform": [
+        "desktop",
+        "mobile"
+      ],
+      "tags": [
+        "评分",
+        "评价",
+        "统计"
+      ],
+      "variants": [
+        "default",
+        "detailed",
+        "compact"
+      ],
+      "complexity": "simple",
+      "accessibility": "评分用文本明确表示，星级只是视觉增强",
+      "designTokens": {},
+      "codeExample": "<div className=\"flex items-center gap-6 p-6 rounded-xl border\">\n  <div className=\"text-center\">\n    ",
+      "url": "/components/feedback/scoreboard"
+    },
+    {
+      "name": "Result",
+      "category": "feedback",
+      "categoryName": "反馈组件",
+      "description": "结果页，操作完成后的结果展示（成功/失败）。",
+      "platform": [
+        "desktop",
+        "mobile",
+        "tablet"
+      ],
+      "tags": [
+        "结果",
+        "状态",
+        "反馈"
+      ],
+      "variants": [
+        "success",
+        "error",
+        "warning",
+        "info"
+      ],
+      "complexity": "simple",
+      "accessibility": "结果标题使用 heading，补充操作用 button",
+      "designTokens": {},
+      "codeExample": "<div className=\"flex flex-col items-center justify-center py-20 text-center\">\n  <CheckCircle classNa",
+      "url": "/components/feedback/result"
+    },
+    {
+      "name": "FadeIn",
+      "category": "animation",
+      "categoryName": "动画/特效",
+      "description": "淡入动画，元素透明度从0到1过渡。",
+      "platform": [
+        "desktop",
+        "mobile",
+        "tablet"
+      ],
+      "tags": [
+        "动画",
+        "淡入",
+        "过渡"
+      ],
+      "variants": [
+        "default",
+        "slow",
+        "fast"
+      ],
+      "complexity": "simple",
+      "accessibility": "配合 prefers-reduced-motion 禁用动画",
+      "designTokens": {},
+      "codeExample": "<div className=\"animate-in fade-in duration-500\">\n  淡入的内容\n</div>",
+      "url": "/components/animation/fadein"
+    },
+    {
+      "name": "SlideIn",
+      "category": "animation",
+      "categoryName": "动画/特效",
+      "description": "滑入动画，元素从指定方向滑入。",
+      "platform": [
+        "desktop",
+        "mobile",
+        "tablet"
+      ],
+      "tags": [
+        "动画",
+        "滑入",
+        "方向"
+      ],
+      "variants": [
+        "fromTop",
+        "fromBottom",
+        "fromLeft",
+        "fromRight"
+      ],
+      "complexity": "simple",
+      "accessibility": "配合 reduced-motion 媒体查询",
+      "designTokens": {},
+      "codeExample": "<div className=\"animate-in slide-in-from-bottom-4 duration-300\">\n  从下方滑入\n</div>",
+      "url": "/components/animation/slidein"
+    },
+    {
+      "name": "ZoomIn",
+      "category": "animation",
+      "categoryName": "动画/特效",
+      "description": "缩放动画，元素从小到大出现。",
+      "platform": [
+        "desktop",
+        "mobile",
+        "tablet"
+      ],
+      "tags": [
+        "动画",
+        "缩放",
+        "弹出"
+      ],
+      "variants": [
+        "default",
+        "bounce",
+        "spring"
+      ],
+      "complexity": "simple",
+      "accessibility": "配合 reduced-motion 禁用",
+      "designTokens": {},
+      "codeExample": "<div className=\"animate-in zoom-in-95 duration-200\">\n  缩放出现\n</div>",
+      "url": "/components/animation/zoomin"
+    },
+    {
+      "name": "HoverEffect",
+      "category": "animation",
+      "categoryName": "动画/特效",
+      "description": "悬停效果，鼠标悬停时的视觉变化。",
+      "platform": [
+        "desktop"
+      ],
+      "tags": [
+        "悬停",
+        "效果",
+        "交互"
+      ],
+      "variants": [
+        "lift",
+        "glow",
+        "scale",
+        "border"
+      ],
+      "complexity": "simple",
+      "accessibility": "悬停效果不能传达唯一信息",
+      "designTokens": {},
+      "codeExample": "<div className=\"rounded-xl border p-6 transition-all duration-200 hover:shadow-lg hover:scale-[1.02]",
+      "url": "/components/animation/hovereffect"
+    },
+    {
+      "name": "ScrollReveal",
+      "category": "animation",
+      "categoryName": "动画/特效",
+      "description": "滚动显示，元素进入视口时触发动画。",
+      "platform": [
+        "desktop",
+        "mobile",
+        "tablet"
+      ],
+      "tags": [
+        "滚动",
+        "显示",
+        "视口"
+      ],
+      "variants": [
+        "fade",
+        "slide",
+        "zoom"
+      ],
+      "complexity": "medium",
+      "accessibility": "配合 reduced-motion，动画仅触发一次",
+      "designTokens": {},
+      "codeExample": "<div className=\"opacity-0 translate-y-4 transition-all duration-600 [&.visible]:opacity-100 [&.visib",
+      "url": "/components/animation/scrollreveal"
+    },
+    {
+      "name": "Stagger",
+      "category": "animation",
+      "categoryName": "动画/特效",
+      "description": "交错动画，子元素依次出现。",
+      "platform": [
+        "desktop",
+        "mobile",
+        "tablet"
+      ],
+      "tags": [
+        "动画",
+        "交错",
+        "列表"
+      ],
+      "variants": [
+        "list",
+        "grid",
+        "cascade"
+      ],
+      "complexity": "medium",
+      "accessibility": "动画延迟不能影响可访问性",
+      "designTokens": {},
+      "codeExample": "<div className=\"space-y-2\">\n  {items.map((item, i) => (\n    <div key={i} className=\"animate-in fade-",
+      "url": "/components/animation/stagger"
+    },
+    {
+      "name": "PageTransition",
+      "category": "animation",
+      "categoryName": "动画/特效",
+      "description": "页面切换动画，页面间的过渡效果。",
+      "platform": [
+        "desktop",
+        "mobile",
+        "tablet"
+      ],
+      "tags": [
+        "动画",
+        "页面",
+        "切换"
+      ],
+      "variants": [
+        "fade",
+        "slide",
+        "none"
+      ],
+      "complexity": "complex",
+      "accessibility": "保持焦点管理，prefers-reduced-motion 禁用",
+      "designTokens": {},
+      "codeExample": "<div className=\"animate-in fade-in slide-in-from-bottom-2 duration-300\">\n  {pageContent}\n</div>",
+      "url": "/components/animation/pagetransition"
+    },
+    {
+      "name": "Pulse",
+      "category": "animation",
+      "categoryName": "动画/特效",
+      "description": "脉冲动画，周期性的缩放闪烁效果。",
+      "platform": [
+        "desktop",
+        "mobile",
+        "tablet"
+      ],
+      "tags": [
+        "动画",
+        "脉冲",
+        "闪烁"
+      ],
+      "variants": [
+        "default",
+        "dot",
+        "ring"
+      ],
+      "complexity": "simple",
+      "accessibility": "不能闪烁超过3次/秒，避免引发癫痫",
+      "designTokens": {},
+      "codeExample": "<div className=\"relative\">\n  <span className=\"absolute h-3 w-3 rounded-full bg-red-500\" />\n  <span c",
+      "url": "/components/animation/pulse"
+    },
+    {
+      "name": "Shimmer",
+      "category": "animation",
+      "categoryName": "动画/特效",
+      "description": "微光效果，扫描光条常用于加载占位。",
+      "platform": [
+        "desktop",
+        "mobile",
+        "tablet"
+      ],
+      "tags": [
+        "动画",
+        "微光",
+        "加载"
+      ],
+      "variants": [
+        "default",
+        "card",
+        "text"
+      ],
+      "complexity": "simple",
+      "accessibility": "纯装饰动画",
+      "designTokens": {},
+      "codeExample": "<div className=\"h-4 rounded bg-zinc-200 relative overflow-hidden\">\n  <div className=\"absolute inset-",
+      "url": "/components/animation/shimmer"
+    },
+    {
+      "name": "NumberAnimation",
+      "category": "animation",
+      "categoryName": "动画/特效",
+      "description": "数字动画，数字递增递减的计数效果。",
+      "platform": [
+        "desktop",
+        "mobile",
+        "tablet"
+      ],
+      "tags": [
+        "动画",
+        "数字",
+        "计数"
+      ],
+      "variants": [
+        "countUp",
+        "countDown",
+        "ticker"
+      ],
+      "complexity": "medium",
+      "accessibility": "使用 aria-live 区域或 aria-valuenow 通知变化",
+      "designTokens": {},
+      "codeExample": "<span className=\"text-2xl font-bold tabular-nums\">\n  {count.toLocaleString()}\n</span>",
+      "url": "/components/animation/numberanimation"
+    },
+    {
+      "name": "Ripple",
+      "category": "animation",
+      "categoryName": "动画/特效",
+      "description": "波纹效果，点击时从触点扩散的水波。",
+      "platform": [
+        "desktop",
+        "mobile"
+      ],
+      "tags": [
+        "动画",
+        "波纹",
+        "点击"
+      ],
+      "variants": [
+        "default",
+        "center"
+      ],
+      "complexity": "medium",
+      "accessibility": "纯装饰效果",
+      "designTokens": {},
+      "codeExample": "<button className=\"relative overflow-hidden rounded-lg px-4 py-2 bg-zinc-900 text-white\">\n  点击波纹\n  <",
+      "url": "/components/animation/ripple"
+    },
+    {
+      "name": "ProgressAnimation",
+      "category": "animation",
+      "categoryName": "动画/特效",
+      "description": "进度动画，进度条和环形进度的动态变化。",
+      "platform": [
+        "desktop",
+        "mobile",
+        "tablet"
+      ],
+      "tags": [
+        "动画",
+        "进度",
+        "动态"
+      ],
+      "variants": [
+        "linear",
+        "circular",
+        "indeterminate"
+      ],
+      "complexity": "medium",
+      "accessibility": "使用 progressbar role 实时更新",
+      "designTokens": {},
+      "codeExample": "<div className=\"space-y-2\">\n  <div className=\"h-2 w-full bg-zinc-200 rounded-full overflow-hidden\">\n",
+      "url": "/components/animation/progressanimation"
+    },
+    {
+      "name": "Confetti",
+      "category": "animation",
+      "categoryName": "动画/特效",
+      "description": "彩带庆祝动画，用于成功/完成场景。",
+      "platform": [
+        "desktop",
+        "mobile"
+      ],
+      "tags": [
+        "动画",
+        "庆祝",
+        "彩带"
+      ],
+      "variants": [
+        "default",
+        "burst",
+        "continuous"
+      ],
+      "complexity": "complex",
+      "accessibility": "纯装饰动画，关键信息不能仅靠动画传达",
+      "designTokens": {},
+      "codeExample": "<div className=\"relative\">\n  {showConfetti && (\n    <div className=\"absolute inset-0 pointer-events-",
+      "url": "/components/animation/confetti"
+    },
+    {
+      "name": "SkeletonLoader",
+      "category": "animation",
+      "categoryName": "动画/特效",
+      "description": "骨架加载动画，内容加载时的占位动画。",
+      "platform": [
+        "desktop",
+        "mobile",
+        "tablet"
+      ],
+      "tags": [
+        "加载",
+        "骨架",
+        "占位"
+      ],
+      "variants": [
+        "text",
+        "card",
+        "avatar",
+        "table"
+      ],
+      "complexity": "simple",
+      "accessibility": "使用 aria-busy='true' 标记加载区域",
+      "designTokens": {},
+      "codeExample": "<div className=\"space-y-4 animate-pulse\">\n  <div className=\"flex items-center gap-3\">\n    <div class",
+      "url": "/components/animation/skeletonloader"
+    },
+    {
+      "name": "DragAnimation",
+      "category": "animation",
+      "categoryName": "动画/特效",
+      "description": "拖拽动画，拖拽时的视觉反馈。",
+      "platform": [
+        "desktop",
+        "mobile"
+      ],
+      "tags": [
+        "动画",
+        "拖拽",
+        "反馈"
+      ],
+      "variants": [
+        "lift",
+        "ghost",
+        "reorder"
+      ],
+      "complexity": "complex",
+      "accessibility": "拖拽操作提供键盘替代方案",
+      "designTokens": {},
+      "codeExample": "<div className=\"rounded-lg border p-4 cursor-grab active:cursor-grabbing active:shadow-xl active:sca",
+      "url": "/components/animation/draganimation"
+    },
+    {
+      "name": "TypingEffect",
+      "category": "animation",
+      "categoryName": "动画/特效",
+      "description": "打字效果，逐字显示的文本动画。",
+      "platform": [
+        "desktop",
+        "mobile"
+      ],
+      "tags": [
+        "动画",
+        "打字",
+        "文本"
+      ],
+      "variants": [
+        "default",
+        "withCursor",
+        "loop"
+      ],
+      "complexity": "medium",
+      "accessibility": "完整文本已经在 DOM 中，动画不影响可访问性",
+      "designTokens": {},
+      "codeExample": "<div className=\"font-mono text-lg\">\n  <span>{displayedText}</span>\n  <span className=\"animate-blink ",
+      "url": "/components/animation/typingeffect"
+    },
+    {
+      "name": "AnimatedIcon",
+      "category": "animation",
+      "categoryName": "动画/特效",
+      "description": "动画图标，带交互反馈的图标组件。",
+      "platform": [
+        "desktop",
+        "mobile"
+      ],
+      "tags": [
+        "动画",
+        "图标",
+        "交互"
+      ],
+      "variants": [
+        "hover",
+        "click",
+        "morph"
+      ],
+      "complexity": "simple",
+      "accessibility": "动画图标的语义通过 aria-label 传达",
+      "designTokens": {},
+      "codeExample": "<button className=\"group relative\" aria-label=\"点赞\">\n  <Heart className=\"h-6 w-6 transition-all group",
+      "url": "/components/animation/animatedicon"
+    },
+    {
+      "name": "BottomSheet",
+      "category": "mobile",
+      "categoryName": "移动端专用",
+      "description": "底部弹出面板，从底部滑出的操作或内容面板。",
+      "platform": [
+        "mobile"
+      ],
+      "tags": [
+        "底部",
+        "面板",
+        "移动端",
+        "弹出"
+      ],
+      "variants": [
+        "default",
+        "withHandle",
+        "snapPoints"
+      ],
+      "complexity": "medium",
+      "accessibility": "使用 dialog role，拖拽手柄可操作",
+      "designTokens": {},
+      "codeExample": "<div className=\"fixed inset-0 z-50 flex flex-col justify-end\">\n  <div className=\"fixed inset-0 bg-bl",
+      "url": "/components/mobile/bottomsheet"
+    },
+    {
+      "name": "ActionSheet",
+      "category": "mobile",
+      "categoryName": "移动端专用",
+      "description": "操作菜单，iOS 风格底部操作列表。",
+      "platform": [
+        "mobile"
+      ],
+      "tags": [
+        "操作",
+        "菜单",
+        "iOS",
+        "移动端"
+      ],
+      "variants": [
+        "default",
+        "destructive",
+        "withCancel"
+      ],
+      "complexity": "simple",
+      "accessibility": "使用 menu/listbox role",
+      "designTokens": {},
+      "codeExample": "<div className=\"fixed inset-x-0 bottom-0 z-50 p-3\">\n  <div className=\"rounded-2xl bg-white overflow-",
+      "url": "/components/mobile/actionsheet"
+    },
+    {
+      "name": "PullToRefresh",
+      "category": "mobile",
+      "categoryName": "移动端专用",
+      "description": "下拉刷新，向下拖动页面触发刷新。",
+      "platform": [
+        "mobile"
+      ],
+      "tags": [
+        "刷新",
+        "下拉",
+        "手势"
+      ],
+      "variants": [
+        "default",
+        "withIndicator",
+        "customIcon"
+      ],
+      "complexity": "medium",
+      "accessibility": "刷新状态通过 aria-live 通知",
+      "designTokens": {},
+      "codeExample": "<div className=\"relative\" style={{transform: \"translateY(40px)\"}}>\n  <div className=\"absolute left-1",
+      "url": "/components/mobile/pulltorefresh"
+    },
+    {
+      "name": "SwipeAction",
+      "category": "mobile",
+      "categoryName": "移动端专用",
+      "description": "滑动操作，左右滑动列表项显示操作按钮。",
+      "platform": [
+        "mobile"
+      ],
+      "tags": [
+        "滑动",
+        "操作",
+        "手势"
+      ],
+      "variants": [
+        "leftActions",
+        "rightActions",
+        "swipeToDelete"
+      ],
+      "complexity": "complex",
+      "accessibility": "操作按钮可聚焦，提供键盘替代方式",
+      "designTokens": {},
+      "codeExample": "<div className=\"relative overflow-hidden\">\n  <div className=\"absolute right-0 h-full flex\">\n    <but",
+      "url": "/components/mobile/swipeaction"
+    },
+    {
+      "name": "TouchRipple",
+      "category": "mobile",
+      "categoryName": "移动端专用",
+      "description": "触摸波纹，Material Design 风格的点击涟漪。",
+      "platform": [
+        "mobile"
+      ],
+      "tags": [
+        "触摸",
+        "波纹",
+        "反馈"
+      ],
+      "variants": [
+        "default",
+        "centered"
+      ],
+      "complexity": "medium",
+      "accessibility": "纯装饰效果",
+      "designTokens": {},
+      "codeExample": "<button className=\"relative overflow-hidden rounded-full bg-zinc-900 text-white px-6 py-3\">\n  点击\n  {",
+      "url": "/components/mobile/touchripple"
+    },
+    {
+      "name": "FloatingActionButton",
+      "category": "mobile",
+      "categoryName": "移动端专用",
+      "description": "悬浮操作按钮，浮动在页面右下角的圆形按钮。",
+      "platform": [
+        "mobile"
+      ],
+      "tags": [
+        "悬浮",
+        "按钮",
+        "浮动"
+      ],
+      "variants": [
+        "default",
+        "extended",
+        "speedDial"
+      ],
+      "complexity": "simple",
+      "accessibility": "所有操作按钮可聚焦且有 aria-label",
+      "designTokens": {},
+      "codeExample": "<div className=\"fixed bottom-6 right-6 flex flex-col items-end gap-3\">\n  {expanded && (\n    <>\n     ",
+      "url": "/components/mobile/floatingactionbutton"
+    },
+    {
+      "name": "SlideGesture",
+      "category": "mobile",
+      "categoryName": "移动端专用",
+      "description": "滑动手势识别，识别左右滑动方向。",
+      "platform": [
+        "mobile"
+      ],
+      "tags": [
+        "手势",
+        "滑动",
+        "触摸"
+      ],
+      "variants": [
+        "horizontal",
+        "vertical",
+        "withThreshold"
+      ],
+      "complexity": "complex",
+      "accessibility": "提供按钮替代手势操作",
+      "designTokens": {},
+      "codeExample": "<div\n  className=\"overflow-hidden\"\n  onTouchStart={handleTouchStart}\n  onTouchMove={handleTouchMove}",
+      "url": "/components/mobile/slidegesture"
+    },
+    {
+      "name": "ShareSheet",
+      "category": "mobile",
+      "categoryName": "移动端专用",
+      "description": "分享面板，唤起系统分享或自定义分享渠道。",
+      "platform": [
+        "mobile"
+      ],
+      "tags": [
+        "分享",
+        "社交",
+        "移动端"
+      ],
+      "variants": [
+        "default",
+        "withPreview"
+      ],
+      "complexity": "medium",
+      "accessibility": "分享选项可聚焦导航",
+      "designTokens": {},
+      "codeExample": "<div className=\"rounded-2xl bg-white p-6\">\n  <h3 className=\"text-lg font-semibold text-center mb-6\">",
+      "url": "/components/mobile/sharesheet"
+    },
+    {
+      "name": "MobileSearch",
+      "category": "mobile",
+      "categoryName": "移动端专用",
+      "description": "移动端搜索，全屏搜索体验优化。",
+      "platform": [
+        "mobile"
+      ],
+      "tags": [
+        "搜索",
+        "移动端",
+        "全屏"
+      ],
+      "variants": [
+        "default",
+        "withHistory",
+        "withSuggestions"
+      ],
+      "complexity": "medium",
+      "accessibility": "搜索输入自动聚焦，Escape/返回关闭",
+      "designTokens": {},
+      "codeExample": "<div className=\"fixed inset-0 z-50 bg-white\">\n  <div className=\"flex items-center gap-3 p-3 border-b",
+      "url": "/components/mobile/mobilesearch"
+    },
+    {
+      "name": "PinchZoom",
+      "category": "mobile",
+      "categoryName": "移动端专用",
+      "description": "双指缩放，图片/内容的捏合缩放。",
+      "platform": [
+        "mobile"
+      ],
+      "tags": [
+        "手势",
+        "缩放",
+        "图片"
+      ],
+      "variants": [
+        "default",
+        "withControls"
+      ],
+      "complexity": "complex",
+      "accessibility": "提供缩放按钮作为手势替代",
+      "designTokens": {},
+      "codeExample": "<div className=\"overflow-hidden touch-none\" ref={containerRef}>\n  <img src={src} className=\"transiti",
+      "url": "/components/mobile/pinchzoom"
+    },
+    {
+      "name": "CollapsibleHeader",
+      "category": "mobile",
+      "categoryName": "移动端专用",
+      "description": "可折叠头部，滚动时折叠/展开的顶部区域。",
+      "platform": [
+        "mobile"
+      ],
+      "tags": [
+        "头部",
+        "折叠",
+        "滚动"
+      ],
+      "variants": [
+        "default",
+        "withSearchBar",
+        "withTabs"
+      ],
+      "complexity": "complex",
+      "accessibility": "折叠/展开不影响可访问性",
+      "designTokens": {},
+      "codeExample": "<div className=\"sticky top-0 z-40 bg-white transition-all\" style={{height: headerHeight}}>\n  <div cl",
+      "url": "/components/mobile/collapsibleheader"
+    },
+    {
+      "name": "BottomNavigation",
+      "category": "mobile",
+      "categoryName": "移动端专用",
+      "description": "底部导航，移动端主要页面切换。",
+      "platform": [
+        "mobile"
+      ],
+      "tags": [
+        "导航",
+        "底部",
+        "切换"
+      ],
+      "variants": [
+        "default",
+        "withBadge",
+        "floating"
+      ],
+      "complexity": "simple",
+      "accessibility": "使用 nav 标签，当前项 aria-current='page'",
+      "designTokens": {},
+      "codeExample": "<nav className=\"fixed bottom-0 inset-x-0 h-16 bg-white border-t flex items-center justify-around saf",
+      "url": "/components/mobile/bottomnavigation"
+    },
+    {
+      "name": "StepperInput",
+      "category": "mobile",
+      "categoryName": "移动端专用",
+      "description": "步进输入，移动端优化的数量增减器。",
+      "platform": [
+        "mobile"
+      ],
+      "tags": [
+        "输入",
+        "数量",
+        "增减"
+      ],
+      "variants": [
+        "default",
+        "minimal",
+        "cart"
+      ],
+      "complexity": "simple",
+      "accessibility": "增/减按钮有清晰的 aria-label",
+      "designTokens": {},
+      "codeExample": "<div className=\"inline-flex items-center rounded-lg border\">\n  <button className=\"h-10 w-10 flex ite",
+      "url": "/components/mobile/stepperinput"
+    },
+    {
+      "name": "SegmentPicker",
+      "category": "mobile",
+      "categoryName": "移动端专用",
+      "description": "滚轮选择器，iOS 风格滚动选择。",
+      "platform": [
+        "mobile"
+      ],
+      "tags": [
+        "选择",
+        "滚轮",
+        "iOS"
+      ],
+      "variants": [
+        "date",
+        "time",
+        "custom"
+      ],
+      "complexity": "complex",
+      "accessibility": "提供输入框作为滚轮替代",
+      "designTokens": {},
+      "codeExample": "<div className=\"flex justify-center h-48 overflow-hidden relative\">\n  <div className=\"absolute inset",
+      "url": "/components/mobile/segmentpicker"
+    },
+    {
+      "name": "SkeletonMobile",
+      "category": "mobile",
+      "categoryName": "移动端专用",
+      "description": "移动端骨架屏，移动端优化的加载占位。",
+      "platform": [
+        "mobile"
+      ],
+      "tags": [
+        "加载",
+        "骨架",
+        "移动端"
+      ],
+      "variants": [
+        "list",
+        "detail",
+        "profile"
+      ],
+      "complexity": "simple",
+      "accessibility": "使用 aria-busy 标记加载区域",
+      "designTokens": {},
+      "codeExample": "<div className=\"animate-pulse space-y-4 p-4\">\n  <div className=\"flex items-center gap-3\">\n    <div c",
+      "url": "/components/mobile/skeletonmobile"
+    }
+  ],
+  "designTokens": {
+    "colors": {
+      "primary": [
+        "#18181b",
+        "#27272a",
+        "#3f3f46",
+        "#a1a1aa"
+      ],
+      "accent": [
+        "#2563eb",
+        "#3b82f6",
+        "#60a5fa"
+      ],
+      "success": [
+        "#059669",
+        "#10b981",
+        "#34d399"
+      ]
+    },
+    "spacing": [
+      "0.25rem",
+      "0.5rem",
+      "1rem",
+      "1.5rem",
+      "2rem",
+      "3rem",
+      "4rem"
+    ],
+    "borderRadius": [
+      "0.25rem",
+      "0.375rem",
+      "0.5rem",
+      "0.75rem",
+      "1rem",
+      "9999px"
+    ]
+  }
+}
