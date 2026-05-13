@@ -2,306 +2,282 @@
 
 import * as React from "react";
 import {
-  Monitor, Smartphone, Tablet, LayoutTemplate, Plus, X, Download, Copy, Check,
-  Search, Trash2, GripVertical, ArrowLeft, Palette, Code2, ChevronRight,
-  MousePointerClick, FormInput, Layout, Table, Navigation, AlertCircle,
-  Sparkles, Menu, Home,
+  Monitor, Smartphone, Tablet, Plus, X, Download, Copy, Check, Search,
+  Trash2, ChevronUp, ChevronDown, GripHorizontal, Minus, Maximize2,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Separator } from "@/components/ui/separator";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "@/components/ui/dialog";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { ComponentRenderer } from "@/components/component-renderer";
 import { cn } from "@/lib/utils";
 
 // ============ Types ============
 
 type Platform = "desktop" | "mobile" | "tablet";
+type Width = "full" | "1/2" | "1/3" | "2/3" | "1/4";
 
-interface SlotComponent {
-  name: string;
+interface CanvasItem {
+  id: string;
+  component: { english: string; chinese: string; category: string; variants: string[] };
+  width: Width;
+}
+
+// ============ Component Library (Chinese names) ============
+
+interface LibraryItem {
+  chinese: string;
+  english: string;
   category: string;
   variants: string[];
+  desc: string;
 }
 
-interface LayoutSlot {
-  id: string;
+interface LibraryCategory {
   name: string;
-  description: string;
-  component: SlotComponent | null;
+  icon: string;
+  items: LibraryItem[];
 }
 
-interface LayoutConfig {
-  platform: Platform;
-  name: string;
-  slots: LayoutSlot[];
-}
-
-// ============ Platform Layouts ============
-
-const PLATFORM_LAYOUTS: Record<Platform, { name: string; icon: typeof Monitor; slots: { id: string; name: string; description: string }[] }> = {
-  desktop: {
-    name: "桌面软件",
-    icon: Monitor,
-    slots: [
-      { id: "header", name: "顶部导航栏", description: "Logo、搜索、菜单、用户头像" },
-      { id: "sidebar", name: "侧边栏", description: "导航菜单、快捷操作" },
-      { id: "content", name: "主内容区", description: "仪表盘、表格、表单、列表" },
-      { id: "footer", name: "底部栏", description: "版权信息、链接、状态栏" },
-    ],
-  },
-  mobile: {
-    name: "移动端应用",
-    icon: Smartphone,
-    slots: [
-      { id: "statusbar", name: "状态栏", description: "时间、电量、信号" },
-      { id: "header", name: "顶部标题栏", description: "标题、返回按钮、操作" },
-      { id: "content", name: "主内容区", description: "列表、卡片、表单、媒体" },
-      { id: "bottomnav", name: "底部导航栏", description: "主要页面切换" },
-      { id: "fab", name: "悬浮按钮", description: "主要操作入口" },
-    ],
-  },
-  tablet: {
-    name: "平板应用",
-    icon: Tablet,
-    slots: [
-      { id: "header", name: "顶部导航栏", description: "标题、搜索、操作按钮" },
-      { id: "sidebar", name: "侧边栏（可折叠）", description: "导航、筛选面板" },
-      { id: "content", name: "主内容区", description: "内容展示、表单、媒体" },
-      { id: "footer", name: "底部工具栏", description: "辅助操作、状态信息" },
-    ],
-  },
-};
-
-// ============ Component Library ============
-
-const COMPONENT_LIBRARY: { category: string; categoryName: string; icon: typeof MousePointerClick; components: SlotComponent[] }[] = [
+const LIBRARY: LibraryCategory[] = [
   {
-    category: "basic", categoryName: "基础组件", icon: MousePointerClick,
-    components: [
-      { name: "Button", category: "basic", variants: ["default","secondary","outline","ghost","destructive"] },
-      { name: "Input", category: "basic", variants: ["default","disabled","error"] },
-      { name: "Badge", category: "basic", variants: ["default","secondary","success","warning"] },
-      { name: "Switch", category: "basic", variants: ["default"] },
-      { name: "Avatar", category: "basic", variants: ["image","fallback","withStatus"] },
-      { name: "Spinner", category: "basic", variants: ["sm","md","lg"] },
-      { name: "SearchInput", category: "basic", variants: ["default"] },
-      { name: "Tooltip", category: "basic", variants: ["top"] },
-      { name: "Divider", category: "basic", variants: ["horizontal"] },
+    name: "基础组件", icon: "□",
+    items: [
+      { chinese: "按钮", english: "Button", category: "basic", variants: ["default","secondary","outline","ghost","destructive"], desc: "操作触发按钮，支持多种变体" },
+      { chinese: "输入框", english: "Input", category: "basic", variants: ["default","disabled","error"], desc: "文本输入" },
+      { chinese: "徽章", english: "Badge", category: "basic", variants: ["default","secondary","success","warning","destructive"], desc: "状态标记" },
+      { chinese: "开关", english: "Switch", category: "basic", variants: ["default"], desc: "二元状态切换" },
+      { chinese: "头像", english: "Avatar", category: "basic", variants: ["image","fallback","withStatus"], desc: "用户头像" },
+      { chinese: "加载旋转", english: "Spinner", category: "basic", variants: ["sm","md","lg"], desc: "加载状态指示" },
+      { chinese: "搜索框", english: "SearchInput", category: "basic", variants: ["default"], desc: "搜索输入" },
+      { chinese: "密码框", english: "PasswordInput", category: "basic", variants: ["default"], desc: "密码输入" },
+      { chinese: "文本域", english: "Textarea", category: "basic", variants: ["default"], desc: "多行文本" },
+      { chinese: "分割线", english: "Divider", category: "basic", variants: ["horizontal"], desc: "内容分隔" },
+      { chinese: "复选框", english: "Checkbox", category: "basic", variants: ["default"], desc: "多选" },
+      { chinese: "单选框", english: "RadioGroup", category: "basic", variants: ["default"], desc: "单选" },
+      { chinese: "下拉选择", english: "Select", category: "basic", variants: ["default"], desc: "下拉菜单选择" },
+      { chinese: "骨架屏", english: "Skeleton", category: "basic", variants: ["text","card"], desc: "加载占位" },
+      { chinese: "提示框", english: "Tooltip", category: "basic", variants: ["top"], desc: "悬浮提示" },
     ],
   },
   {
-    category: "navigation", categoryName: "导航组件", icon: Navigation,
-    components: [
-      { name: "Breadcrumb", category: "navigation", variants: ["default"] },
-      { name: "DropdownMenu", category: "navigation", variants: ["default"] },
-      { name: "Stepper", category: "navigation", variants: ["horizontal"] },
-      { name: "Pagination", category: "navigation", variants: ["default"] },
+    name: "导航组件", icon: "☰",
+    items: [
+      { chinese: "面包屑", english: "Breadcrumb", category: "navigation", variants: ["default"], desc: "页面路径" },
+      { chinese: "下拉菜单", english: "DropdownMenu", category: "navigation", variants: ["default"], desc: "操作菜单" },
+      { chinese: "步骤条", english: "Stepper", category: "navigation", variants: ["horizontal"], desc: "流程步骤" },
+      { chinese: "分页器", english: "Pagination", category: "navigation", variants: ["default"], desc: "数据分页" },
+      { chinese: "分段控件", english: "Tabs", category: "layout", variants: ["line","pills"], desc: "内容切换标签" },
     ],
   },
   {
-    category: "layout", categoryName: "布局组件", icon: Layout,
-    components: [
-      { name: "Card", category: "layout", variants: ["default","hover"] },
-      { name: "Tabs", category: "layout", variants: ["line","pills"] },
-      { name: "Accordion", category: "layout", variants: ["single"] },
-      { name: "EmptyState", category: "layout", variants: ["default","withAction"] },
-      { name: "ErrorState", category: "layout", variants: ["default"] },
+    name: "数据展示", icon: "▦",
+    items: [
+      { chinese: "统计卡片", english: "StatCard", category: "data-display", variants: ["default","withTrend"], desc: "数据指标展示" },
+      { chinese: "进度条", english: "Progress", category: "data-display", variants: ["linear","withLabel"], desc: "进度展示" },
+      { chinese: "时间轴", english: "Timeline", category: "data-display", variants: ["vertical"], desc: "事件时间线" },
+      { chinese: "评分板", english: "ScoreBoard", category: "data-display", variants: ["default"], desc: "评分展示" },
+      { chinese: "轮播", english: "Carousel", category: "data-display", variants: ["default"], desc: "内容轮播" },
+      { chinese: "日历", english: "DatePicker", category: "form", variants: ["single","range"], desc: "日期选择" },
+      { chinese: "标签页", english: "Tabs", category: "layout", variants: ["line","pills"], desc: "选项卡" },
+      { chinese: "手风琴", english: "Accordion", category: "layout", variants: ["single"], desc: "折叠面板" },
     ],
   },
   {
-    category: "data-display", categoryName: "数据展示", icon: Table,
-    components: [
-      { name: "StatCard", category: "data-display", variants: ["default","withTrend"] },
-      { name: "Progress", category: "data-display", variants: ["linear","withLabel"] },
-      { name: "Timeline", category: "data-display", variants: ["vertical"] },
-      { name: "ScoreBoard", category: "data-display", variants: ["default"] },
-      { name: "Carousel", category: "data-display", variants: ["default"] },
-      { name: "Pagination", category: "data-display", variants: ["default"] },
+    name: "容器布局", icon: "▣",
+    items: [
+      { chinese: "卡片", english: "Card", category: "layout", variants: ["default","hover"], desc: "内容容器" },
+      { chinese: "空状态", english: "EmptyState", category: "layout", variants: ["default","withAction"], desc: "无数据占位" },
+      { chinese: "错误状态", english: "ErrorState", category: "layout", variants: ["default"], desc: "错误占位" },
+      { chinese: "分割线", english: "Divider", category: "basic", variants: ["horizontal","withLabel"], desc: "分区隔断" },
+      { chinese: "滚动区", english: "ScrollArea", category: "basic", variants: ["vertical"], desc: "自定义滚动" },
     ],
   },
   {
-    category: "form", categoryName: "表单组件", icon: FormInput,
-    components: [
-      { name: "Form", category: "form", variants: ["default"] },
-      { name: "Select", category: "basic", variants: ["default"] },
-      { name: "Checkbox", category: "basic", variants: ["default"] },
-      { name: "RadioGroup", category: "basic", variants: ["default"] },
-      { name: "DatePicker", category: "form", variants: ["single","range"] },
-      { name: "StarRating", category: "form", variants: ["default"] },
-      { name: "SwitchGroup", category: "form", variants: ["default"] },
-      { name: "TagInput", category: "form", variants: ["default"] },
-      { name: "OtpInput", category: "form", variants: ["numeric"] },
+    name: "表单组件", icon: "☑",
+    items: [
+      { chinese: "星级评分", english: "StarRating", category: "form", variants: ["default"], desc: "评分" },
+      { chinese: "开关组", english: "SwitchGroup", category: "form", variants: ["default"], desc: "多个开关" },
+      { chinese: "标签输入", english: "TagInput", category: "form", variants: ["default"], desc: "标签管理" },
+      { chinese: "滑块", english: "Slider", category: "form", variants: ["default"], desc: "数值滑动" },
+      { chinese: "验证码", english: "OtpInput", category: "form", variants: ["numeric"], desc: "OTP输入" },
+      { chinese: "颜色选择", english: "ColorPicker", category: "form", variants: ["default"], desc: "颜色选择" },
     ],
   },
   {
-    category: "feedback", categoryName: "反馈组件", icon: AlertCircle,
-    components: [
-      { name: "Alert", category: "feedback", variants: ["info","success","warning","error"] },
-      { name: "Dialog", category: "feedback", variants: ["default","confirm"] },
-      { name: "Toast", category: "feedback", variants: ["success","error"] },
-      { name: "Result", category: "feedback", variants: ["success","error"] },
-      { name: "ConfirmDialog", category: "feedback", variants: ["delete"] },
-      { name: "Banner", category: "feedback", variants: ["default"] },
+    name: "反馈通知", icon: "⚠",
+    items: [
+      { chinese: "提示条", english: "Alert", category: "feedback", variants: ["info","success","warning","error"], desc: "信息提示" },
+      { chinese: "对话框", english: "Dialog", category: "feedback", variants: ["default","confirm"], desc: "模态弹窗" },
+      { chinese: "消息通知", english: "Toast", category: "feedback", variants: ["success","error"], desc: "短暂通知" },
+      { chinese: "结果页", english: "Result", category: "feedback", variants: ["success","error"], desc: "操作结果" },
+      { chinese: "确认弹窗", english: "ConfirmDialog", category: "feedback", variants: ["delete"], desc: "确认操作" },
+      { chinese: "横幅通知", english: "Banner", category: "feedback", variants: ["default"], desc: "顶部横幅" },
     ],
   },
   {
-    category: "mobile", categoryName: "移动端专用", icon: Smartphone,
-    components: [
-      { name: "BottomSheet", category: "mobile", variants: ["default"] },
-      { name: "ActionSheet", category: "mobile", variants: ["default"] },
-      { name: "FloatingActionButton", category: "mobile", variants: ["default","extended"] },
-      { name: "BottomNavigation", category: "mobile", variants: ["default","withBadge"] },
-      { name: "MobileSearch", category: "mobile", variants: ["default"] },
+    name: "移动端专用", icon: "📱",
+    items: [
+      { chinese: "底部弹出面板", english: "BottomSheet", category: "mobile", variants: ["default"], desc: "底部弹出" },
+      { chinese: "操作菜单", english: "ActionSheet", category: "mobile", variants: ["default"], desc: "iOS操作菜单" },
+      { chinese: "悬浮按钮", english: "FloatingActionButton", category: "mobile", variants: ["default","extended"], desc: "浮动操作" },
+      { chinese: "底部导航", english: "BottomNavigation", category: "mobile", variants: ["default","withBadge"], desc: "移动导航" },
+      { chinese: "移动搜索", english: "MobileSearch", category: "mobile", variants: ["default"], desc: "全屏搜索" },
     ],
   },
 ];
 
 // ============ Main Page ============
 
+let itemCounter = 0;
+function nextId() { return `item-${++itemCounter}`; }
+
 export default function BuilderPage() {
   const [platform, setPlatform] = React.useState<Platform>("desktop");
-  const [slots, setSlots] = React.useState<LayoutSlot[]>(() =>
-    PLATFORM_LAYOUTS.desktop.slots.map(s => ({ ...s, component: null }))
-  );
-  const [selectedSlot, setSelectedSlot] = React.useState<string | null>(null);
+  const [items, setItems] = React.useState<CanvasItem[]>(() => {
+    itemCounter = 0;
+    return [
+      { id: nextId(), component: LIBRARY[0].items[0], width: "1/3" }, // 按钮
+      { id: nextId(), component: LIBRARY[0].items[2], width: "1/3" }, // 徽章
+      { id: nextId(), component: LIBRARY[0].items[3], width: "1/3" }, // 开关
+      { id: nextId(), component: LIBRARY[2].items[0], width: "1/4" }, // 统计卡片
+      { id: nextId(), component: LIBRARY[2].items[0], width: "1/4" },
+      { id: nextId(), component: LIBRARY[2].items[0], width: "1/4" },
+      { id: nextId(), component: LIBRARY[2].items[0], width: "1/4" },
+    ];
+  });
+  const [selectedId, setSelectedId] = React.useState<string | null>(null);
   const [pickerOpen, setPickerOpen] = React.useState(false);
   const [exportOpen, setExportOpen] = React.useState(false);
   const [searchQuery, setSearchQuery] = React.useState("");
-  const [layoutName, setLayoutName] = React.useState("我的界面布局");
+  const [layoutName, setLayoutName] = React.useState("我的界面");
 
-  const platformMeta = PLATFORM_LAYOUTS[platform];
+  const platformNames: Record<Platform, string> = { desktop: "桌面软件", mobile: "手机应用", tablet: "平板应用" };
 
-  const switchPlatform = (p: Platform) => {
-    setPlatform(p);
-    setSlots(PLATFORM_LAYOUTS[p].slots.map(s => ({ ...s, component: null })));
-    setSelectedSlot(null);
-  };
-
-  const assignComponent = (component: SlotComponent) => {
-    if (!selectedSlot) return;
-    setSlots(prev => prev.map(s =>
-      s.id === selectedSlot ? { ...s, component } : s
-    ));
+  const addItem = (libItem: LibraryItem) => {
+    const newItem: CanvasItem = {
+      id: nextId(),
+      component: libItem,
+      width: platform === "mobile" ? "full" : "full",
+    };
+    if (selectedId) {
+      // Insert after selected
+      const idx = items.findIndex(i => i.id === selectedId);
+      setItems(prev => [...prev.slice(0, idx + 1), newItem, ...prev.slice(idx + 1)]);
+    } else {
+      setItems(prev => [...prev, newItem]);
+    }
     setPickerOpen(false);
+    setSelectedId(newItem.id);
   };
 
-  const removeComponent = (slotId: string) => {
-    setSlots(prev => prev.map(s =>
-      s.id === slotId ? { ...s, component: null } : s
-    ));
+  const removeItem = (id: string) => {
+    setItems(prev => prev.filter(i => i.id !== id));
+    if (selectedId === id) setSelectedId(null);
   };
 
-  const buildExportData = () => ({
+  const moveItem = (id: string, direction: "up" | "down") => {
+    setItems(prev => {
+      const idx = prev.findIndex(i => i.id === id);
+      if (idx === -1) return prev;
+      if (direction === "up" && idx === 0) return prev;
+      if (direction === "down" && idx === prev.length - 1) return prev;
+      const newItems = [...prev];
+      const targetIdx = direction === "up" ? idx - 1 : idx + 1;
+      [newItems[idx], newItems[targetIdx]] = [newItems[targetIdx], newItems[idx]];
+      return newItems;
+    });
+  };
+
+  const setItemWidth = (id: string, width: Width) => {
+    setItems(prev => prev.map(i => i.id === id ? { ...i, width } : i));
+  };
+
+  const duplicateItem = (id: string) => {
+    const item = items.find(i => i.id === id);
+    if (!item) return;
+    const newItem = { ...item, id: nextId() };
+    const idx = items.findIndex(i => i.id === id);
+    setItems(prev => [...prev.slice(0, idx + 1), newItem, ...prev.slice(idx + 1)]);
+  };
+
+  const buildExport = () => ({
     name: layoutName,
     platform,
-    platformName: platformMeta.name,
+    platformName: platformNames[platform],
     createdAt: new Date().toISOString(),
-    slots: slots.map(s => ({
-      id: s.id,
-      name: s.name,
-      component: s.component ? {
-        name: s.component.name,
-        category: s.component.category,
-        url: `/components/${s.component.category}/${s.component.name.toLowerCase()}`,
-      } : null,
-    })),
-    usedComponents: slots.filter(s => s.component).map(s => ({
-      slotId: s.id,
-      slotName: s.name,
-      component: s.component!.name,
-      category: s.component!.category,
-      variants: s.component!.variants,
+    componentCount: items.length,
+    layout: items.map((item, index) => ({
+      order: index + 1,
+      component: item.component.chinese,
+      english: item.component.english,
+      category: item.component.category,
+      width: item.width,
+      variants: item.component.variants,
     })),
     designTokens: {
-      platform,
-      responsiveBreakpoints: { mobile: 375, tablet: 768, desktop: 1280 },
       colors: { primary: "#18181b", accent: "#2563eb", success: "#059669", danger: "#dc2626", background: "#ffffff" },
-      spacing: { xs: "0.25rem", sm: "0.5rem", md: "1rem", lg: "1.5rem", xl: "2rem" },
-      borderRadius: { sm: "0.25rem", md: "0.5rem", lg: "0.75rem", full: "9999px" },
+      spacing: { xs: "4px", sm: "8px", md: "16px", lg: "24px", xl: "32px" },
+      borderRadius: { sm: "4px", md: "8px", lg: "12px", full: "9999px" },
+      fontSize: { xs: "12px", sm: "14px", base: "16px", lg: "18px", xl: "20px" },
+      animation: { fast: "150ms", normal: "300ms" },
     },
+    responsiveBreakpoints: { mobile: 375, tablet: 768, desktop: 1280 },
+    exportNote: "此JSON可直接提供给AI，用于生成对应的前端代码。layout数组中的order表示组件从上到下的排列顺序，width表示组件占据的宽度比例。",
   });
 
-  const handleCopyExport = async () => {
-    await navigator.clipboard.writeText(JSON.stringify(buildExportData(), null, 2));
-  };
-
-  const handleDownloadExport = () => {
-    const blob = new Blob([JSON.stringify(buildExportData(), null, 2)], { type: "application/json" });
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement("a");
-    a.href = url; a.download = `${layoutName.replace(/\s/g, "-").toLowerCase()}.json`; a.click();
-    URL.revokeObjectURL(url);
-  };
-
-  // Filter components for picker
   const filteredLibrary = React.useMemo(() => {
-    if (!searchQuery.trim()) return COMPONENT_LIBRARY;
+    if (!searchQuery.trim()) return LIBRARY;
     const q = searchQuery.toLowerCase();
-    return COMPONENT_LIBRARY.map(cat => ({
+    return LIBRARY.map(cat => ({
       ...cat,
-      components: cat.components.filter(c =>
-        c.name.toLowerCase().includes(q) || c.category.toLowerCase().includes(q)
-      ),
-    })).filter(cat => cat.components.length > 0);
+      items: cat.items.filter(i => i.chinese.toLowerCase().includes(q) || i.english.toLowerCase().includes(q)),
+    })).filter(cat => cat.items.length > 0);
   }, [searchQuery]);
 
-  // Device frame dimensions
   const frameStyles: Record<Platform, string> = {
-    desktop: "w-full max-w-4xl mx-auto",
-    mobile: "w-[375px] mx-auto",
-    tablet: "w-[640px] mx-auto",
+    desktop: "w-full max-w-4xl",
+    mobile: "w-[375px]",
+    tablet: "w-[640px]",
   };
+
+  const widthOptions: { label: string; value: Width; className: string }[] = [
+    { label: "满宽", value: "full", className: "w-full" },
+    { label: "1/2", value: "1/2", className: "w-1/2" },
+    { label: "1/3", value: "1/3", className: "w-1/3" },
+    { label: "2/3", value: "2/3", className: "w-2/3" },
+    { label: "1/4", value: "1/4", className: "w-1/4" },
+  ];
 
   return (
     <div className="h-[calc(100vh-0px)] flex flex-col">
       {/* ===== TOP BAR ===== */}
       <div className="shrink-0 border-b bg-white/80 backdrop-blur-sm dark:border-zinc-800 dark:bg-zinc-950/80">
-        <div className="flex items-center justify-between px-4 h-14">
+        <div className="flex items-center justify-between px-4 h-12">
           <div className="flex items-center gap-4">
-            <div className="flex items-center gap-2">
-              <LayoutTemplate className="h-5 w-5" />
-              <span className="text-sm font-semibold">界面搭建器</span>
+            <span className="text-sm font-semibold">界面搭建器</span>
+            <div className="flex rounded-md bg-zinc-100 p-0.5 dark:bg-zinc-800">
+              {(["desktop", "tablet", "mobile"] as Platform[]).map(p => (
+                <button key={p} onClick={() => setPlatform(p)}
+                  className={cn("flex items-center gap-1 rounded px-2.5 py-1 text-xs transition-all",
+                    platform === p ? "bg-white shadow-sm text-zinc-900 dark:bg-zinc-700 dark:text-zinc-50" : "text-zinc-500 hover:text-zinc-700")}>
+                  {p === "desktop" ? <Monitor className="h-3 w-3" /> : p === "mobile" ? <Smartphone className="h-3 w-3" /> : <Tablet className="h-3 w-3" />}
+                  {platformNames[p]}
+                </button>
+              ))}
             </div>
-            <Separator orientation="vertical" className="h-6" />
-            {/* Platform toggle */}
-            <div className="flex rounded-lg bg-zinc-100 p-0.5 dark:bg-zinc-800">
-              {(["desktop", "tablet", "mobile"] as Platform[]).map(p => {
-                const meta = PLATFORM_LAYOUTS[p];
-                const Icon = meta.icon;
-                return (
-                  <button
-                    key={p}
-                    onClick={() => switchPlatform(p)}
-                    className={cn(
-                      "flex items-center gap-1.5 rounded-md px-3 py-1.5 text-sm transition-all",
-                      platform === p
-                        ? "bg-white text-zinc-900 shadow-sm dark:bg-zinc-700 dark:text-zinc-50"
-                        : "text-zinc-500 hover:text-zinc-700 dark:hover:text-zinc-300"
-                    )}
-                  >
-                    <Icon className="h-3.5 w-3.5" />
-                    <span className="hidden sm:inline">{meta.name}</span>
-                  </button>
-                );
-              })}
-            </div>
+            <Separator orientation="vertical" className="h-5" />
+            <Input className="h-7 w-32 text-xs" placeholder="方案名称..." value={layoutName} onChange={e => setLayoutName(e.target.value)} />
+            <span className="text-xs text-zinc-400">{items.length} 个组件</span>
           </div>
           <div className="flex items-center gap-2">
-            <Input
-              className="h-8 w-40 text-xs"
-              placeholder="布局名称..."
-              value={layoutName}
-              onChange={e => setLayoutName(e.target.value)}
-            />
-            <Button size="sm" variant="outline" onClick={() => setExportOpen(true)} className="gap-1.5 h-8 text-xs">
-              <Code2 className="h-3.5 w-3.5" />
-              导出布局
+            <Button size="sm" variant="outline" onClick={() => setPickerOpen(true)} className="gap-1 h-7 text-xs">
+              <Plus className="h-3 w-3" />添加组件
+            </Button>
+            <Button size="sm" onClick={() => setExportOpen(true)} className="gap-1 h-7 text-xs">
+              <Download className="h-3 w-3" />导出方案
             </Button>
           </div>
         </div>
@@ -310,45 +286,23 @@ export default function BuilderPage() {
       {/* ===== MAIN CONTENT ===== */}
       <div className="flex-1 flex min-h-0">
         {/* LEFT: Component Library */}
-        <div className="w-60 shrink-0 border-r bg-zinc-50/50 dark:border-zinc-800 dark:bg-zinc-900/30">
-          <div className="p-3 border-b dark:border-zinc-800">
+        <div className="w-56 shrink-0 border-r bg-zinc-50/50 dark:border-zinc-800 dark:bg-zinc-900/30 hidden lg:block">
+          <div className="p-2 border-b dark:border-zinc-800">
             <div className="relative">
-              <Search className="absolute left-2 top-2 h-3.5 w-3.5 text-zinc-400" />
-              <Input
-                className="pl-7 h-8 text-xs"
-                placeholder="搜索组件..."
-                value={searchQuery}
-                onChange={e => setSearchQuery(e.target.value)}
-              />
+              <Search className="absolute left-2 top-2 h-3 w-3 text-zinc-400" />
+              <Input className="pl-7 h-7 text-xs" placeholder="搜索组件..." value={searchQuery} onChange={e => setSearchQuery(e.target.value)} />
             </div>
           </div>
-          <ScrollArea className="h-[calc(100vh-7rem)]">
-            <div className="p-2 space-y-1">
+          <ScrollArea className="h-[calc(100vh-6rem)]">
+            <div className="p-1.5 space-y-0.5">
               {filteredLibrary.map(cat => (
-                <div key={cat.category}>
-                  <div className="flex items-center gap-1.5 px-2 py-1.5">
-                    <cat.icon className="h-3 w-3 text-zinc-400" />
-                    <span className="text-[11px] font-semibold uppercase text-zinc-400">{cat.categoryName}</span>
-                  </div>
-                  {cat.components.map(comp => (
-                    <button
-                      key={comp.name}
-                      onClick={() => {
-                        if (selectedSlot) {
-                          assignComponent(comp);
-                        }
-                      }}
-                      className={cn(
-                        "w-full text-left px-2 py-1.5 rounded-md text-sm transition-colors hover:bg-zinc-200/60 dark:hover:bg-zinc-800",
-                        !selectedSlot && "opacity-50 cursor-not-allowed"
-                      )}
-                      disabled={!selectedSlot}
-                      title={!selectedSlot ? "请先在预览区选择一个区域" : `添加 ${comp.name}`}
-                    >
-                      <span className="text-xs">{comp.name}</span>
-                      <span className="ml-1 text-[10px] text-zinc-400">
-                        {comp.variants.length > 0 ? `(${comp.variants.length} 变体)` : ""}
-                      </span>
+                <div key={cat.name}>
+                  <div className="px-2 py-1.5 text-[10px] font-semibold uppercase text-zinc-400">{cat.name}</div>
+                  {cat.items.map(item => (
+                    <button key={item.english} onClick={() => addItem(item)}
+                      className="w-full text-left px-2 py-1.5 rounded-md transition-colors hover:bg-zinc-200/60 dark:hover:bg-zinc-800 group">
+                      <div className="text-xs">{item.chinese}</div>
+                      <div className="text-[10px] text-zinc-400">{item.english} · {item.desc}</div>
                     </button>
                   ))}
                 </div>
@@ -357,128 +311,140 @@ export default function BuilderPage() {
           </ScrollArea>
         </div>
 
-        {/* CENTER: Canvas Preview */}
-        <div className="flex-1 flex items-start justify-center p-4 bg-zinc-100/50 dark:bg-zinc-900/50 overflow-auto">
-          <div className={cn("flex flex-col gap-0", frameStyles[platform])}>
-            {/* Device frame */}
-            <div className="rounded-xl border-2 border-zinc-300 bg-white shadow-lg overflow-hidden dark:border-zinc-600 dark:bg-zinc-950">
-              {/* Browser chrome (desktop/tablet) */}
-              {(platform === "desktop" || platform === "tablet") && (
-                <div className="flex items-center gap-2 h-9 px-3 bg-zinc-100 border-b dark:bg-zinc-800 dark:border-zinc-700">
-                  <span className="h-2.5 w-2.5 rounded-full bg-red-400" />
-                  <span className="h-2.5 w-2.5 rounded-full bg-yellow-400" />
-                  <span className="h-2.5 w-2.5 rounded-full bg-green-400" />
-                  <span className="ml-2 text-[10px] text-zinc-400 truncate flex-1 text-center">
-                    {layoutName} — {platformMeta.name}
-                  </span>
-                </div>
-              )}
-
-              {/* Layout Slots */}
-              <div className={cn(
-                "min-h-[500px]",
-                platform === "mobile" && "min-h-[600px]"
-              )}>
-                {slots.map(slot => (
-                  <LayoutSlotRenderer
-                    key={slot.id}
-                    slot={slot}
-                    platform={platform}
-                    isSelected={selectedSlot === slot.id}
-                    onSelect={() => setSelectedSlot(slot.id)}
-                    onRemove={() => removeComponent(slot.id)}
-                  />
-                ))}
-              </div>
-            </div>
-
-            {/* Hint */}
-            {!selectedSlot && (
-              <div className="mt-3 text-center text-xs text-amber-600 dark:text-amber-400">
-                👆 点击预览区的虚线框选择区域，然后从左侧组件库挑选组件
+        {/* CENTER: Canvas */}
+        <div className="flex-1 flex flex-col items-center p-4 bg-zinc-100/50 dark:bg-zinc-900/50 overflow-auto">
+          <div className={cn("flex flex-col gap-3", frameStyles[platform])}>
+            {/* Browser chrome for desktop/tablet */}
+            {(platform === "desktop" || platform === "tablet") && (
+              <div className="flex items-center gap-2 h-7 px-3 rounded-t-lg bg-zinc-200/70 dark:bg-zinc-800/70">
+                <span className="h-2 w-2 rounded-full bg-red-400" />
+                <span className="h-2 w-2 rounded-full bg-yellow-400" />
+                <span className="h-2 w-2 rounded-full bg-green-400" />
+                <span className="ml-2 text-[10px] text-zinc-500 flex-1 text-center">{layoutName}</span>
               </div>
             )}
+
+            {/* Items */}
+            <div className={cn(
+              "bg-white dark:bg-zinc-950 rounded-lg min-h-[400px] p-4",
+              platform === "mobile" && "rounded-2xl",
+              (platform === "desktop" || platform === "tablet") && "rounded-b-lg shadow-sm border dark:border-zinc-700"
+            )}>
+              {items.length === 0 ? (
+                <div className="flex flex-col items-center justify-center h-64 text-zinc-300 dark:text-zinc-600">
+                  <Plus className="h-10 w-10 mb-3" />
+                  <p className="text-sm">从左侧组件库选择组件</p>
+                  <p className="text-xs mt-1">或点击右上角"添加组件"</p>
+                </div>
+              ) : (
+                <div className="flex flex-wrap gap-3">
+                  {items.map((item) => (
+                    <CanvasItemCard
+                      key={item.id}
+                      item={item}
+                      isSelected={selectedId === item.id}
+                      onSelect={() => setSelectedId(item.id === selectedId ? null : item.id)}
+                      onRemove={() => removeItem(item.id)}
+                      onMoveUp={() => moveItem(item.id, "up")}
+                      onMoveDown={() => moveItem(item.id, "down")}
+                      onDuplicate={() => duplicateItem(item.id)}
+                      onWidthChange={(w) => setItemWidth(item.id, w)}
+                      widthOptions={widthOptions}
+                      platform={platform}
+                    />
+                  ))}
+                </div>
+              )}
+            </div>
           </div>
         </div>
 
-        {/* RIGHT: Slot Info */}
-        <div className="w-64 shrink-0 border-l bg-zinc-50/50 dark:border-zinc-800 dark:bg-zinc-900/30">
-          <ScrollArea className="h-[calc(100vh-3.5rem)]">
-            <div className="p-4">
-              <h3 className="text-sm font-semibold mb-4">布局区域</h3>
-              <div className="space-y-2">
-                {slots.map(slot => (
-                  <button
-                    key={slot.id}
-                    onClick={() => setSelectedSlot(slot.id)}
-                    className={cn(
-                      "w-full text-left rounded-lg border p-3 transition-all",
-                      selectedSlot === slot.id
-                        ? "border-zinc-900 bg-white dark:border-zinc-50 dark:bg-zinc-800"
-                        : "border-zinc-200 hover:bg-white dark:border-zinc-700 dark:hover:bg-zinc-800"
-                    )}
-                  >
-                    <div className="flex items-center justify-between">
-                      <span className="text-sm font-medium">{slot.name}</span>
-                      {slot.component && (
-                        <button
-                          onClick={e => { e.stopPropagation(); removeComponent(slot.id); }}
-                          className="rounded p-0.5 hover:bg-red-100 dark:hover:bg-red-900/30"
-                        >
-                          <X className="h-3 w-3 text-zinc-400 hover:text-red-500" />
-                        </button>
-                      )}
+        {/* RIGHT: Properties panel */}
+        <div className="w-56 shrink-0 border-l bg-zinc-50/50 dark:border-zinc-800 dark:bg-zinc-900/30 hidden lg:block">
+          <ScrollArea className="h-[calc(100vh-3rem)]">
+            {selectedId ? (
+              <div className="p-3">
+                <h3 className="text-sm font-semibold mb-3">组件属性</h3>
+                {(() => {
+                  const item = items.find(i => i.id === selectedId);
+                  if (!item) return null;
+                  return (
+                    <div className="space-y-4">
+                      <div className="rounded-lg border p-3 dark:border-zinc-700">
+                        <p className="text-sm font-medium">{item.component.chinese}</p>
+                        <p className="text-[11px] text-zinc-500 mt-0.5">{item.component.english}</p>
+                        <Badge variant="secondary" className="mt-2 text-[10px]">{item.component.category}</Badge>
+                      </div>
+                      <div>
+                        <p className="text-xs font-medium mb-2">宽度</p>
+                        <div className="space-y-0.5">
+                          {widthOptions.map(w => (
+                            <button key={w.value} onClick={() => onWidthChange(w.value)}
+                              className={cn("w-full text-left px-2 py-1 rounded text-xs",
+                                item.width === w.value ? "bg-zinc-900 text-white dark:bg-white dark:text-zinc-900" : "hover:bg-zinc-100 dark:hover:bg-zinc-800")}>
+                              {w.label}
+                            </button>
+                          ))}
+                        </div>
+                      </div>
+                      <div>
+                        <p className="text-xs font-medium mb-2">变体</p>
+                        <div className="flex flex-wrap gap-1">
+                          {item.component.variants.map(v => <Badge key={v} variant="outline" className="text-[10px]">{v}</Badge>)}
+                        </div>
+                      </div>
+                      <Separator />
+                      <div className="space-y-1">
+                        <Button variant="ghost" size="sm" className="w-full justify-start text-xs h-7" onClick={() => onDuplicate()}>📋 复制组件</Button>
+                        <Button variant="ghost" size="sm" className="w-full justify-start text-xs h-7" onClick={() => onMoveUp()}>⬆ 上移</Button>
+                        <Button variant="ghost" size="sm" className="w-full justify-start text-xs h-7" onClick={() => onMoveDown()}>⬇ 下移</Button>
+                        <Button variant="ghost" size="sm" className="w-full justify-start text-xs h-7 text-red-500" onClick={() => onRemove()}>🗑 删除</Button>
+                      </div>
                     </div>
-                    <p className="text-[11px] text-zinc-500 mt-0.5">{slot.description}</p>
-                    {slot.component ? (
-                      <Badge variant="secondary" className="mt-2 text-[10px]">{slot.component.name}</Badge>
-                    ) : (
-                      <p className="mt-1 text-[11px] text-amber-500">未选择组件</p>
-                    )}
-                  </button>
-                ))}
+                  );
+                })()}
               </div>
-            </div>
+            ) : (
+              <div className="p-4 text-center text-xs text-zinc-400 mt-8">
+                <p>点击画布中的组件</p>
+                <p className="mt-1">查看和编辑属性</p>
+              </div>
+            )}
           </ScrollArea>
         </div>
       </div>
 
       {/* ===== EXPORT DIALOG ===== */}
       <Dialog open={exportOpen} onOpenChange={setExportOpen}>
-        <DialogContent className="max-w-xl max-h-[80vh]">
+        <DialogContent className="max-w-xl max-h-[85vh]">
           <DialogHeader>
             <DialogTitle>导出布局方案</DialogTitle>
-            <DialogDescription>
-              结构化 JSON 格式，包含布局结构、组件信息、设计 Token，可直接提供给 AI
-            </DialogDescription>
+            <DialogDescription>结构化 JSON，可直接提供给 AI 生成代码</DialogDescription>
           </DialogHeader>
           <div className="space-y-4">
-            <div className="grid grid-cols-3 gap-3">
-              <div className="rounded-lg border p-3 text-center dark:border-zinc-700">
-                <p className="text-xl font-bold">{slots.filter(s => s.component).length}</p>
-                <p className="text-[10px] text-zinc-500">已选组件</p>
+            <div className="grid grid-cols-3 gap-2">
+              <div className="rounded-lg border p-2 text-center dark:border-zinc-700">
+                <p className="text-lg font-bold">{items.length}</p>
+                <p className="text-[10px] text-zinc-500">组件数</p>
               </div>
-              <div className="rounded-lg border p-3 text-center dark:border-zinc-700">
-                <p className="text-xl font-bold">{slots.length}</p>
-                <p className="text-[10px] text-zinc-500">布局区域</p>
+              <div className="rounded-lg border p-2 text-center dark:border-zinc-700">
+                <p className="text-lg font-bold">{platformNames[platform]}</p>
+                <p className="text-[10px] text-zinc-500">平台</p>
               </div>
-              <div className="rounded-lg border p-3 text-center dark:border-zinc-700">
-                <p className="text-xl font-bold">{platformMeta.name}</p>
-                <p className="text-[10px] text-zinc-500">目标平台</p>
+              <div className="rounded-lg border p-2 text-center dark:border-zinc-700">
+                <p className="text-lg font-bold">{new Set(items.map(i => i.component.category)).size}</p>
+                <p className="text-[10px] text-zinc-500">分类数</p>
               </div>
             </div>
-            <div>
-              <p className="text-sm font-medium mb-2">JSON 预览（AI 可读）</p>
-              <pre className="rounded-lg bg-zinc-950 p-3 text-xs text-zinc-100 max-h-48 overflow-auto dark:bg-zinc-900">
-                {JSON.stringify(buildExportData(), null, 2)}
-              </pre>
-            </div>
+            <pre className="rounded-lg bg-zinc-950 p-3 text-xs text-zinc-100 max-h-64 overflow-auto dark:bg-zinc-900">
+              {JSON.stringify(buildExport(), null, 2)}
+            </pre>
             <div className="flex justify-end gap-2">
-              <Button variant="outline" size="sm" onClick={handleCopyExport} className="gap-1.5">
-                <Copy className="h-3.5 w-3.5" />复制 JSON
+              <Button variant="outline" size="sm" onClick={async () => { await navigator.clipboard.writeText(JSON.stringify(buildExport(), null, 2)); }} className="gap-1 h-8 text-xs">
+                <Copy className="h-3 w-3" />复制
               </Button>
-              <Button size="sm" onClick={handleDownloadExport} className="gap-1.5">
-                <Download className="h-3.5 w-3.5" />下载 JSON
+              <Button size="sm" onClick={() => { const b = new Blob([JSON.stringify(buildExport(), null, 2)], { type: "application/json" }); const u = URL.createObjectURL(b); const a = document.createElement("a"); a.href = u; a.download = `${layoutName}.json`; a.click(); URL.revokeObjectURL(u); }} className="gap-1 h-8 text-xs">
+                <Download className="h-3 w-3" />下载
               </Button>
             </div>
           </div>
@@ -488,125 +454,81 @@ export default function BuilderPage() {
   );
 }
 
-// ============ Layout Slot Renderer ============
+// ============ Canvas Item Card ============
 
-function LayoutSlotRenderer({
-  slot, platform, isSelected, onSelect, onRemove,
+function CanvasItemCard({
+  item, isSelected, onSelect, onRemove, onMoveUp, onMoveDown, onDuplicate, onWidthChange, widthOptions, platform,
 }: {
-  slot: LayoutSlot;
-  platform: Platform;
+  item: CanvasItem;
   isSelected: boolean;
   onSelect: () => void;
   onRemove: () => void;
+  onMoveUp: () => void;
+  onMoveDown: () => void;
+  onDuplicate: () => void;
+  onWidthChange: (w: Width) => void;
+  widthOptions: { label: string; value: Width; className: string }[];
+  platform: Platform;
 }) {
-  const slotStyles: Record<string, string> = {
-    header: "h-14",
-    sidebar: "h-48",
-    content: "flex-1 min-h-[280px]",
-    footer: "h-12",
-    statusbar: "h-8",
-    bottomnav: "h-14",
-    fab: "h-16",
-  };
+  const widthClass = widthOptions.find(w => w.value === item.width)?.className || "w-full";
 
-  // Special layout for desktop: header + (sidebar | content) + footer
-  if (platform === "desktop") {
-    if (slot.id === "header") return <SlotBar slot={slot} isSelected={isSelected} onSelect={onSelect} onRemove={onRemove} className="h-14 border-b dark:border-zinc-700" />;
-    if (slot.id === "footer") return <SlotBar slot={slot} isSelected={isSelected} onSelect={onSelect} onRemove={onRemove} className="h-10 border-t dark:border-zinc-700" />;
-    if (slot.id === "sidebar") return (
-      <div className="flex flex-1 min-h-[300px]">
-        <SlotBar slot={slot} isSelected={isSelected} onSelect={onSelect} onRemove={onRemove} className="w-48 border-r dark:border-zinc-700" />
-        <SlotPlaceholder slotId="content" isSelected={isSelected} />
-      </div>
-    );
-    if (slot.id === "content") return null; // rendered as placeholder in the sidebar slot
-  }
-
-  // Tablet layout
-  if (platform === "tablet") {
-    if (slot.id === "header") return <SlotBar slot={slot} isSelected={isSelected} onSelect={onSelect} onRemove={onRemove} className="h-14 border-b dark:border-zinc-700" />;
-    if (slot.id === "footer") return <SlotBar slot={slot} isSelected={isSelected} onSelect={onSelect} onRemove={onRemove} className="h-10 border-t dark:border-zinc-700" />;
-    if (slot.id === "sidebar") return (
-      <div className="flex flex-1 min-h-[300px]">
-        <SlotBar slot={slot} isSelected={isSelected} onSelect={onSelect} onRemove={onRemove} className="w-40 border-r dark:border-zinc-700" />
-        <SlotPlaceholder slotId="content" isSelected={isSelected} />
-      </div>
-    );
-    if (slot.id === "content") return null;
-  }
-
-  // Mobile layout
-  if (platform === "mobile") {
-    if (slot.id === "content") return <SlotBar slot={slot} isSelected={isSelected} onSelect={onSelect} onRemove={onRemove} className="flex-1 min-h-[350px]" />;
-    if (slot.id === "fab") return (
-      <div className="relative h-0">
-        <div className="absolute bottom-4 right-4">
-          <SlotBar slot={slot} isSelected={isSelected} onSelect={onSelect} onRemove={onRemove} className="h-14 w-14 rounded-full" />
+  return (
+    <div className={cn(
+      "group relative rounded-xl transition-all",
+      platform === "mobile" ? "w-full" : cn(widthClass, "flex-shrink-0"),
+      isSelected ? "ring-2 ring-blue-500" : "border-2 border-transparent hover:border-zinc-200 dark:hover:border-zinc-700"
+    )}>
+      {/* Hover toolbar */}
+      <div className={cn(
+        "absolute -top-3 right-2 z-20 flex items-center gap-0.5 opacity-0 group-hover:opacity-100 transition-opacity",
+        isSelected && "opacity-100"
+      )}>
+        <div className="flex rounded-md bg-white shadow-lg border dark:bg-zinc-800 dark:border-zinc-700 overflow-hidden">
+          <ToolBtn onClick={onMoveUp} title="上移"><ChevronUp className="h-3 w-3" /></ToolBtn>
+          <ToolBtn onClick={onMoveDown} title="下移"><ChevronDown className="h-3 w-3" /></ToolBtn>
+          <div className="w-px bg-zinc-200 dark:bg-zinc-700" />
+          <ToolBtn onClick={onDuplicate} title="复制">📋</ToolBtn>
+          <div className="w-px bg-zinc-200 dark:bg-zinc-700" />
+          {widthOptions.map(w => (
+            <ToolBtn key={w.value} onClick={() => onWidthChange(w.value)} title={w.label} active={item.width === w.value}>
+              <span className="text-[10px]">{w.label === "满宽" ? "▣" : w.label}</span>
+            </ToolBtn>
+          ))}
+          <div className="w-px bg-zinc-200 dark:bg-zinc-700" />
+          <ToolBtn onClick={onRemove} title="删除" danger><X className="h-3 w-3" /></ToolBtn>
         </div>
       </div>
-    );
-  }
 
-  return <SlotBar slot={slot} isSelected={isSelected} onSelect={onSelect} onRemove={onRemove} className={slotStyles[slot.id] || "h-16"} />;
-}
-
-function SlotPlaceholder({ slotId, isSelected }: { slotId: string; isSelected: boolean }) {
-  return (
-    <div className="flex-1 flex items-center justify-center min-h-[300px] bg-zinc-50/50 dark:bg-zinc-900/30">
-      <p className="text-xs text-zinc-300 dark:text-zinc-600">选择 &quot;{slotId}&quot; 区域添加组件</p>
+      {/* Component content */}
+      <div onClick={onSelect} className="cursor-pointer rounded-xl border bg-white p-3 dark:border-zinc-700 dark:bg-zinc-900 min-h-[60px]">
+        <div className="flex items-center justify-between mb-1">
+          <span className="text-[10px] text-zinc-400">{item.component.chinese}</span>
+        </div>
+        <ComponentRenderer componentName={item.component.english} category={item.component.category} variants={item.component.variants} />
+      </div>
     </div>
   );
 }
 
-function SlotBar({
-  slot, isSelected, onSelect, onRemove, className,
-}: {
-  slot: LayoutSlot;
-  isSelected: boolean;
-  onSelect: () => void;
-  onRemove: () => void;
-  className?: string;
+function ToolBtn({ children, onClick, title, active, danger }: {
+  children: React.ReactNode;
+  onClick: () => void;
+  title: string;
+  active?: boolean;
+  danger?: boolean;
 }) {
   return (
-    <div
-      onClick={onSelect}
+    <button
+      onClick={onClick}
+      title={title}
       className={cn(
-        "relative transition-all cursor-pointer group",
-        isSelected && "ring-2 ring-blue-500 ring-inset z-10",
-        !slot.component && "border-2 border-dashed border-zinc-300 hover:border-blue-400 dark:border-zinc-600",
-        className
+        "px-1.5 py-1 text-xs transition-colors",
+        active && "bg-blue-50 text-blue-600 dark:bg-blue-900/30 dark:text-blue-400",
+        danger && "hover:bg-red-50 hover:text-red-500",
+        !active && !danger && "hover:bg-zinc-100 dark:hover:bg-zinc-700"
       )}
     >
-      {slot.component ? (
-        <div className="flex items-center justify-center h-full p-3 bg-white dark:bg-zinc-950">
-          <div className="w-full overflow-hidden">
-            <ComponentRenderer
-              componentName={slot.component.name}
-              category={slot.component.category}
-              variants={slot.component.variants}
-            />
-          </div>
-          {/* Hover overlay */}
-          <div className="absolute inset-0 bg-black/0 group-hover:bg-black/5 transition-colors flex items-start justify-end p-1">
-            <div className="opacity-0 group-hover:opacity-100 flex gap-1">
-              <button
-                onClick={e => { e.stopPropagation(); onRemove(); }}
-                className="rounded bg-white shadow p-1 hover:bg-red-50 dark:bg-zinc-800"
-                title="移除组件"
-              >
-                <Trash2 className="h-3 w-3 text-red-500" />
-              </button>
-            </div>
-          </div>
-        </div>
-      ) : (
-        <div className="flex items-center justify-center h-full min-h-[60px]">
-          <div className="text-center">
-            <Plus className="mx-auto h-4 w-4 text-zinc-400" />
-            <span className="text-[11px] text-zinc-400 mt-1 block">{slot.name}</span>
-          </div>
-        </div>
-      )}
-    </div>
+      {children}
+    </button>
   );
 }
