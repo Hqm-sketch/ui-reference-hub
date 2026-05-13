@@ -116,6 +116,12 @@ export function ComponentRenderer({ componentName, category, variants }: Compone
   if (name === "blankslot" || name === "空白占位") return <BlankSlotShowcase />;
   if (name === "listgroup" || name === "列表组") return <ListGroupShowcase />;
 
+  // --- Overlay components ---
+  if (name === "角标" || name === "cornerbadge") return <CornerBadgeShowcase />;
+  if (name === "图标" || name === "overlayicon") return <OverlayIconShowcase />;
+  if (name === "文字标签" || name === "textlabel") return <TextLabelShowcase />;
+  if (name === "按钮叠加" || name === "overlaybutton") return <OverlayButtonShowcase />;
+
   // --- Scene: Chat/Social ---
   if (name === "消息气泡" || name === "chatbubble") return <ChatBubbleShowcase />;
   if (name === "聊天输入栏" || name === "chatinput") return <ChatInputShowcase />;
@@ -1438,6 +1444,63 @@ function CheckInShowcase() {
         ))}
       </div>
       <Button size="sm" className="w-full mt-3 text-xs h-8">签到领积分</Button>
+    </div>
+  );
+}
+
+// ============ OVERLAY COMPONENTS ============
+
+function CornerBadgeShowcase() {
+  return (
+    <div className="flex items-center gap-4">
+      <div className="relative inline-flex">
+        <span className="absolute -top-1.5 -right-1.5 flex h-5 w-5 items-center justify-center rounded-full bg-red-500 text-[10px] font-bold text-white ring-2 ring-white dark:ring-zinc-900">3</span>
+        <span className="text-[10px] text-zinc-400">数字角标</span>
+      </div>
+      <div className="relative inline-flex">
+        <span className="absolute -top-1 -right-1 h-3 w-3 rounded-full bg-red-500 ring-2 ring-white dark:ring-zinc-900" />
+        <span className="text-[10px] text-zinc-400">圆点角标</span>
+      </div>
+      <span className="inline-flex items-center rounded-full bg-red-500 px-2 py-0.5 text-[9px] font-bold text-white">HOT</span>
+      <span className="inline-flex items-center rounded-full bg-blue-500 px-2 py-0.5 text-[9px] font-bold text-white">NEW</span>
+    </div>
+  );
+}
+
+function OverlayIconShowcase() {
+  return (
+    <div className="flex items-center gap-3">
+      <div className="flex h-8 w-8 items-center justify-center rounded-full bg-white dark:bg-zinc-800 shadow border dark:border-zinc-700">
+        <Heart className="h-4 w-4 text-red-500" />
+      </div>
+      <div className="flex h-8 w-8 items-center justify-center rounded-full bg-white dark:bg-zinc-800 shadow border dark:border-zinc-700">
+        <Star className="h-4 w-4 text-yellow-500" />
+      </div>
+      <div className="flex h-8 w-8 items-center justify-center rounded-full bg-white dark:bg-zinc-800 shadow border dark:border-zinc-700">
+        <Bell className="h-4 w-4 text-blue-500" />
+      </div>
+      <div className="flex h-8 w-8 items-center justify-center rounded-full bg-white dark:bg-zinc-800 shadow border dark:border-zinc-700">
+        <Settings className="h-4 w-4 text-zinc-500" />
+      </div>
+    </div>
+  );
+}
+
+function TextLabelShowcase() {
+  return (
+    <div className="flex items-center gap-2">
+      <span className="inline-flex rounded-full bg-white/90 dark:bg-zinc-800/90 backdrop-blur px-2.5 py-1 text-[10px] font-medium shadow border dark:border-zinc-700">推荐</span>
+      <span className="inline-flex rounded-full bg-green-500/90 text-white px-2.5 py-1 text-[10px] font-medium">已认证</span>
+      <span className="inline-flex rounded-full bg-amber-500/90 text-white px-2.5 py-1 text-[10px] font-medium">限时</span>
+    </div>
+  );
+}
+
+function OverlayButtonShowcase() {
+  return (
+    <div className="flex items-center gap-2">
+      <Button size="sm" className="h-7 text-[10px] rounded-full shadow-lg">立即购买</Button>
+      <Button size="sm" variant="secondary" className="h-7 text-[10px] rounded-full shadow-lg bg-white/90 dark:bg-zinc-800/90">查看详情</Button>
     </div>
   );
 }
