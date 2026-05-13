@@ -124,6 +124,9 @@ export function Sidebar() {
                 更多
               </span>
             </div>
+            <NavItem href="/builder" icon={LayoutTemplate}>
+              界面搭建器
+            </NavItem>
             <NavItem href="/playground" icon={LayoutTemplate}>
               Playground
             </NavItem>
