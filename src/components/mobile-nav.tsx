@@ -49,6 +49,7 @@ export function MobileNav() {
                   </MobileNavItem>
                 ))}
                 <div className="pt-3 border-t mt-3 dark:border-zinc-800">
+                  <MobileNavItem href="/playground" onClick={() => setOpen(false)}>Playground</MobileNavItem>
                   <MobileNavItem href="/templates" onClick={() => setOpen(false)}>页面模板</MobileNavItem>
                   <MobileNavItem href="/design-system" onClick={() => setOpen(false)}>Design Token</MobileNavItem>
                   <MobileNavItem href="/search" onClick={() => setOpen(false)}>搜索</MobileNavItem>

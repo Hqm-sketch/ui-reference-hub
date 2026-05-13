@@ -72,7 +72,7 @@ export default async function ComponentDetailPage({ params }: Props) {
           <Card>
             <CardHeader><CardTitle className="text-base">实时预览</CardTitle></CardHeader>
             <CardContent>
-              <ComponentDetailClient codeExample={comp.codeExample} />
+              <ComponentDetailClient codeExample={comp.codeExample} componentName={comp.name} category={category} variants={comp.variants} />
             </CardContent>
           </Card>
 
