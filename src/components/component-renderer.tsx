@@ -19,7 +19,7 @@ import {
   Loader2, ShoppingCart, CreditCard, Camera, Mic, Upload, Eye, EyeOff,
   Bold, Italic, Underline, List, Copy, Check, ChevronDown, ArrowUp,
   LayoutDashboard, BarChart3, TrendingUp, MapPin, Lock, Calendar,
-  Folder, File, Inbox, Sparkles, RefreshCw,
+  Folder, File, Inbox, Sparkles, RefreshCw, Palette,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 // Utility classes (defined in globals.css):
@@ -103,6 +103,38 @@ export function ComponentRenderer({ componentName, category, variants }: Compone
   if (name === "actionsheet") return <ActionSheetShowcase />;
   if (name === "floatingactionbutton") return <FabShowcase />;
   if (name === "bottomnavigation") return <BottomNavShowcase />;
+
+  // --- ATOMIC components ---
+  if (name === "AtomicBtn" || name === "小按钮") return <AtomicBtnRender />;
+  if (name === "AtomicIconBtn" || name === "图标按钮") return <AtomicIconBtnRender />;
+  if (name === "AtomicTextBtn" || name === "文字按钮") return <AtomicTextBtnRender />;
+  if (name === "AtomicH" || name === "标题文字") return <AtomicHRender />;
+  if (name === "AtomicP" || name === "正文段落") return <AtomicPRender />;
+  if (name === "AtomicLabel" || name === "标签文字") return <AtomicLabelRender />;
+  if (name === "AtomicPrice" || name === "价格数字") return <AtomicPriceRender />;
+  if (name === "AtomicIcon24" || name === "小图标24") return <AtomicIcon24Render />;
+  if (name === "AtomicIcon32" || name === "中图标32") return <AtomicIcon32Render />;
+  if (name === "AtomicIcon48" || name === "大图标48") return <AtomicIcon48Render />;
+  if (name === "AtomicEmoji" || name === "Emoji") return <AtomicEmojiRender />;
+  if (name === "AtomicInput" || name === "短输入框") return <AtomicInputRender />;
+  if (name === "AtomicSearch" || name === "搜索框") return <AtomicSearchRender />;
+  if (name === "AtomicSwitch" || name === "开关") return <AtomicSwitchRender />;
+  if (name === "AtomicSelect" || name === "选择框") return <AtomicSelectRender />;
+  if (name === "AtomicCheckbox" || name === "复选框") return <AtomicCheckboxRender />;
+  if (name === "AtomicBox" || name === "空白盒子") return <AtomicBoxRender />;
+  if (name === "AtomicCard" || name === "圆角卡片") return <AtomicCardRender />;
+  if (name === "AtomicRow" || name === "横向排列") return <AtomicRowRender />;
+  if (name === "AtomicCol" || name === "纵向排列") return <AtomicColRender />;
+  if (name === "AtomicBadgeNum" || name === "角标数字") return <AtomicBadgeNumRender />;
+  if (name === "AtomicBadgeDot" || name === "角标圆点") return <AtomicBadgeDotRender />;
+  if (name === "AtomicTag" || name === "状态标签") return <AtomicTagRender />;
+  if (name === "AtomicAvatar" || name === "头像圆圈") return <AtomicAvatarRender />;
+  if (name === "AtomicDivider" || name === "分割线") return <AtomicDividerRender />;
+  if (name === "AtomicSpacer" || name === "占位间距") return <AtomicSpacerRender />;
+  if (name === "AtomicNumber" || name === "数据数字") return <AtomicNumberRender />;
+  if (name === "AtomicProgress" || name === "进度条") return <AtomicProgressRender />;
+  if (name === "AtomicStars" || name === "评分星星") return <AtomicStarsRender />;
+  if (name === "AtomicListItem" || name === "列表项") return <AtomicListItemRender />;
 
   // --- App-level components ---
   if (name === "bottomtabnav" || name === "底部导航栏") return <BottomTabNavShowcase />;
@@ -1447,6 +1479,223 @@ function CheckInShowcase() {
         ))}
       </div>
       <Button size="sm" className="w-full mt-3 text-xs h-8">签到领积分</Button>
+    </div>
+  );
+}
+
+// ============ TRUE ATOMIC COMPONENTS ============
+
+function AtomicBtnRender() {
+  return (
+    <div className="flex flex-wrap gap-1.5">
+      <button className="btn-press rounded-lg bg-zinc-900 text-white px-3 py-1.5 text-xs font-medium dark:bg-white dark:text-zinc-900">按钮</button>
+      <button className="btn-press rounded-lg border px-3 py-1.5 text-xs font-medium dark:border-zinc-600">次要</button>
+      <button className="btn-press rounded-lg text-red-500 px-3 py-1.5 text-xs font-medium hover:bg-red-50 dark:hover:bg-red-950/30">危险</button>
+    </div>
+  );
+}
+
+function AtomicIconBtnRender() {
+  return (
+    <div className="flex gap-1">
+      <button className="btn-press h-7 w-7 rounded-full bg-zinc-100 dark:bg-zinc-800 flex items-center justify-center"><Search className="h-3.5 w-3.5" /></button>
+      <button className="btn-press h-7 w-7 rounded-full bg-zinc-100 dark:bg-zinc-800 flex items-center justify-center"><Bell className="h-3.5 w-3.5" /></button>
+      <button className="btn-press h-7 w-7 rounded-full bg-zinc-100 dark:bg-zinc-800 flex items-center justify-center"><Heart className="h-3.5 w-3.5" /></button>
+      <button className="btn-press h-7 w-7 rounded-full bg-red-50 dark:bg-red-950/30 flex items-center justify-center"><X className="h-3.5 w-3.5 text-red-500" /></button>
+    </div>
+  );
+}
+
+function AtomicTextBtnRender() {
+  return (
+    <div className="flex gap-2">
+      <button className="text-xs text-blue-600 hover:underline font-medium">编辑</button>
+      <button className="text-xs text-zinc-500 hover:text-zinc-900 dark:hover:text-zinc-100">取消</button>
+      <button className="text-xs text-red-500 hover:text-red-700">删除</button>
+    </div>
+  );
+}
+
+function AtomicHRender() {
+  return (
+    <div className="space-y-0.5">
+      <h1 className="text-lg font-bold">这是标题</h1>
+      <h2 className="text-base font-semibold text-zinc-500 dark:text-zinc-400">这是副标题</h2>
+      <h3 className="text-sm font-medium text-zinc-400">这是小标题</h3>
+    </div>
+  );
+}
+
+function AtomicPRender() {
+  return <p className="text-xs text-zinc-600 dark:text-zinc-400 leading-relaxed">这是一段正文内容。原子组件可以自由组合，搭配出你想要的任何界面效果。</p>;
+}
+
+function AtomicLabelRender() {
+  return (
+    <div className="flex gap-2">
+      <span className="text-[10px] text-zinc-500">标签文字</span>
+      <span className="text-[10px] font-semibold text-zinc-900 dark:text-zinc-100">粗体标签</span>
+      <span className="text-[10px] text-zinc-400">辅助说明</span>
+    </div>
+  );
+}
+
+function AtomicPriceRender() {
+  return (
+    <div className="flex items-baseline gap-0.5">
+      <span className="text-[10px] text-red-500">¥</span>
+      <span className="text-xl font-bold text-red-500">99</span>
+      <span className="text-[10px] text-red-500">.00</span>
+    </div>
+  );
+}
+
+function AtomicIcon24Render() {
+  return (
+    <div className="flex gap-2">
+      <Heart className="h-6 w-6 text-red-500" />
+      <Star className="h-6 w-6 text-yellow-500" />
+      <Bell className="h-6 w-6 text-blue-500" />
+      <Settings className="h-6 w-6 text-zinc-500" />
+      <Search className="h-6 w-6 text-zinc-400" />
+    </div>
+  );
+}
+
+function AtomicIcon32Render() {
+  return (
+    <div className="flex gap-2">
+      <div className="h-8 w-8 rounded-lg bg-red-50 dark:bg-red-950/30 flex items-center justify-center"><Heart className="h-5 w-5 text-red-500" /></div>
+      <div className="h-8 w-8 rounded-lg bg-yellow-50 dark:bg-yellow-950/30 flex items-center justify-center"><Star className="h-5 w-5 text-yellow-500" /></div>
+      <div className="h-8 w-8 rounded-lg bg-blue-50 dark:bg-blue-950/30 flex items-center justify-center"><Bell className="h-5 w-5 text-blue-500" /></div>
+    </div>
+  );
+}
+
+function AtomicIcon48Render() {
+  return (
+    <div className="flex gap-2">
+      <div className="h-12 w-12 rounded-xl bg-gradient-to-br from-blue-400 to-blue-600 flex items-center justify-center"><Search className="h-6 w-6 text-white" /></div>
+      <div className="h-12 w-12 rounded-xl bg-gradient-to-br from-red-400 to-red-600 flex items-center justify-center"><Heart className="h-6 w-6 text-white" /></div>
+    </div>
+  );
+}
+
+function AtomicEmojiRender() {
+  return <span className="text-2xl">💰 📊 🎯 💳 📝 ⚙️</span>;
+}
+
+function AtomicInputRender() {
+  return <input className="h-8 rounded-lg border px-2.5 text-xs dark:border-zinc-700 dark:bg-zinc-800 dark:text-zinc-50 w-full min-w-[120px]" placeholder="请输入..." />;
+}
+
+function AtomicSearchRender() {
+  return (
+    <div className="relative w-full min-w-[140px]">
+      <Search className="absolute left-2 top-1.5 h-3.5 w-3.5 text-zinc-400" />
+      <input className="h-8 w-full rounded-full border-0 bg-zinc-100 pl-7 pr-3 text-xs dark:bg-zinc-800 dark:text-zinc-50" placeholder="搜索..." />
+    </div>
+  );
+}
+
+function AtomicSwitchRender() {
+  return <Switch />;
+}
+
+function AtomicSelectRender() {
+  return (
+    <select className="h-8 rounded-lg border px-2 text-xs dark:border-zinc-700 dark:bg-zinc-800 dark:text-zinc-50">
+      <option>选项一</option><option>选项二</option><option>选项三</option>
+    </select>
+  );
+}
+
+function AtomicCheckboxRender() {
+  return (
+    <label className="flex items-center gap-1.5 text-xs">
+      <input type="checkbox" className="h-3.5 w-3.5 rounded" defaultChecked /> 复选框
+    </label>
+  );
+}
+
+function AtomicBoxRender() {
+  return <div className="w-full h-full min-h-[40px] rounded-lg border-2 border-dashed border-zinc-300 dark:border-zinc-600 flex items-center justify-center text-[10px] text-zinc-400">容器</div>;
+}
+
+function AtomicCardRender() {
+  return <div className="w-full h-full min-h-[60px] rounded-xl border bg-white dark:bg-zinc-900 dark:border-zinc-700 shadow-sm flex items-center justify-center text-[10px] text-zinc-400">卡片</div>;
+}
+
+function AtomicRowRender() {
+  return <div className="w-full h-full min-h-[30px] flex items-center gap-2 text-[9px] text-zinc-400"><span>← 横向 →</span></div>;
+}
+
+function AtomicColRender() {
+  return <div className="w-full h-full min-h-[40px] flex flex-col items-center gap-1 text-[9px] text-zinc-400"><span>↑</span><span>纵向</span><span>↓</span></div>;
+}
+
+function AtomicBadgeNumRender() {
+  return <span className="inline-flex h-5 w-5 items-center justify-center rounded-full bg-red-500 text-[10px] font-bold text-white">3</span>;
+}
+
+function AtomicBadgeDotRender() {
+  return <span className="inline-block h-2.5 w-2.5 rounded-full bg-red-500" />;
+}
+
+function AtomicTagRender() {
+  return (
+    <div className="flex gap-1">
+      <span className="rounded-full bg-zinc-100 dark:bg-zinc-800 px-2 py-0.5 text-[9px] font-medium">标签</span>
+      <span className="rounded-full bg-green-100 dark:bg-green-950/30 text-green-700 dark:text-green-400 px-2 py-0.5 text-[9px] font-medium">成功</span>
+      <span className="rounded-full bg-red-100 dark:bg-red-950/30 text-red-700 dark:text-red-400 px-2 py-0.5 text-[9px] font-medium">警告</span>
+      <span className="rounded-full bg-blue-100 dark:bg-blue-950/30 text-blue-700 dark:text-blue-400 px-2 py-0.5 text-[9px] font-medium">信息</span>
+    </div>
+  );
+}
+
+function AtomicAvatarRender() {
+  return (
+    <div className="flex items-center gap-1.5">
+      <div className="flex h-8 w-8 items-center justify-center rounded-full bg-zinc-200 dark:bg-zinc-700 text-xs font-medium">A</div>
+      <div className="flex h-10 w-10 items-center justify-center rounded-full bg-blue-200 text-sm font-medium text-blue-700">B</div>
+      <div className="relative h-8 w-8 rounded-full bg-zinc-200 dark:bg-zinc-700">
+        <span className="absolute bottom-0 right-0 h-2.5 w-2.5 rounded-full border-2 border-white dark:border-zinc-900 bg-green-500" />
+      </div>
+    </div>
+  );
+}
+
+function AtomicDividerRender() {
+  return <hr className="w-full border-zinc-200 dark:border-zinc-700" />;
+}
+
+function AtomicSpacerRender() {
+  return <div className="w-full" style={{ height: 16 }} />;
+}
+
+function AtomicNumberRender() {
+  return <span className="text-2xl font-bold tabular-nums">12,458</span>;
+}
+
+function AtomicProgressRender() {
+  return (
+    <div className="w-full space-y-1">
+      <div className="flex justify-between text-[10px]"><span>进度</span><span>60%</span></div>
+      <div className="h-2 w-full rounded-full bg-zinc-200 dark:bg-zinc-700 overflow-hidden"><div className="h-full w-[60%] rounded-full bg-blue-500" /></div>
+    </div>
+  );
+}
+
+function AtomicStarsRender() {
+  return <div className="text-yellow-500 text-sm">⭐⭐⭐⭐<span className="text-zinc-300">⭐</span></div>;
+}
+
+function AtomicListItemRender() {
+  return (
+    <div className="flex items-center gap-2 w-full min-w-[160px]">
+      <div className="flex h-7 w-7 items-center justify-center rounded-full bg-zinc-100 dark:bg-zinc-800 text-sm">📋</div>
+      <span className="text-xs flex-1">列表项标题</span>
+      <ChevronRight className="h-3.5 w-3.5 text-zinc-400" />
     </div>
   );
 }
