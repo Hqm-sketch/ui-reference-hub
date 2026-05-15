@@ -22,6 +22,9 @@ import {
   Folder, File, Inbox, Sparkles, RefreshCw,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
+// Utility classes (defined in globals.css):
+// .glass-effect, .card-lift, .btn-press, .animate-fade-in, .animate-slide-up
+// .animate-glow, .animate-shimmer, .skeleton-pulse
 
 interface ComponentRendererProps {
   componentName: string;
@@ -156,16 +159,16 @@ export function ComponentRenderer({ componentName, category, variants }: Compone
 function ButtonShowcase() {
   return (
     <div className="flex flex-wrap items-center gap-2">
-      <Button>默认按钮</Button>
-      <Button variant="secondary">次要</Button>
-      <Button variant="outline">边框</Button>
-      <Button variant="ghost">幽灵</Button>
-      <Button variant="destructive">危险</Button>
+      <Button className="btn-press">默认按钮</Button>
+      <Button variant="secondary" className="btn-press">次要</Button>
+      <Button variant="outline" className="btn-press">边框</Button>
+      <Button variant="ghost" className="btn-press">幽灵</Button>
+      <Button variant="destructive" className="btn-press">危险</Button>
       <Button variant="link">链接</Button>
-      <Button size="lg">大</Button>
-      <Button size="sm">小</Button>
+      <Button size="lg" className="btn-press">大</Button>
+      <Button size="sm" className="btn-press">小</Button>
       <Button disabled>禁用</Button>
-      <Button>
+      <Button className="btn-press">
         <Search className="mr-2 h-4 w-4" /> 搜索
       </Button>
     </div>
@@ -487,21 +490,21 @@ function ScrollShowcase() {
 function CardShowcase() {
   return (
     <div className="grid gap-4 sm:grid-cols-2">
-      <Card>
+      <Card className="animate-fade-in">
         <CardHeader>
           <CardTitle>基础卡片</CardTitle>
           <CardDescription>这是一个基础卡片组件</CardDescription>
         </CardHeader>
         <CardContent><p className="text-sm text-zinc-500">卡片内容区域，可以放置任何内容。</p></CardContent>
         <CardFooter className="flex gap-2">
-          <Button size="sm">确认</Button>
+          <Button size="sm" className="btn-press">确认</Button>
           <Button size="sm" variant="ghost">取消</Button>
         </CardFooter>
       </Card>
-      <Card className="hover:shadow-md transition-shadow cursor-pointer">
+      <Card className="card-lift glass-effect">
         <CardContent className="p-6">
           <div className="flex items-center gap-4">
-            <div className="flex h-12 w-12 items-center justify-center rounded-lg bg-blue-100 text-blue-600"><BarChart3 className="h-6 w-6" /></div>
+            <div className="flex h-12 w-12 items-center justify-center rounded-lg bg-blue-100 dark:bg-blue-900/30 text-blue-600"><BarChart3 className="h-6 w-6" /></div>
             <div>
               <p className="text-sm text-zinc-500">总收入</p>
               <p className="text-2xl font-bold">¥128,450</p>
@@ -1031,7 +1034,7 @@ function DataCardShowcase() {
         { label: "本月收入", value: "¥12,450", color: "text-green-500", icon: TrendingUp },
         { label: "账户余额", value: "¥8,320", color: "text-blue-500", icon: CreditCard },
       ].map((d, i) => (
-        <div key={i} className="rounded-xl border bg-white p-4 dark:border-zinc-700 dark:bg-zinc-900 shadow-sm">
+        <div key={i} className="glass-effect rounded-xl p-4 card-lift animate-fade-in" style={{ animationDelay: `${i * 100}ms` }}>
           <div className="flex items-center justify-between mb-2">
             <span className="text-xs text-zinc-500">{d.label}</span>
             <d.icon className={`h-4 w-4 ${d.color}`} />
@@ -1199,12 +1202,12 @@ function StatRowShowcase() {
   return (
     <div className="flex gap-3 w-full">
       {[
-        { label: "支出", value: "¥1,280", color: "text-red-500" },
-        { label: "收入", value: "¥3,450", color: "text-green-500" },
-        { label: "结余", value: "¥2,170", color: "text-blue-500" },
+        { label: "支出", value: "¥1,280", color: "text-red-500", bg: "bg-red-50 dark:bg-red-950/20" },
+        { label: "收入", value: "¥3,450", color: "text-green-500", bg: "bg-green-50 dark:bg-green-950/20" },
+        { label: "结余", value: "¥2,170", color: "text-blue-500", bg: "bg-blue-50 dark:bg-blue-950/20" },
       ].map((s, i) => (
-        <div key={i} className="flex-1 rounded-xl border bg-white p-3 text-center dark:border-zinc-700 dark:bg-zinc-900">
-          <p className="text-xs text-zinc-500">{s.label}</p>
+        <div key={i} className={`flex-1 glass-effect rounded-xl p-3 text-center card-lift animate-fade-in`} style={{ animationDelay: `${i * 80}ms` }}>
+          <p className="text-[11px] text-zinc-500">{s.label}</p>
           <p className={`text-base font-bold mt-1 ${s.color}`}>{s.value}</p>
         </div>
       ))}
