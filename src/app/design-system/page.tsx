@@ -153,6 +153,57 @@ export default function DesignSystemPage() {
       </section>
 
       <section className="mb-12">
+        <h2 className="text-xl font-semibold mb-4">工具类 (Utility Classes)</h2>
+        <p className="text-sm text-zinc-500 mb-4">
+          原子化 CSS 工具类，一键生成毛玻璃、卡片悬浮、按钮按压等效果。复合组件 = HTML 标签 + 工具类组合。
+        </p>
+        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          {[
+            { name: "glass-effect", desc: "毛玻璃效果", preview: "rounded-xl glass-effect p-4 text-sm" },
+            { name: "card-lift", desc: "悬浮上浮 + 阴影", preview: "rounded-xl border bg-white dark:bg-zinc-900 p-4 text-sm card-lift cursor-pointer" },
+            { name: "btn-press", desc: "点击缩放反馈", preview: "rounded-lg bg-zinc-900 text-white dark:bg-white dark:text-zinc-900 px-4 py-2 text-sm btn-press" },
+            { name: "animate-fade-in", desc: "淡入显示", preview: "rounded-xl border p-4 text-sm animate-fade-in" },
+            { name: "animate-slide-up", desc: "从下往上滑入", preview: "rounded-xl border p-4 text-sm animate-slide-up" },
+            { name: "skeleton-pulse", desc: "骨架屏脉冲", preview: "h-10 rounded-lg skeleton-pulse" },
+          ].map((u, i) => (
+            <Card key={u.name}>
+              <CardContent className="p-5 space-y-3">
+                <div>
+                  <p className="text-sm font-mono font-medium">{u.name}</p>
+                  <p className="text-xs text-zinc-500">{u.desc}</p>
+                </div>
+                <div className={u.preview}>
+                  {u.name === "skeleton-pulse" ? "" : "预览效果"}
+                </div>
+              </CardContent>
+            </Card>
+          ))}
+        </div>
+      </section>
+
+      <Separator className="my-8" />
+
+      <section className="mb-12">
+        <h2 className="text-xl font-semibold mb-4">原子化组件层级</h2>
+        <p className="text-sm text-zinc-500 mb-4">
+          遵循 原子 → 复合 → 页面 → 布局 的四层组件生成逻辑
+        </p>
+        <div className="grid gap-4 sm:grid-cols-4">
+          {[
+            { level: "L1 原子", desc: "最小不可拆分单元：按钮、输入框、图标、标签、开关", color: "bg-blue-50 dark:bg-blue-950/30 border-blue-200" },
+            { level: "L2 复合", desc: "原子组件拼合：卡片、列表项、表单组、导航栏", color: "bg-green-50 dark:bg-green-950/30 border-green-200" },
+            { level: "L3 页面", desc: "复合组件纵向排布成完整页面", color: "bg-amber-50 dark:bg-amber-950/30 border-amber-200" },
+            { level: "L4 布局", desc: "Flex/Grid 自适应排列多页面", color: "bg-purple-50 dark:bg-purple-950/30 border-purple-200" },
+          ].map((l) => (
+            <div key={l.level} className={`rounded-xl border p-4 ${l.color}`}>
+              <p className="text-sm font-bold">{l.level}</p>
+              <p className="text-xs text-zinc-600 dark:text-zinc-300 mt-1">{l.desc}</p>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <section className="mb-12">
         <h2 className="text-xl font-semibold mb-4">动画时长</h2>
         <Card>
           <CardContent className="p-6">
